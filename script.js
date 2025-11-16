@@ -180,6 +180,18 @@ document.addEventListener('DOMContentLoaded', () => {
   recalcBadge();
 });
 
+/* FAQ Toggle Animation */
+document.querySelectorAll('.faq-item').forEach(item => {
+  item.addEventListener('toggle', function() {
+    const icon = this.querySelector('i.fa-chevron-down');
+    if (this.open) {
+      icon.style.transform = 'rotate(180deg)';
+    } else {
+      icon.style.transform = 'rotate(0deg)';
+    }
+  });
+});
+
 document.addEventListener("DOMContentLoaded", ()=> {
   const lenis = new Lenis({
     lerp: 0.070,

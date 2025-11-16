@@ -22,7 +22,8 @@ html {
 body {
   font-family: var(--body-font);
   color: var(--text-color);
-  background: var(--bg-color);
+  background: linear-gradient(135deg, #1a1410 0%, #2c2416 50%, #1a1410 100%);
+  background-attachment: fixed;
   line-height: 1.6;
 }
 
@@ -119,11 +120,13 @@ nav a:hover::after {
 /* Menu Section */
 .menu-section { 
   padding: 5rem 10%; 
-  background: #1a1410; 
+  background: rgba(26, 20, 16, 0.6);
+  backdrop-filter: blur(10px);
 }
 
 .menu-section:nth-child(odd){ 
-  background: #0f0c08; 
+  background: rgba(15, 12, 8, 0.4); 
+  backdrop-filter: blur(10px);
 }
 
 .menu-section h2 {
@@ -174,20 +177,21 @@ nav a:hover::after {
 }
 
 .menu-item {
-  background: linear-gradient(135deg, #5a4a38 0%, #4d3f2f 100%);
-  border: 1px solid rgba(200, 160, 100, 0.3);
+  background: linear-gradient(135deg, rgba(90, 74, 56, 0.95) 0%, rgba(77, 63, 47, 0.95) 100%);
+  border: 2px solid rgba(200, 160, 100, 0.4);
   border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, .4);
-  transition: transform .25s ease, box-shadow .25s ease;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
   display: flex; 
   flex-direction: column; 
   overflow: hidden;
+  backdrop-filter: blur(10px);
 }
 
 .menu-item:hover { 
-  transform: translateY(-6px); 
-  box-shadow: 0 12px 28px rgba(200, 160, 100, .4);
-  border-color: rgba(200, 160, 100, 0.6);
+  transform: translateY(-8px); 
+  box-shadow: 0 16px 40px rgba(200, 160, 100, .5), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  border-color: rgba(200, 160, 100, 0.8);
 }
 
 .menu-item-img { 

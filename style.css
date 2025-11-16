@@ -4,7 +4,7 @@
   --secondary-color: #6f4e37;
   --accent-color: #c8a064;
   --text-color: #333;
-  --bg-color: #fff;
+  --bg-color: #2c2416;
   --header-font: 'Playfair Display', serif;
   --body-font: 'Lora', serif;
 }
@@ -119,11 +119,11 @@ nav a:hover::after {
 /* Menu Section */
 .menu-section { 
   padding: 5rem 10%; 
-  background: #fdfaf6; 
+  background: var(--bg-color); 
 }
 
 .menu-section:nth-child(odd){ 
-  background: var(--bg-color); 
+  background: #1a1410; 
 }
 
 .menu-section h2 {
@@ -131,7 +131,7 @@ nav a:hover::after {
   font-size: 2.6rem;
   text-align: center;
   margin-bottom: 1.5rem;
-  color: var(--secondary-color);
+  color: var(--primary-color);
 }
 
 /* Filters */
@@ -148,7 +148,7 @@ nav a:hover::after {
   padding: .55rem .95rem;
   border:1px solid var(--accent-color);
   background: transparent; 
-  color: var(--secondary-color);
+  color: var(--primary-color);
   border-radius: 999px; 
   cursor: pointer;
   transition: all .25s ease;
@@ -156,14 +156,14 @@ nav a:hover::after {
 
 .filter-btn:hover { 
   background: var(--accent-color); 
-  color: var(--bg-color); 
+  color: #1a1410; 
   transform: translateY(-2px); 
 }
 
 .filter-btn.active { 
-  background: var(--secondary-color); 
-  color: var(--primary-color); 
-  border-color: var(--secondary-color); 
+  background: var(--accent-color); 
+  color: #1a1410; 
+  border-color: var(--accent-color); 
 }
 
 /* Menu grid */
@@ -174,9 +174,9 @@ nav a:hover::after {
 }
 
 .menu-item {
-  background: var(--bg-color);
+  background: #3a2f24;
   border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, .06);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, .3);
   transition: transform .25s ease, box-shadow .25s ease;
   display: flex; 
   flex-direction: column; 
@@ -185,7 +185,7 @@ nav a:hover::after {
 
 .menu-item:hover { 
   transform: translateY(-6px); 
-  box-shadow: 0 12px 28px rgba(0, 0, 0, .12); 
+  box-shadow: 0 12px 28px rgba(200, 160, 100, .2); 
 }
 
 .menu-item-img { 
@@ -206,12 +206,13 @@ nav a:hover::after {
 .menu-item h3 { 
   font-family: var(--header-font); 
   font-size: 1.35rem; 
-  color: var(--secondary-color); 
+  color: var(--primary-color); 
 }
 
 .menu-item p { 
   font-size: .95rem; 
-  color:#555; 
+  color: var(--primary-color); 
+  opacity: 0.8;
   flex-grow: 1; 
 }
 

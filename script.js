@@ -192,6 +192,44 @@ document.querySelectorAll('.faq-item').forEach(item => {
   });
 });
 
+/* Image Zoom Modal */
+const modal = document.getElementById('image-modal');
+const modalImg = document.getElementById('modal-img');
+const modalCaption = document.querySelector('.modal-caption');
+const closeModal = document.querySelector('.modal-close');
+
+// Add click event to all product images
+document.addEventListener('click', (e) => {
+  if (e.target.classList.contains('menu-item-img')) {
+    modal.classList.add('show');
+    modalImg.src = e.target.src;
+    modalCaption.textContent = e.target.alt;
+    document.body.style.overflow = 'hidden'; // Prevent scrolling
+  }
+});
+
+// Close modal when clicking X
+closeModal.addEventListener('click', () => {
+  modal.classList.remove('show');
+  document.body.style.overflow = 'auto';
+});
+
+// Close modal when clicking outside image
+modal.addEventListener('click', (e) => {
+  if (e.target === modal) {
+    modal.classList.remove('show');
+    document.body.style.overflow = 'auto';
+  }
+});
+
+// Close modal with ESC key
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && modal.classList.contains('show')) {
+    modal.classList.remove('show');
+    document.body.style.overflow = 'auto';
+  }
+});
+
 document.addEventListener("DOMContentLoaded", ()=> {
   const lenis = new Lenis({
     lerp: 0.070,

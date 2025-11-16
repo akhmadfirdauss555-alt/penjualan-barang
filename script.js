@@ -298,7 +298,7 @@ class ShoppingCart extends BaseModule {
   toggleDropdown() {
     const isExpanded = this.elements.toggle.getAttribute('aria-expanded') === 'true';
     this.elements.toggle.setAttribute('aria-expanded', (!isExpanded).toString());
-    this.elements.dropdown?.classList.toggle('show');
+    this.elements.dropdown?.classList.toggle('open');
   }
 
   handleOutsideClick(event) {
@@ -307,7 +307,7 @@ class ShoppingCart extends BaseModule {
     
     if (!isInsideCart) {
       this.elements.toggle?.setAttribute('aria-expanded', 'false');
-      this.elements.dropdown?.classList.remove('show');
+      this.elements.dropdown?.classList.remove('open');
     }
   }
 
@@ -701,12 +701,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const app = new Application();
 
   // Register all modules
-  app.registerModule(new AnimationController());
-  app.registerModule(new ProductFilter());
-  app.registerModule(new ShoppingCart());
-  app.registerModule(new ImageZoom());
-  app.registerModule(new FAQAccordion());
-  app.registerModule(new SmoothScrollController());
+  app.register(new AnimationController());
+  app.register(new ProductFilter());
+  app.register(new ShoppingCart());
+  app.register(new ImageZoom());
+  app.register(new FAQAccordion());
+  app.register(new SmoothScrollController());
 
   // Initialize application
   app.init();

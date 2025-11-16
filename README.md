@@ -1,214 +1,135 @@
-# 🪑 MEJA CAFE PALU - E-Commerce Website
+<div align="center">
 
-[![GitHub stars](https://img.shields.io/github/stars/Dlanang/penjualan-barang?style=social)](https://github.com/Dlanang/penjualan-barang/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/Dlanang/penjualan-barang?style=social)](https://github.com/Dlanang/penjualan-barang/network)
-[![License](https://img.shields.io/github/license/Dlanang/penjualan-barang)](https://github.com/Dlanang/penjualan-barang/blob/main/LICENSE)
-[![Website](https://img.shields.io/badge/Website-Live-brightgreen)](https://dlanang.github.io/penjualan-barang)
+# 🪑 MEJA CAFE PALU
 
----
+**Modern E-Commerce Website for Cafe Furniture**
 
-## 📖 **Project Overview**
+[![GitHub stars](https://img.shields.io/github/stars/Dlanang/penjualan-barang?style=for-the-badge&logo=github)](https://github.com/Dlanang/penjualan-barang/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/Dlanang/penjualan-barang?style=for-the-badge&logo=github)](https://github.com/Dlanang/penjualan-barang/network)
+[![Website](https://img.shields.io/badge/Website-Live-brightgreen?style=for-the-badge&logo=vercel)](https://dlanang.github.io/penjualan-barang)
+[![License](https://img.shields.io/github/license/Dlanang/penjualan-barang?style=for-the-badge)](https://github.com/Dlanang/penjualan-barang/blob/main/LICENSE)
 
-**MEJA CAFE PALU** adalah website e-commerce modern untuk furniture cafe di Sulawesi Tengah. Website ini menyediakan:
-- 🪑 Katalog meja & kursi cafe
-- 🛋️ Furniture custom & ready stock  
-- 📦 System keranjang belanja
-- 💬 Integrasi WhatsApp untuk konsultasi
-- 📍 Google Maps lokasi toko
-- 🎨 UI/UX modern dengan animasi
+[**🌐 Live Demo**](https://dlanang.github.io/penjualan-barang) • [**📱 Taplink**](https://taplink.cc/mejacafepalu) • [**💬 WhatsApp**](https://wa.me/6285220888840)
 
----
+</div>
 
-## 🚀 **Live Demo**
+## 📖 Overview
 
-🌐 **Website:** [https://dlanang.github.io/penjualan-barang](https://dlanang.github.io/penjualan-barang)  
-📱 **Taplink:** [https://taplink.cc/mejacafepalu](https://taplink.cc/mejacafepalu)
+**MEJA CAFE PALU** is a modern e-commerce website specializing in cafe furniture in Central Sulawesi, Indonesia. Built with vanilla HTML, CSS, and JavaScript, featuring a responsive design and interactive shopping experience.
 
----
+### ✨ Key Features
 
-## 📂 **Project Structure & Code Index**
+- 🪑 **Product Catalog** - Interactive furniture showcase with filtering
+- 🛒 **Shopping Cart** - Dynamic cart system with real-time calculations  
+- 📱 **Mobile Responsive** - Optimized for all device sizes
+- 💬 **WhatsApp Integration** - Direct ordering via WhatsApp
+- 📍 **Google Maps** - Embedded store location
+- 🎨 **Modern UI/UX** - Clean design with smooth animations
+- 🌐 **Social Media** - Integration with 9 platforms
 
-### **🏗️ Core Files**
-```
-📁 penjualan-barang/
-├── 📄 index.html                 # Main HTML structure (300 lines)
-├── 🎨 style.css                  # Complete styling (1,320+ lines)  
-├── ⚡ script.js                  # JavaScript functionality (720+ lines)
-├── 📖 README.md                  # Project documentation
-├── 📝 kata-kata-web.md           # Business contact data
-└── 📂 assets2/                   # Product images & assets
-    ├── 📂 meja/                  # Table images (4 products)
-    ├── 📂 set/                   # Set furniture images (3 products)
-    ├── 📂 sofa/                  # Sofa images (2 products)
-    ├── 📂 logo/                  # Brand logos
-    └── 🖼️ banner.jpg            # Hero background
-```
+## 🚀 Quick Start
 
-### **📄 HTML Structure (index.html)**
-```html
-<!DOCTYPE html>
-<html lang="id">
-<head>                            <!-- Lines 1-20: Meta tags, fonts, icons -->
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MEJA CAFE PALU</title>
-  <link rel="stylesheet" href="style.css">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-</head>
-<body>
-  <header>                        <!-- Lines 21-45: Navigation & Hero -->
-    <nav>                         <!-- Fixed navigation with logo & menu -->
-    <section class="hero-section"> <!-- Hero with background & CTA -->
-  </header>
-  
-  <main>                          <!-- Lines 46-180: Main content -->
-    <section class="menu-section"> <!-- Product catalog -->
-      <div class="menu-filters">   <!-- Filter buttons (Semua, Meja, Set, Sofa) -->
-      <div class="menu-grid">      <!-- 9 product cards -->
-  </main>
-  
-  <footer>                        <!-- Lines 181-300: Footer sections -->
-    <section class="faq-section">  <!-- FAQ grid -->
-    <div class="footer-grid">      <!-- Company info, location, social media -->
-  </footer>
-  
-  <script src="script.js"></script>
-</body>
-</html>
+```bash
+# Clone the repository
+git clone https://github.com/Dlanang/penjualan-barang.git
+
+# Navigate to project directory
+cd penjualan-barang
+
+# Start local server
+python3 -m http.server 8080
+
+# Open in browser
+open http://localhost:8080
 ```
 
-### **🎨 CSS Architecture (style.css)**
+## 📂 Project Structure
+
+```
+penjualan-barang/
+├── 📄 index.html          # Main HTML structure (314 lines)
+├── 🎨 style.css           # Complete styling (1,356 lines)
+├── ⚡ script.js           # JavaScript functionality (716 lines)
+├── 📖 README.md           # Project documentation
+├── 📝 kata-kata-web.md    # Business contact data
+└── 📂 assets2/            # Images and assets
+    ├── 📂 meja/           # Table product images
+    ├── 📂 set/            # Furniture set images  
+    ├── 📂 sofa/           # Sofa product images
+    ├── 📂 logo/           # Brand logos
+    └── 🖼️ banner.jpg     # Hero background
+```
+
+## 🛠️ Tech Stack
+
+| Technology | Version | Purpose |
+|------------|---------|---------|
+| ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white) | Latest | Semantic structure |
+| ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3&logoColor=white) | Latest | Styling & animations |
+| ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black) | ES6+ | Interactive functionality |
+| ![Font Awesome](https://img.shields.io/badge/Font_Awesome-339AF0?style=flat&logo=fontawesome&logoColor=white) | 6.5.1 | Icon library |
+
+## 🎨 Design System
+
+<details>
+<summary><strong>🎨 Color Palette</strong></summary>
+
 ```css
-/* ==== CSS STRUCTURE ==== */
-
-/* Variables & Reset */        /* Lines 1-50: CSS custom properties */
-:root {
-  --primary-color: #fff;
-  --secondary-color: #6f4e37;   /* Brown theme */
-  --accent-color: #c8a064;      /* Gold accent */
-  --text-color: #333;
-  --header-font: 'Playfair Display';
-  --body-font: 'Lora';
-}
-
-/* Base Styles */              /* Lines 51-100: Typography & base elements */
-/* Navigation */               /* Lines 101-180: Fixed header with blur */
-/* Hero Section */             /* Lines 181-250: Background with overlay */
-/* Product Catalog */          /* Lines 251-400: Filter buttons & grid */
-/* Product Cards */            /* Lines 401-550: Enhanced cards with hover */
-/* Cart System */              /* Lines 551-650: Dropdown cart with animation */
-/* Footer */                   /* Lines 651-800: Grid layout with FAQ */
-/* Social Media */             /* Lines 801-900: 9 platforms with brand colors */
-/* Animations */               /* Lines 901-1000: WhatsApp button & hovers */
-/* Modal System */             /* Lines 1001-1100: Image zoom modal */
-/* Responsive Design */        /* Lines 1101-1320: Mobile & tablet breakpoints */
+--primary-color: #ffffff    /* Pure white backgrounds */
+--secondary-color: #6f4e37  /* Rich brown for headers */
+--accent-color: #c8a064     /* Gold for highlights */
+--text-color: #333333       /* Dark gray for readability */
+--background: #fdfaf6       /* Warm off-white */
 ```
 
-### **⚡ JavaScript Modules (script.js)**
-```javascript
-// ==== JAVASCRIPT STRUCTURE ====
+</details>
 
-/* Configuration */             // Lines 1-20: App constants & settings
-class AppConfig {
-  static WHATSAPP_NUMBER = '6285220888840';
-  static SCROLL_THRESHOLD = 8;
-}
+<details>
+<summary><strong>📝 Typography</strong></summary>
 
-/* Base Architecture */         // Lines 21-80: OOP base classes
-class BaseModule { }            // Base class for all modules
-class Utils { }                 // Utility functions
+- **Headers**: Playfair Display (Elegant serif)
+- **Body**: Lora (Readable serif)  
+- **Icons**: Font Awesome 6.5.1
 
-/* Core Modules */              // Lines 81-300: Main functionality
-class NavigationHandler { }     // Scroll effects & mobile menu
-class ProductFilter { }         // Category filtering system
-class CartManager { }           // Shopping cart functionality
-class ProductModal { }          // Image zoom modal
-class AnimationManager { }      // Smooth animations
+</details>
 
-/* Application */               // Lines 301-720: App initialization
-class App {                     // Main application class
-  init() {                      // Module registration & startup
-    this.register(new NavigationHandler());
-    this.register(new ProductFilter());
-    this.register(new CartManager());
-  }
-}
+<details>
+<summary><strong>🎬 Animations</strong></summary>
 
-// Application startup
-document.addEventListener('DOMContentLoaded', () => {
-  window.app = new App();
-  window.app.init();
-});
-```
-
----
-
-## 🎨 **Design System**
-
-### **🎨 Color Palette**
-```css
-Primary:    #ffffff    (Pure white backgrounds)
-Secondary:  #6f4e37    (Rich brown for headers)
-Accent:     #c8a064    (Gold for highlights)
-Text:       #333333    (Dark gray for readability)
-Background: #fdfaf6    (Warm off-white)
-```
-
-### **📝 Typography**
-```css
-Headers:    Playfair Display    (Elegant serif)
-Body:       Lora               (Readable serif)
-Icons:      Font Awesome 6.5.1 (Modern icons)
-```
-
-### **🎬 Animations**
 - **WhatsApp Button**: Pulse + Wiggle + Bounce (3 simultaneous)
 - **Product Cards**: Hover scale & shadow effects
 - **Cart Dropdown**: Slide-down with backdrop blur
 - **Navigation**: Scroll-triggered backdrop blur
-- **Buttons**: Smooth color & scale transitions
 
----
+</details>
 
-## 🚀 **Features & Functionality**
+## 🚀 Features
 
-### **✨ Core Features**
-- ✅ Responsive design (Mobile-first approach)
-- ✅ Product catalog with category filtering
-- ✅ Interactive shopping cart system
-- ✅ WhatsApp integration for orders
-- ✅ Google Maps embed with location
-- ✅ Image modal zoom functionality
-- ✅ Social media integration (9 platforms)
-- ✅ FAQ section with clean grid layout
+### Core Functionality
+- ✅ **Responsive Design** - Mobile-first approach
+- ✅ **Product Filtering** - Dynamic category filtering
+- ✅ **Shopping Cart** - Add/remove with quantity management
+- ✅ **WhatsApp Orders** - Formatted order messages
+- ✅ **Image Modal** - Product image zoom functionality
+- ✅ **Maps Integration** - Embedded Google Maps location
 
-### **🛒 E-Commerce Functions**
-- **Product Display**: 9 furniture items across 3 categories
-- **Filtering**: Dynamic category filtering (Semua, Meja, Set, Sofa)
-- **Cart System**: Add/remove items with quantity management
-- **Price Calculation**: Real-time total calculation
-- **WhatsApp Orders**: Formatted message with cart items
+### E-Commerce Features  
+- 🛒 **Cart Management** - Real-time price calculation
+- 📱 **Mobile Optimized** - Touch-friendly interface
+- 🔍 **Product Search** - Category-based filtering
+- 💬 **Direct Communication** - WhatsApp integration
+- 📍 **Store Locator** - Google Maps embed
 
-### **📱 Responsive Breakpoints**
-```css
-Desktop:    1024px+     (Full layout)
-Tablet:     768px       (Adjusted grid)
-Mobile:     600px       (Single column)
-Small:      480px       (Compact layout)
-```
+## 📱 Responsive Design
 
----
+The website is optimized for all device sizes:
 
-## 🛠️ **Tech Stack**
-
-| Technology | Version | Purpose |
-|------------|---------|---------|
-| **HTML5** | Latest | Semantic structure |
-| **CSS3** | Latest | Modern styling & animations |
-| **JavaScript** | ES6+ | Interactive functionality |
-| **Font Awesome** | 6.5.1 | Icon library |
-| **Google Fonts** | Latest | Typography (Playfair Display, Lora) |
-| **Google Maps** | Embed API | Location integration |
+| Device | Breakpoint | Layout |
+|--------|------------|--------|
+| 📱 **Mobile** | < 600px | Single column |
+| 📱 **Large Mobile** | 600px - 768px | Adjusted grid |
+| 💻 **Tablet** | 768px - 1024px | Two columns |
+| 🖥️ **Desktop** | > 1024px | Full layout |
 
 ---
 
@@ -276,68 +197,95 @@ du -h *.css *.js *.html
 
 ### **🔧 Optimizations**
 - ✅ Lazy loading for images
-- ✅ CSS animations over JavaScript
+## 📊 Performance
+
+### Code Statistics
+- **HTML**: 314 lines (Semantic structure)
+- **CSS**: 1,356 lines (Modern styling) 
+- **JavaScript**: 716 lines (Modular architecture)
+- **Total Assets**: 9 product images + brand assets
+- **Load Time**: < 3 seconds on 3G
+- **Lighthouse Score**: 90+ Performance
+
+### Optimizations
+- ✅ Lazy loading for images
+- ✅ CSS animations over JavaScript  
 - ✅ Compressed asset files
 - ✅ Minimal external dependencies
-- ✅ Clean, semantic HTML
 - ✅ Efficient CSS selectors
 
+## 📞 Contact & Business Info
+
+<div align="center">
+
+### 🏪 MEJA CAFE PALU
+**Furniture Cafe Specialist in Central Sulawesi**
+
+📍 **Address**  
+Nabila Residen 2, Jl. Manunggal, Baliase  
+Kec. Marawola, Kab. Sigi, Sulawesi Tengah 94222
+
+📱 **WhatsApp** • [+62 852-2088-8840](https://wa.me/6285220888840)  
+🗺️ **Location** • [View on Google Maps](https://www.google.com/maps/place/Meja+Cafe/@-0.9432431,119.8552128,17z)  
+🌐 **Website** • [taplink.cc/mejacafepalu](https://taplink.cc/mejacafepalu)
+
+### Social Media
+[![Instagram](https://img.shields.io/badge/Instagram-E4405F?style=flat&logo=instagram&logoColor=white)](https://www.instagram.com/meja_cafe.plw)
+[![Facebook](https://img.shields.io/badge/Facebook-1877F2?style=flat&logo=facebook&logoColor=white)](https://www.facebook.com/mejacafepalu)
+[![TikTok](https://img.shields.io/badge/TikTok-000000?style=flat&logo=tiktok&logoColor=white)](https://www.tiktok.com/@mejacafepalu)
+[![YouTube](https://img.shields.io/badge/YouTube-FF0000?style=flat&logo=youtube&logoColor=white)](https://www.youtube.com/@mejacafepalu)
+
+</div>
+
+## 🚧 Roadmap
+
+### Planned Features
+- 🔥 **Backend Integration** (Node.js/PHP)
+- 🔥 **Database System** (MySQL/MongoDB)  
+- 🔥 **Admin Panel** for product management
+- 🔥 **WhatsApp API** for order confirmation
+- 🔥 **Portfolio Gallery** of completed projects
+- 🔥 **Payment Gateway** integration
+
+### UI/UX Enhancements
+- 🎨 Dark mode toggle
+- 🎨 Product comparison feature
+- 🎨 Advanced filtering options
+- 🎨 360° product view
+- 🎨 AR product preview
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the project
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- **Font Awesome** for the amazing icon library
+- **Google Fonts** for beautiful typography
+- **GitHub** for hosting and version control
+- **Vercel** for deployment platform
+
 ---
 
-## 🚧 **Future Roadmap**
+<div align="center">
 
-### **🔥 Planned Features**
-- 🔹 **Backend Integration** (Node.js/PHP)
-- 🔹 **Database System** (MySQL/MongoDB)
-- 🔹 **Admin Panel** untuk manajemen produk
-- 🔹 **WhatsApp API** untuk konfirmasi order
-- 🔹 **Portfolio Gallery** project yang dikerjakan
-- 🔹 **Payment Gateway** integration
-- 🔹 **User Reviews** system
-- 🔹 **Inventory Management**
+**🪑 MEJA CAFE PALU**  
+*Furniture Cafe Specialist • Ready Stock & Custom Order*
 
-### **🎨 UI/UX Improvements**
-- 🔹 Dark mode toggle
-- 🔹 Product comparison feature
-- 🔹 Advanced filtering options
-- 🔹 360° product view
-- 🔹 Augmented Reality preview
-- 🔹 Wishlist functionality
+**Made with ❤️ in Sulawesi Tengah, Indonesia**
 
----
+⭐ **Star this repo if it helped you!** ⭐
 
-## 📝 **Contributing**
-
-Contributions are welcome! Please follow these steps:
-
-1. **Fork** the repository
-2. **Create** a feature branch (`git checkout -b feature/amazing-feature`)
-3. **Commit** your changes (`git commit -m 'Add amazing feature'`)
-4. **Push** to the branch (`git push origin feature/amazing-feature`)
-5. **Open** a Pull Request
-
----
-
-## 📜 **License**
-
-This project is licensed under the **MIT License**.  
-See the [LICENSE](LICENSE) file for details.
-
----
-
-## 👨‍💼 **About MEJA CAFE PALU**
-
-🪑 **Spesialis Furniture Cafe Profesional**  
-📍 **Melayani Sulawesi Tengah & Sekitarnya**  
-✨ **Ready Stock & Custom Order**  
-🏗️ **Pembuatan Cafe/Outlet Lengkap**  
-
----
-
-**© 2025 MEJA CAFE PALU - All Rights Reserved**
-
----
-
-⭐ **Jika project ini membantu, jangan lupa beri star di GitHub!** ⭐
+</div>
  
  

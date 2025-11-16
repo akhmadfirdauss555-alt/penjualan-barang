@@ -316,21 +316,11 @@ class ShoppingCart extends BaseModule {
     if (!productElement) return;
 
     const product = this.extractProductData(productElement);
-    
-    // Validasi harga
-    if (product.price <= 0) {
-      alert('Mohon masukkan harga produk terlebih dahulu!');
-      const priceInput = productElement.querySelector('.price-input');
-      priceInput?.focus();
-      return;
-    }
-
     this.addItem(product);
   }
 
   extractProductData(productElement) {
-    const priceInput = productElement.querySelector('.price-input');
-    const priceValue = priceInput ? parseInt(priceInput.value) || 0 : 0;
+    const priceValue = parseInt(productElement.dataset.price) || 0;
     
     return {
       name: productElement.querySelector('h3')?.textContent || 'Unknown',

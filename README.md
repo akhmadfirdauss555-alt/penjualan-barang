@@ -1,79 +1,90 @@
-<div align="center">
-
 # 🪑 MEJA CAFE PALU
 
-**Modern E-Commerce Website for Cafe Furniture**
+<div align="center">
 
-[![GitHub stars](https://img.shields.io/github/stars/Dlanang/penjualan-barang?style=for-the-badge&logo=github)](https://github.com/Dlanang/penjualan-barang/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/Dlanang/penjualan-barang?style=for-the-badge&logo=github)](https://github.com/Dlanang/penjualan-barang/network)
-[![Website](https://img.shields.io/badge/Website-Live-brightgreen?style=for-the-badge&logo=vercel)](https://dlanang.github.io/penjualan-barang)
-[![License](https://img.shields.io/github/license/Dlanang/penjualan-barang?style=for-the-badge)](https://github.com/Dlanang/penjualan-barang/blob/main/LICENSE)
+**Professional Cafe Furniture E-Commerce Website**
 
-[**🌐 Live Demo**](https://dlanang.github.io/penjualan-barang) • [**📱 Taplink**](https://taplink.cc/mejacafepalu) • [**💬 WhatsApp**](https://wa.me/6285220888840)
+[![Website](https://img.shields.io/badge/Website-Live-brightgreen?style=for-the-badge&logo=vercel)](https://meja-cafe-palu.vercel.app/)
+[![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](https://github.com/Dlanang/penjualan-barang/blob/main/LICENSE)
+[![Instagram](https://img.shields.io/badge/Instagram-@meja__cafe.plw-E4405F?style=for-the-badge&logo=instagram)](https://www.instagram.com/meja_cafe.plw)
+[![WhatsApp](https://img.shields.io/badge/WhatsApp-+6285220888840-25D366?style=for-the-badge&logo=whatsapp)](https://wa.me/6285220888840)
+
+[**🌐 Live Demo**](https://meja-cafe-palu.vercel.app/) • [**📱 Taplink**](https://taplink.cc/mejacafepalu) • [**💬 Order WhatsApp**](https://wa.me/6285220888840)
 
 </div>
 
 ## 📖 Overview
 
-**MEJA CAFE PALU** is a modern e-commerce website specializing in cafe furniture in Central Sulawesi, Indonesia. Built with vanilla HTML, CSS, and JavaScript, featuring a responsive design and interactive shopping experience.
+**MEJA CAFE PALU** adalah website e-commerce modern yang mengkhususkan diri dalam furniture cafe berkualitas di Sulawesi Tengah. Website ini dibangun dengan teknologi vanilla web (HTML5, CSS3, JavaScript) dengan fitur lengkap dan desain responsif untuk pengalaman belanja yang optimal.
 
-### ✨ Key Features
+### 🎯 Spesialisasi Produk
+- **Meja Cafe** - Berbagai model dan ukuran
+- **Sofa & Seating** - Premium comfort furniture  
+- **Furniture Set** - Complete cafe setup
+- **Custom Design** - Sesuai kebutuhan spesifik
 
-- 🪑 **Product Catalog** - Interactive furniture showcase with filtering
-- 🛒 **Shopping Cart** - Dynamic cart system with real-time calculations  
-- 📱 **Mobile Responsive** - Optimized for all device sizes
-- 💬 **WhatsApp Integration** - Direct ordering via WhatsApp
-- 📍 **Google Maps** - Embedded store location
-- 🎨 **Modern UI/UX** - Clean design with smooth animations
-- 🌐 **Social Media** - Integration with 9 platforms
+## ✨ Fitur Unggulan
+
+| Category | Features |
+|----------|----------|
+| **🛒 E-Commerce** | Product Catalog, Dynamic Cart, WhatsApp Checkout |
+| **📱 Mobile** | Responsive Design, Touch Navigation |
+| **🎨 UI/UX** | Modern Animations, Smooth Scrolling |
+| **📞 Integration** | WhatsApp, Instagram, Google Maps |
 
 ## 🚀 Quick Start
 
 ```bash
-# Clone the repository
-git clone https://github.com/Dlanang/penjualan-barang.git
-
-# Navigate to project directory
+# Clone repository
+git clone 
 cd penjualan-barang
 
-# Start local server
+# Start development server (pilih salah satu)
 python3 -m http.server 8080
+# atau
+npx serve .
+# atau
+live-server .
 
-# Open in browser
+# Buka di browser
 open http://localhost:8080
 ```
+
+## 🛠 Tech Stack
+
+| Technology | Purpose | Version |
+|------------|---------|---------|
+| **HTML5** | Structure & Semantics | Latest |
+| **CSS3** | Styling & Animations | Latest |
+| **JavaScript** | Interactive Features | ES6+ |
+| **AOS** | Scroll Animations | 2.3.1 |
+| **Font Awesome** | Icons | 6.5.1 |
+| **Normalize.css** | Cross-browser CSS | 8.0.1 |
+| **Lenis** | Smooth Scrolling | 1.3.11 |
+| **Google Fonts** | Typography | Latest |
 
 ## 📂 Project Structure
 
 ```
 penjualan-barang/
-├── 📄 index.html          # Main HTML structure (314 lines)
-├── 🎨 style.css           # Complete styling (1,356 lines)
-├── ⚡ script.js           # JavaScript functionality (716 lines)
-├── 📖 README.md           # Project documentation
-├── 📝 kata-kata-web.md    # Business contact data
-└── 📂 assets2/            # Images and assets
-    ├── 📂 meja/           # Table product images
-    ├── 📂 set/            # Furniture set images  
-    ├── 📂 sofa/           # Sofa product images
-    ├── 📂 logo/           # Brand logos
-    └── 🖼️ banner.jpg     # Hero background
+├── 📄 index.html              # Main page
+├── 🎨 style.css               # Complete styling (1,356 lines)
+├── ⚡ script.js               # JavaScript functionality (716 lines)
+├── 📖 README.md               # Project documentation
+├── 📝 kata-kata-web.md        # Business contact data
+├── 📋 harga.md                # Pricing documentation
+└── 📂 assets2/                # Images and assets
+    ├── 📂 logo/               # Brand logos
+    ├── 📂 meja/               # Table product images
+    ├── 📂 sofa/               # Sofa product images  
+    ├── 📂 set/                # Furniture set images
+    ├── 📂 testimony/          # Customer reviews
+    └── 🖼️ banner.jpg         # Hero background
 ```
-
-## 🛠️ Tech Stack
-
-| Technology | Version | Purpose |
-|------------|---------|---------|
-| ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white) | Latest | Semantic structure |
-| ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3&logoColor=white) | Latest | Styling & animations |
-| ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black) | ES6+ | Interactive functionality |
-| ![Font Awesome](https://img.shields.io/badge/Font_Awesome-339AF0?style=flat&logo=fontawesome&logoColor=white) | 6.5.1 | Icon library |
 
 ## 🎨 Design System
 
-<details>
-<summary><strong>🎨 Color Palette</strong></summary>
-
+### Color Palette
 ```css
 --primary-color: #ffffff    /* Pure white backgrounds */
 --secondary-color: #6f4e37  /* Rich brown for headers */
@@ -82,47 +93,53 @@ penjualan-barang/
 --background: #fdfaf6       /* Warm off-white */
 ```
 
-</details>
-
-<details>
-<summary><strong>📝 Typography</strong></summary>
-
+### Typography
 - **Headers**: Playfair Display (Elegant serif)
 - **Body**: Lora (Readable serif)  
 - **Icons**: Font Awesome 6.5.1
 
-</details>
-
-<details>
-<summary><strong>🎬 Animations</strong></summary>
-
+### Animations
 - **WhatsApp Button**: Pulse + Wiggle + Bounce (3 simultaneous)
 - **Product Cards**: Hover scale & shadow effects
 - **Cart Dropdown**: Slide-down with backdrop blur
 - **Navigation**: Scroll-triggered backdrop blur
 
-</details>
+## 🎯 Fitur Utama
 
-## 🚀 Features
-
-### Core Functionality
+### 💼 E-Commerce Core
+- ✅ **Product Catalog** - 9 produk furniture premium
+- ✅ **Dynamic Filtering** - Filter by Meja, Sofa, Set
+- ✅ **Shopping Cart** - Real-time calculation & quantity
+- ✅ **WhatsApp Checkout** - Order langsung ke WhatsApp
+- ✅ **Image Zoom Modal** - Preview produk detail
 - ✅ **Responsive Design** - Mobile-first approach
-- ✅ **Product Filtering** - Dynamic category filtering
-- ✅ **Shopping Cart** - Add/remove with quantity management
-- ✅ **WhatsApp Orders** - Formatted order messages
-- ✅ **Image Modal** - Product image zoom functionality
-- ✅ **Maps Integration** - Embedded Google Maps location
 
-### E-Commerce Features  
-- 🛒 **Cart Management** - Real-time price calculation
-- 📱 **Mobile Optimized** - Touch-friendly interface
-- 🔍 **Product Search** - Category-based filtering
-- 💬 **Direct Communication** - WhatsApp integration
-- 📍 **Store Locator** - Google Maps embed
+### 📱 Instagram Integration  
+- ✅ **Instagram Carousel** - Auto-rotating gallery
+- ✅ **Touch Navigation** - Swipe support for mobile
+- ✅ **Social Proof** - Live Instagram feed
+- ✅ **Follow Button** - Direct Instagram integration
+
+### 🗺️ Location Services
+- ✅ **Google Maps Embed** - Interactive store location
+- ✅ **GPS Navigation** - Direct navigation link
+- ✅ **Business Integration** - Google Business Profile
+
+### 🎨 User Experience
+- ✅ **AOS Animations** - Scroll-triggered animations
+- ✅ **Smooth Scrolling** - Lenis smooth scroll
+- ✅ **Loading States** - Professional loading indicators
+- ✅ **FAQ Section** - Customer service information
+
+## 💰 Product Range
+
+| Kategori | Harga Range | Produk |
+|----------|-------------|---------|
+| **Meja** | Rp 650K - 1.35M | Konsol, Gaming, Kafe, Taman |
+| **Sofa** | Rp 2.8M - 3.2M | Esty Premium, Gucci 2-Seater |
+| **Set** | Rp 1.9M - 2.4M | Coffee Table, Couple Rotan, Elinda |
 
 ## 📱 Responsive Design
-
-The website is optimized for all device sizes:
 
 | Device | Breakpoint | Layout |
 |--------|------------|--------|
@@ -131,73 +148,7 @@ The website is optimized for all device sizes:
 | 💻 **Tablet** | 768px - 1024px | Two columns |
 | 🖥️ **Desktop** | > 1024px | Full layout |
 
----
-
-## 📞 **Business Contact**
-
-📍 **Alamat Toko:**  
-Nabila Residen 2, Jl. Manunggal, Baliase  
-Kec. Marawola, Kab. Sigi, Sulawesi Tengah 94222
-
-📱 **WhatsApp:** [+62 852-2088-8840](https://wa.me/6285220888840)  
-🗺️ **Google Maps:** [Lihat Lokasi](https://www.google.com/maps/place/Meja+Cafe/@-0.9432431,119.8552128,17z)  
-🌐 **Website:** [taplink.cc/mejacafepalu](https://taplink.cc/mejacafepalu)
-
-### **🌐 Social Media**
-- 📸 [Instagram: @meja_cafe.plw](https://www.instagram.com/meja_cafe.plw)
-- 📘 [Facebook: mejacafepalu](https://www.facebook.com/mejacafepalu)
-- 🎵 [TikTok: @mejacafepalu](https://www.tiktok.com/@mejacafepalu)
-- 📺 [YouTube: @mejacafepalu](https://www.youtube.com/@mejacafepalu)
-
----
-
-## 🚀 **Development Setup**
-
-### **🔧 Local Installation**
-```bash
-# 1. Clone repository
-git clone https://github.com/Dlanang/penjualan-barang.git
-
-# 2. Navigate to project
-cd penjualan-barang
-
-# 3. Start local server (Python)
-python3 -m http.server 8080
-
-# 4. Open in browser
-# http://localhost:8080
-```
-
-### **📝 Development Commands**
-```bash
-# Check git status
-git status
-
-# Run on different port
-python3 -m http.server 5500
-
-# View file structure
-tree . -I 'node_modules|.git'
-
-# Check file sizes
-du -h *.css *.js *.html
-```
-
----
-
-## 🎯 **Performance Metrics**
-
-### **📊 Code Statistics**
-- **HTML**: ~300 lines (Semantic structure)
-- **CSS**: ~1,320 lines (Modern styling)
-- **JavaScript**: ~720 lines (Modular architecture)
-- **Images**: Optimized JPEG format
-- **Load Time**: <3 seconds on 3G
-- **Lighthouse Score**: 90+ (Performance)
-
-### **🔧 Optimizations**
-- ✅ Lazy loading for images
-## 📊 Performance
+## ⚡ Performance
 
 ### Code Statistics
 - **HTML**: 314 lines (Semantic structure)
@@ -287,5 +238,10 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ⭐ **Star this repo if it helped you!** ⭐
 
 </div>
- 
- 
+
+---
+
+**📋 Changelog**  
+*• README.md diperbarui dengan struktur yang lebih terorganisir*  
+*• Informasi teknis dan bisnis dipisahkan dengan jelas*  
+*• Menambahkan roadmap dan section kontribusi*

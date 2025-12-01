@@ -695,6 +695,602 @@ class Application {
 }
 
 // ============================================
+// INSTAGRAM CAROUSEL MODULE
+// ============================================
+class InstagramCarousel extends BaseModule {
+  constructor() {
+    super('InstagramCarousel');
+    this.carousel = null;
+    this.carouselContainer = null;
+    this.posts = [];
+    this.allPosts = []; // Pool lengkap semua posts
+    this.currentIndex = 0;
+    this.postsPerView = 3;
+    this.isLoading = false;
+    this.autoplayInterval = null;
+    this.autoplayDelay = 5000;
+    this.refreshInterval = null;
+    this.refreshDelay = 30000; // Refresh setiap 30 detik
+    this.maxDisplayPosts = 6; // Maksimal posts yang ditampilkan
+  }
+
+  init() {
+    try {
+      this.cacheElements();
+      if (this.carousel) {
+        this.initializeAllPosts();
+        this.loadInstagramPosts();
+        this.setupEventListeners();
+        this.setupTouchEvents();
+        this.startAutoRefresh();
+        this.logInitialization(true);
+      }
+    } catch (error) {
+      console.error('Instagram Carousel initialization error:', error);
+      this.logInitialization(false);
+    }
+  }
+
+  cacheElements() {
+    this.carousel = document.getElementById('instagram-carousel');
+    this.carouselContainer = document.querySelector('.carousel-container');
+    this.prevButton = document.getElementById('carousel-prev');
+    this.nextButton = document.getElementById('carousel-next');
+    this.dotsContainer = document.getElementById('carousel-dots');
+  }
+
+  initializeAllPosts() {
+    // Pool lengkap semua posts yang tersedia
+    this.allPosts = [
+      {
+        id: '1',
+        username: 'meja_cafe.plw',
+        location: 'Palu, Sulawesi Tengah',
+        image: 'assets2/meja/4 meja 1 kursi.jpeg',
+        avatar: 'assets2/logo/logo.jpg',
+        likes: 143,
+        caption: '✨ Set meja cafe minimalis dengan 4 kursi yang nyaman! Harga Rp 2.500.000 - Perfect untuk cafe kecil dengan nuansa cozy dan modern.',
+        hashtags: '#mejacafe #furnituredesign #coffeeshop #minimalist #interior',
+        category: 'meja',
+        priority: 1,
+        baseTimestamp: Date.now() - (2 * 24 * 60 * 60 * 1000)
+      },
+      {
+        id: '2', 
+        username: 'meja_cafe.plw',
+        location: 'Palu, Sulawesi Tengah',
+        image: 'assets2/sofa/Sofa Esty.jpeg',
+        avatar: 'assets2/logo/logo.jpg',
+        likes: 89,
+        caption: '🛋️ Sofa Esty series - kenyamanan premium untuk area lounge cafe Anda! Harga Rp 3.200.000 - Design elegant dengan material berkualitas.',
+        hashtags: '#sofacafe #premium #comfort #lounge #furniture',
+        category: 'sofa',
+        priority: 2,
+        baseTimestamp: Date.now() - (4 * 24 * 60 * 60 * 1000)
+      },
+      {
+        id: '3',
+        username: 'meja_cafe.plw',
+        location: 'Palu, Sulawesi Tengah',
+        image: 'assets2/set/Coffe table set.jpeg',
+        avatar: 'assets2/logo/logo.jpg',
+        likes: 156,
+        caption: '☕ Coffee table set dengan design industrial modern! Harga Rp 2.100.000 - Cocok untuk outdoor maupun indoor dengan style yang timeless.',
+        hashtags: '#coffeetable #industrial #outdoor #stylish #modern',
+        category: 'set',
+        priority: 1,
+        baseTimestamp: Date.now() - (7 * 24 * 60 * 60 * 1000)
+      },
+      {
+        id: '4',
+        username: 'meja_cafe.plw',
+        location: 'Palu, Sulawesi Tengah',
+        image: 'assets2/meja/Meja komputer gaming.jpeg',
+        avatar: 'assets2/logo/logo.jpg',
+        likes: 201,
+        caption: '🎮 Meja gaming yang multifunctional! Harga Rp 1.800.000 - Bisa untuk workspace cafe dengan storage yang praktis dan cable management rapi.',
+        hashtags: '#mejagaming #workspace #multifunctional #modern #storage',
+        category: 'meja',
+        priority: 3,
+        baseTimestamp: Date.now() - (8 * 24 * 60 * 60 * 1000)
+      },
+      {
+        id: '5',
+        username: 'meja_cafe.plw',
+        location: 'Palu, Sulawesi Tengah',
+        image: 'assets2/sofa/Sofa gucchi 2 seater.jpeg',
+        avatar: 'assets2/logo/logo.jpg',
+        likes: 342,
+        caption: '💎 Sofa Gucci 2 seater - luxury meets comfort! Harga Rp 2.800.000 - Design eksklusif untuk area VIP cafe dengan material premium.',
+        hashtags: '#sofagucci #luxury #vip #exclusive #premium #comfort',
+        category: 'sofa',
+        priority: 1,
+        baseTimestamp: Date.now() - (14 * 24 * 60 * 60 * 1000)
+      },
+      {
+        id: '6',
+        username: 'meja_cafe.plw',
+        location: 'Palu, Sulawesi Tengah',
+        image: 'assets2/set/Set couple ropan busa.jpeg',
+        avatar: 'assets2/logo/logo.jpg',
+        likes: 97,
+        caption: '💕 Set couple dengan ropan busa super empuk! Harga Rp 1.900.000 - Perfect untuk date corner di cafe dengan nuansa romantic.',
+        hashtags: '#setcouple #romantic #datespot #comfort #soft #cafe',
+        category: 'set',
+        priority: 2,
+        baseTimestamp: Date.now() - (15 * 24 * 60 * 60 * 1000)
+      },
+      {
+        id: '7',
+        username: 'meja_cafe.plw',
+        location: 'Palu, Sulawesi Tengah',
+        image: 'assets2/meja/Meja taman.jpeg',
+        avatar: 'assets2/logo/logo.jpg',
+        likes: 178,
+        caption: '🌿 Meja taman outdoor dengan design weather-resistant! Harga Rp 900.000 - Perfect untuk area outdoor cafe dengan nuansa natural.',
+        hashtags: '#mejataman #outdoor #weatherproof #natural #garden',
+        category: 'meja',
+        priority: 2,
+        baseTimestamp: Date.now() - (10 * 24 * 60 * 60 * 1000)
+      },
+      {
+        id: '8',
+        username: 'meja_cafe.plw',
+        location: 'Palu, Sulawesi Tengah',
+        image: 'assets2/set/set elinda.jpeg',
+        avatar: 'assets2/logo/logo.jpg',
+        likes: 234,
+        caption: '✨ Set Elinda dengan design contemporary elegant! Harga Rp 2.400.000 - Kombinasi sofa dan meja yang sempurna untuk area VIP.',
+        hashtags: '#setelinda #contemporary #elegant #vip #exclusive',
+        category: 'set',
+        priority: 1,
+        baseTimestamp: Date.now() - (5 * 24 * 60 * 60 * 1000)
+      },
+      {
+        id: '9',
+        username: 'meja_cafe.plw',
+        location: 'Palu, Sulawesi Tengah',
+        image: 'assets2/meja/Meja konsol.jpeg',
+        avatar: 'assets2/logo/logo.jpg',
+        likes: 126,
+        caption: '📺 Meja konsol multifungsi dengan storage yang maksimal! Harga Rp 1.200.000 - Cocok untuk display produk atau area kasir cafe.',
+        hashtags: '#mejakonsol #storage #display #kasir #multifungsi',
+        category: 'meja',
+        priority: 3,
+        baseTimestamp: Date.now() - (12 * 24 * 60 * 60 * 1000)
+      }
+    ];
+  }
+
+  async loadInstagramPosts() {
+    if (this.isLoading) return;
+    
+    this.isLoading = true;
+    console.log('Loading fresh Instagram posts...');
+
+    try {
+      this.showLoading();
+      
+      // Simulate API delay
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      
+      // Generate dynamic post selection
+      this.posts = this.generateFreshPosts();
+      
+      this.renderCarousel();
+      this.setupNavigation();
+      this.startAutoplay();
+      
+    } catch (error) {
+      console.error('Error loading Instagram posts:', error);
+      this.showError();
+    } finally {
+      this.isLoading = false;
+    }
+  }
+
+  generateFreshPosts() {
+    // Shuffle dan pilih posts berdasarkan priority dan waktu
+    const shuffledPosts = [...this.allPosts]
+      .map(post => {
+        // Update likes dengan variasi random
+        const likesVariation = Math.floor(Math.random() * 20) - 10;
+        const newLikes = Math.max(1, post.likes + likesVariation);
+        
+        // Update timestamp untuk variasi
+        const timeVariation = Math.floor(Math.random() * 2 * 60 * 60 * 1000); // ±2 jam
+        const newTimestamp = post.baseTimestamp + timeVariation;
+        
+        return {
+          ...post,
+          likes: newLikes,
+          timestamp: newTimestamp,
+          date: this.formatInstagramDate(newTimestamp)
+        };
+      })
+      .sort((a, b) => {
+        // Sort by priority first, then by timestamp (newest first)
+        if (a.priority !== b.priority) {
+          return a.priority - b.priority;
+        }
+        return b.timestamp - a.timestamp;
+      });
+
+    // Pilih posts dengan algoritma dynamic selection
+    const selectedPosts = [];
+    const categories = new Set();
+    
+    // Pastikan variasi kategori
+    for (const post of shuffledPosts) {
+      if (selectedPosts.length >= this.maxDisplayPosts) break;
+      
+      // Prioritaskan kategori yang belum ada
+      if (!categories.has(post.category) || selectedPosts.length < 3) {
+        selectedPosts.push(post);
+        categories.add(post.category);
+      }
+    }
+    
+    // Isi sisa slot jika belum cukup
+    for (const post of shuffledPosts) {
+      if (selectedPosts.length >= this.maxDisplayPosts) break;
+      if (!selectedPosts.find(p => p.id === post.id)) {
+        selectedPosts.push(post);
+      }
+    }
+    
+    console.log(`✨ Generated ${selectedPosts.length} fresh posts with categories:`, 
+                [...categories].join(', '));
+    
+    return selectedPosts.slice(0, this.maxDisplayPosts);
+  }
+
+  formatInstagramDate(timestamp) {
+    const now = Date.now();
+    const diff = now - timestamp;
+    const days = Math.floor(diff / (24 * 60 * 60 * 1000));
+    const hours = Math.floor(diff / (60 * 60 * 1000));
+    const minutes = Math.floor(diff / (60 * 1000));
+    
+    if (days > 0) {
+      if (days === 1) return '1 DAY AGO';
+      if (days < 7) return `${days} DAYS AGO`;
+      if (days < 14) return '1 WEEK AGO';
+      return `${Math.floor(days/7)} WEEKS AGO`;
+    } else if (hours > 0) {
+      return `${hours}H AGO`;
+    } else {
+      return `${Math.max(1, minutes)}M AGO`;
+    }
+  }
+
+  async refreshContent() {
+    console.log('🔄 Auto-refreshing Instagram content...');
+    
+    // Show refresh indicator
+    const refreshIndicator = document.getElementById('refresh-indicator');
+    if (refreshIndicator) {
+      refreshIndicator.style.display = 'inline-block';
+    }
+    
+    // Show subtle loading on carousel
+    const carousel = document.getElementById('instagram-carousel');
+    if (carousel) {
+      carousel.style.opacity = '0.7';
+    }
+    
+    try {
+      // Generate new post selection
+      await new Promise(resolve => setTimeout(resolve, 1200));
+      this.posts = this.generateFreshPosts();
+      
+      // Re-render with smooth transition
+      this.renderCarousel();
+      this.setupNavigation();
+      
+      // Reset carousel position
+      this.currentIndex = 0;
+      this.updateCarousel();
+      
+      if (carousel) {
+        carousel.style.opacity = '1';
+      }
+      
+      console.log('✨ Content refreshed successfully');
+      
+    } catch (error) {
+      console.error('Error refreshing content:', error);
+      if (carousel) {
+        carousel.style.opacity = '1';
+      }
+    } finally {
+      // Hide refresh indicator
+      if (refreshIndicator) {
+        setTimeout(() => {
+          refreshIndicator.style.display = 'none';
+        }, 500);
+      }
+    }
+  }
+
+  startAutoRefresh() {
+    this.stopAutoRefresh();
+    
+    this.refreshInterval = setInterval(() => {
+      if (!document.hidden && this.isInitialized()) {
+        this.refreshContent();
+      }
+    }, this.refreshDelay);
+    
+    console.log(`🔄 Auto-refresh started: every ${this.refreshDelay/1000}s`);
+  }
+
+  stopAutoRefresh() {
+    if (this.refreshInterval) {
+      clearInterval(this.refreshInterval);
+      this.refreshInterval = null;
+    }
+  }
+
+  showLoading() {
+    const loadingElement = document.querySelector('.carousel-loading');
+    if (loadingElement) {
+      loadingElement.style.display = 'flex';
+    }
+  }
+
+  hideLoading() {
+    const loadingElement = document.querySelector('.carousel-loading');
+    if (loadingElement) {
+      loadingElement.style.display = 'none';
+    }
+  }
+
+  renderCarousel() {
+    if (!this.carousel) return;
+
+    this.hideLoading(); // Hide loading state first
+
+    const postsHTML = this.posts.map(post => `
+      <div class="instagram-post-card" data-post-id="${post.id}">
+        <div class="instagram-post-header">
+          <div class="instagram-avatar">
+            <img src="${post.avatar}" alt="${post.username}" loading="lazy">
+          </div>
+          <div class="instagram-user-info">
+            <div class="instagram-username">${post.username}</div>
+            <div class="instagram-location">${post.location}</div>
+          </div>
+        </div>
+        
+        <div class="instagram-post-image-container">
+          <img src="${post.image}" alt="Instagram post" class="instagram-post-image" loading="lazy">
+        </div>
+        
+        <div class="instagram-post-content">
+          <div class="instagram-actions">
+            <div class="instagram-action-left">
+              <i class="far fa-heart"></i>
+              <i class="far fa-comment"></i>
+              <i class="far fa-paper-plane"></i>
+            </div>
+            <div class="instagram-action-right">
+              <i class="far fa-bookmark"></i>
+            </div>
+          </div>
+          
+          <div class="instagram-likes">${post.likes.toLocaleString('id-ID')} likes</div>
+          
+          <div class="instagram-caption">
+            <span class="username">${post.username}</span>
+            ${post.caption}
+            <div class="instagram-hashtags">${post.hashtags}</div>
+          </div>
+          
+          <div class="instagram-date">${post.date}</div>
+        </div>
+      </div>
+    `).join('');
+
+    this.carousel.innerHTML = postsHTML;
+    this.updateCarouselWidth();
+  }
+
+  updateCarouselWidth() {
+    const cardWidth = 320; // Including margin
+    const totalWidth = this.posts.length * cardWidth;
+    this.carousel.style.width = `${totalWidth}px`;
+  }
+
+  setupNavigation() {
+    this.createDots();
+    this.updateNavigationState();
+  }
+
+  createDots() {
+    if (!this.dotsContainer) return;
+    
+    const totalSlides = Math.ceil(this.posts.length / this.postsPerView);
+    const dotsHTML = Array.from({ length: totalSlides }, (_, i) => 
+      `<div class="carousel-dot ${i === 0 ? 'active' : ''}" data-slide="${i}"></div>`
+    ).join('');
+    
+    this.dotsContainer.innerHTML = dotsHTML;
+  }
+
+  setupEventListeners() {
+    if (this.prevButton) {
+      this.prevButton.addEventListener('click', () => this.prevSlide());
+    }
+    
+    if (this.nextButton) {
+      this.nextButton.addEventListener('click', () => this.nextSlide());
+    }
+
+    if (this.dotsContainer) {
+      this.dotsContainer.addEventListener('click', (e) => {
+        if (e.target.classList.contains('carousel-dot')) {
+          const slideIndex = parseInt(e.target.dataset.slide);
+          this.goToSlide(slideIndex);
+        }
+      });
+    }
+
+    // Pause autoplay on hover
+    if (this.carouselContainer) {
+      this.carouselContainer.addEventListener('mouseenter', () => this.stopAutoplay());
+      this.carouselContainer.addEventListener('mouseleave', () => this.startAutoplay());
+    }
+
+    // Handle visibility change for auto-refresh
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        this.stopAutoplay();
+        this.stopAutoRefresh();
+      } else {
+        this.startAutoplay();
+        this.startAutoRefresh();
+      }
+    });
+  }
+
+  setupTouchEvents() {
+    if (!this.carouselContainer) return;
+    
+    let startX = 0;
+    let currentX = 0;
+    let isDragging = false;
+
+    this.carouselContainer.addEventListener('touchstart', (e) => {
+      startX = e.touches[0].clientX;
+      isDragging = true;
+      this.stopAutoplay();
+    });
+
+    this.carouselContainer.addEventListener('touchmove', (e) => {
+      if (!isDragging) return;
+      currentX = e.touches[0].clientX;
+      e.preventDefault();
+    });
+
+    this.carouselContainer.addEventListener('touchend', () => {
+      if (!isDragging) return;
+      
+      const diffX = startX - currentX;
+      const threshold = 50;
+
+      if (diffX > threshold) {
+        this.nextSlide();
+      } else if (diffX < -threshold) {
+        this.prevSlide();
+      }
+
+      isDragging = false;
+      this.startAutoplay();
+    });
+  }
+
+  nextSlide() {
+    const maxIndex = Math.ceil(this.posts.length / this.postsPerView) - 1;
+    this.currentIndex = this.currentIndex >= maxIndex ? 0 : this.currentIndex + 1;
+    this.updateCarousel();
+  }
+
+  prevSlide() {
+    const maxIndex = Math.ceil(this.posts.length / this.postsPerView) - 1;
+    this.currentIndex = this.currentIndex <= 0 ? maxIndex : this.currentIndex - 1;
+    this.updateCarousel();
+  }
+
+  goToSlide(index) {
+    this.currentIndex = index;
+    this.updateCarousel();
+  }
+
+  updateCarousel() {
+    if (!this.carousel) return;
+
+    const cardWidth = 320;
+    const translateX = -this.currentIndex * cardWidth * this.postsPerView;
+    
+    this.carousel.style.transform = `translateX(${translateX}px)`;
+    this.updateNavigationState();
+    this.updateDots();
+  }
+
+  updateNavigationState() {
+    const maxIndex = Math.ceil(this.posts.length / this.postsPerView) - 1;
+    
+    if (this.prevButton) {
+      this.prevButton.disabled = this.currentIndex === 0;
+    }
+    
+    if (this.nextButton) {
+      this.nextButton.disabled = this.currentIndex >= maxIndex;
+    }
+  }
+
+  updateDots() {
+    if (!this.dotsContainer) return;
+    
+    const dots = this.dotsContainer.querySelectorAll('.carousel-dot');
+    dots.forEach((dot, index) => {
+      dot.classList.toggle('active', index === this.currentIndex);
+    });
+  }
+
+  startAutoplay() {
+    this.stopAutoplay();
+    this.autoplayInterval = setInterval(() => {
+      this.nextSlide();
+    }, this.autoplayDelay);
+  }
+
+  stopAutoplay() {
+    if (this.autoplayInterval) {
+      clearInterval(this.autoplayInterval);
+      this.autoplayInterval = null;
+    }
+  }
+
+  showError() {
+    if (this.carousel) {
+      this.carousel.innerHTML = `
+        <div class="carousel-loading">
+          <i class="fas fa-exclamation-triangle" style="color: #e74c3c; font-size: 2rem; margin-bottom: 1rem;"></i>
+          <p>Unable to load Instagram posts at the moment.</p>
+          <a href="https://www.instagram.com/meja_cafe.plw" target="_blank" class="instagram-follow-btn" style="margin-top: 1rem;">
+            <i class="fab fa-instagram"></i>
+            <span>Visit Our Instagram</span>
+          </a>
+        </div>
+      `;
+    }
+  }
+
+  // Handle responsive changes
+  handleResize() {
+    const width = window.innerWidth;
+    if (width <= 600) {
+      this.postsPerView = 1;
+    } else if (width <= 768) {
+      this.postsPerView = 2;
+    } else {
+      this.postsPerView = 3;
+    }
+    this.updateCarouselWidth();
+    this.updateCarousel();
+    this.createDots();
+  }
+
+  destroy() {
+    this.stopAutoplay();
+    this.stopAutoRefresh();
+    // Clean up event listeners if needed
+  }
+}
+
+// ============================================
 // APPLICATION BOOTSTRAP
 // ============================================
 document.addEventListener('DOMContentLoaded', () => {
@@ -707,6 +1303,7 @@ document.addEventListener('DOMContentLoaded', () => {
   app.register(new ImageZoom());
   app.register(new FAQAccordion());
   app.register(new SmoothScrollController());
+  app.register(new InstagramCarousel());
 
   // Initialize application
   app.init();

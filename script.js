@@ -312,11 +312,21 @@ class ShoppingCart extends BaseModule {
       this.elements.dropdown?.classList.remove('open');
     }
   }
-
    /**
    * Animasi gambar produk terbang ke icon keranjang
    * @param {HTMLElement} button - tombol add-to-cart yang diklik
    */
+    /**
+   * Ambil data produk dari kartu dan masukkan ke keranjang
+   * @param {HTMLElement} button - tombol add-to-cart yang diklik
+   */
+  addItemFromButton(button) {
+    const productElement = button.closest('.menu-item');
+    if (!productElement) return;
+
+    const product = this.extractProductData(productElement);
+    this.addItem(product);
+  }
   animateAddToCart(button) {
     const cartNav = this.elements.cartNav;
     if (!cartNav) return;

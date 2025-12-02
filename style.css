@@ -1543,10 +1543,10 @@ nav.social-links {
 
 /* Badge Gratis Ongkir */
 .gratis-ongkir-badge {
-  bottom: 60px !important;   /* 🔥 turun pasti */
-  left: 20px !important;
-  right: auto !important;
-}
+  position: fixed;
+  bottom: 110px;
+  left: 20px;       /* Dipindah kiri */
+  right: auto;
 
   z-index: 998;
   background: linear-gradient(135deg, var(--accent-color), var(--secondary-color));

@@ -1603,20 +1603,27 @@ nav.social-links {
 }
 
 /* Mobile */
+/* Mobile: badge lebih kecil & tidak kepotong */
 @media (max-width: 600px) {
   .gratis-ongkir-badge {
-    left: 50%;
-    right: auto;
-    transform: translateX(-50%);
-    bottom: 90px;
-    width: calc(100% - 40px);
+    right: 20px;          /* sejajar jalur WhatsApp */
+    left: auto;
+    bottom: 95px;         /* tepat di atas tombol WA */
+    width: auto;
+    max-width: 230px;     /* supaya tidak keluar layar */
+    padding: 8px 14px;
     align-items: center;
-    text-align: center;
+    text-align: left;
+    font-size: 0.8rem;
+    animation: badgePulse 1.8s ease-in-out infinite;
   }
 
-  .gratis-ongkir-badge::before {
-    margin-right: 0;
-    margin-bottom: 2px;
+  .gratis-ongkir-badge .go-main {
+    font-size: 0.85rem;
+  }
+
+  .gratis-ongkir-badge .go-sub {
+    font-size: 0.7rem;
   }
 }
 

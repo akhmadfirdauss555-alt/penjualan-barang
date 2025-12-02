@@ -1129,6 +1129,22 @@ nav.social-links {
   z-index: 999;
   transition: all 0.3s ease;
   text-decoration: none;
+   animation: waPulse 2s ease-in-out infinite;  /* <- ini boleh di dalam */
+}
+
+@keyframes waPulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5);
+  }
+  50% {
+    transform: scale(1.12);
+    box-shadow: 0 0 18px 10px rgba(37, 211, 102, 0);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+  }
 }
 
 .floating-whatsapp:hover {

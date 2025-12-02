@@ -258,19 +258,20 @@ class ShoppingCart extends BaseModule {
   }
 
   cacheElements() {
-    this.elements = {
-      toggle: document.getElementById('cart-toggle'),
-      dropdown: Utils.safeQuerySelector('.cart-dropdown'),
-      list: Utils.safeQuerySelector('.cart-list'),
-      total: Utils.safeQuerySelector('.cart-total'),
-      empty: Utils.safeQuerySelector('.cart-empty'),
-      badge: Utils.safeQuerySelector('.cart-count'),
-      clearBtn: Utils.safeQuerySelector('.cart-clear'),
-      checkoutBtn: Utils.safeQuerySelector('.cart-nav') 
-    };
-  }
+  this.elements = {
+    toggle: document.getElementById('cart-toggle'),
+    dropdown: Utils.safeQuerySelector('.cart-dropdown'),
+    list: Utils.safeQuerySelector('.cart-list'),
+    total: Utils.safeQuerySelector('.cart-total'),
+    empty: Utils.safeQuerySelector('.cart-empty'),
+    badge: Utils.safeQuerySelector('.cart-count'),
+    clearBtn: Utils.safeQuerySelector('.cart-clear'),
+    checkoutBtn: Utils.safeQuerySelector('.cart-checkout'), // tombol checkout
+    cartNav: Utils.safeQuerySelector('.cart-nav')           // posisi icon keranjang
+  };
+}
 
-  attachEventListeners() {
+    attachEventListeners() {
     // Toggle cart dropdown
     this.elements.toggle?.addEventListener('click', (e) => {
       e.stopPropagation();
@@ -282,11 +283,12 @@ class ShoppingCart extends BaseModule {
       this.handleOutsideClick(e);
     });
 
-    // Add to cart buttons
+    // Add to cart buttons (ANIMASI + TAMBAH KE KERANJANG)
     document.querySelectorAll('.add-to-cart-btn').forEach(button => {
       button.addEventListener('click', (e) => {
         e.stopPropagation();
-        this.addItemFromButton(button);
+        this.animateAddToCart(button);   // animasi terbang
+        this.addItemFromButton(button);  // logic keranjang
       });
     });
 
@@ -564,20 +566,18 @@ class ImageZoom extends BaseModule {
     };
   }
 
-  attachEventListeners() {
-        // Add to cart buttons
-    document.querySelectorAll('.add-to-cart-btn').forEach(button => {
-      button.addEventListener('click', (e) => {
-        e.stopPropagation();
-        this.animateAddToCart(button);   // animasi terbang
-        this.addItemFromButton(button);  // logic keranjang tetap
-      });
+    attachEventListeners() {
+    // Klik pada gambar produk -> buka modal zoom
+    document.addEventListener('click', (e) => {
+      if (e.target.classList.contains('menu-item-img')) {
+        this.open(e.target);
+      }
     });
 
-    // Close button
+    // Tombol close
     this.elements.closeBtn?.addEventListener('click', () => this.close());
 
-    // Click outside
+    // Klik area gelap di luar gambar
     this.elements.modal?.addEventListener('click', (e) => {
       if (e.target === this.elements.modal) {
         this.close();

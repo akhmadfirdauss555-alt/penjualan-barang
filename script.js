@@ -267,7 +267,7 @@ class ShoppingCart extends BaseModule {
     badge: Utils.safeQuerySelector('.cart-count'),
     clearBtn: Utils.safeQuerySelector('.cart-clear'),
     checkoutBtn: Utils.safeQuerySelector('.cart-checkout'), // tombol checkout
-    cartNav: Utils.safeQuerySelector('.cart-nav')           // posisi icon keranjang
+    cartNav: document.getElementById('cart-toggle')
   };
 }
 
@@ -348,6 +348,7 @@ class ShoppingCart extends BaseModule {
     flying.style.width  = imgRect.width + 'px';
     flying.style.height = imgRect.height + 'px';
     flying.style.opacity = '1';
+    flying.style.transform = 'scale(1.05)';
 
     document.body.appendChild(flying);
 
@@ -357,7 +358,7 @@ class ShoppingCart extends BaseModule {
 
     // jalankan animasi
     requestAnimationFrame(() => {
-      flying.style.transform = `translate(${deltaX}px, ${deltaY}px) scale(0.2)`;
+      flying.style.transform = `translate(${deltaX}px, ${deltaY}px) scale(0.3)`;
       flying.style.opacity = '0';
     });
 

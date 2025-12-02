@@ -1541,42 +1541,35 @@ nav.social-links {
   right: 30px; 
 }
 
-/* Badge Gratis Ongkir */
 .gratis-ongkir-badge {
   position: fixed;
-  bottom: 110px;              /* di atas floating WhatsApp */
+  bottom: 110px;
   right: 20px;
   z-index: 998;
   background: linear-gradient(135deg, var(--accent-color), var(--secondary-color));
   color: var(--primary-color);
-  padding: 10px 18px;
+  padding: 6px 12px;
   border-radius: 999px;
   display: inline-flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 2px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
   font-family: var(--body-font);
-  cursor: pointer;
-  animation: badgePulse 1.8s ease-in-out infinite;
-  border: 2px solid rgba(255, 255, 255, 0.7);
 }
 
 .gratis-ongkir-badge::before {
   content: "🛻";
   margin-right: 6px;
-  font-size: 1.1rem;
+  font-size: 2.2rem;
 }
 
 .gratis-ongkir-badge .go-main {
+  font-size: 0.8rem;
   font-weight: 800;
-  font-size: 0.95rem;
-  letter-spacing: 0.08em;
 }
 
 .gratis-ongkir-badge .go-sub {
-  font-size: 0.78rem;
-  opacity: 0.9;
+  font-size: 0.65rem;
 }
 
 @keyframes badgePulse {

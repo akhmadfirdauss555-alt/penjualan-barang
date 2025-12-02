@@ -1545,25 +1545,28 @@ nav.social-links {
 .gratis-ongkir-badge {
   position: fixed;
   bottom: 110px;
-  right: 20px;
+  left: 20px;       /* Dipindah kiri */
+  right: auto;
+
   z-index: 998;
   background: linear-gradient(135deg, var(--accent-color), var(--secondary-color));
   color: var(--primary-color);
-  padding: 8px 18px;          /* 🔥 lebih tipis */
-  min-width: 190px;           /* memanjang */
-  height: 55px;               /* 🔥 lebih pipih */
-  border-radius: 30px;        /* oval pipih */
-  
+  padding: 8px 18px;
+  min-width: 190px;
+  height: 55px;
+  border-radius: 30px;
+
   display: flex;
-  flex-direction: row;        /* ikon & teks samping */
-  align-items: center;        /* rata tengah vertikal */
+  flex-direction: row;
+  align-items: center;
   gap: 10px;
 
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.35);
   cursor: pointer;
   animation: badgePulse 1.8s ease-in-out infinite;
-  border: 2px solid rgba(255, 255, 255, 0.7);
+  border: 2px solid rgba(255,255,255,0.7);
 }
+
 
 
 .gratis-ongkir-badge::before {

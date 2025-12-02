@@ -418,21 +418,21 @@ nav a:hover::after {
   box-shadow: 0 6px 20px rgba(111, 78, 55, 0.4);
 }
 
-.add-to-cart-btn:active {
-  transform: scale(0.98);
-} 
+.add-to-cart-btn {
   justify-content: center;
   min-width: 44px;
 }
 
-.add-to-cart-btn:hover { 
-  background:#543c2b; 
-  transform: scale(1.05); 
+.add-to-cart-btn:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 6px 20px rgba(111, 78, 55, 0.4);
+  background: #543c2b;
 }
 
-.add-to-cart-btn:active { 
-  transform: scale(0.97); 
+.add-to-cart-btn:active {
+  transform: scale(0.97);
 }
+
 
 /* Loading State */
 .carousel-loading {

@@ -266,7 +266,7 @@ class ShoppingCart extends BaseModule {
       empty: Utils.safeQuerySelector('.cart-empty'),
       badge: Utils.safeQuerySelector('.cart-count'),
       clearBtn: Utils.safeQuerySelector('.cart-clear'),
-      checkoutBtn: Utils.safeQuerySelector('.cart-checkout')
+      checkoutBtn: Utils.safeQuerySelector('.cart-nav') 
     };
   }
 
@@ -311,12 +311,50 @@ class ShoppingCart extends BaseModule {
     }
   }
 
-  addItemFromButton(button) {
+   /**
+   * Animasi gambar produk terbang ke icon keranjang
+   * @param {HTMLElement} button - tombol add-to-cart yang diklik
+   */
+  animateAddToCart(button) {
+    const cartNav = this.elements.cartNav;
+    if (!cartNav) return;
+
     const productElement = button.closest('.menu-item');
     if (!productElement) return;
 
-    const product = this.extractProductData(productElement);
-    this.addItem(product);
+    const img = productElement.querySelector('.menu-item-img');
+    if (!img) return;
+
+    const imgRect  = img.getBoundingClientRect();
+    const cartRect = cartNav.getBoundingClientRect();
+
+    // clone gambar
+    const flying = img.cloneNode(true);
+    flying.classList.add('flying-img');
+    flying.style.left   = imgRect.left + 'px';
+    flying.style.top    = imgRect.top + 'px';
+    flying.style.width  = imgRect.width + 'px';
+    flying.style.height = imgRect.height + 'px';
+    flying.style.opacity = '1';
+
+    document.body.appendChild(flying);
+
+    // jarak ke icon keranjang
+    const deltaX = cartRect.left + cartRect.width / 2  - (imgRect.left + imgRect.width / 2);
+    const deltaY = cartRect.top  + cartRect.height / 2 - (imgRect.top  + imgRect.height / 2);
+
+    // jalankan animasi
+    requestAnimationFrame(() => {
+      flying.style.transform = `translate(${deltaX}px, ${deltaY}px) scale(0.2)`;
+      flying.style.opacity = '0';
+    });
+
+    // setelah selesai, hapus & bump icon cart
+    flying.addEventListener('transitionend', () => {
+      flying.remove();
+      cartNav.classList.add('bump');
+      setTimeout(() => cartNav.classList.remove('bump'), 400);
+    }, { once: true });
   }
 
   extractProductData(productElement) {
@@ -527,11 +565,13 @@ class ImageZoom extends BaseModule {
   }
 
   attachEventListeners() {
-    // Click on product images
-    document.addEventListener('click', (e) => {
-      if (e.target.classList.contains('menu-item-img')) {
-        this.open(e.target);
-      }
+        // Add to cart buttons
+    document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+      button.addEventListener('click', (e) => {
+        e.stopPropagation();
+        this.animateAddToCart(button);   // animasi terbang
+        this.addItemFromButton(button);  // logic keranjang tetap
+      });
     });
 
     // Close button

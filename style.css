@@ -1549,38 +1549,39 @@ nav.social-links {
   z-index: 998;
   background: linear-gradient(135deg, var(--accent-color), var(--secondary-color));
   color: var(--primary-color);
-  padding: 12px 20px;     /* dibuat lebih memanjang */
-  min-width: 180px;       /* 🔥 badge memanjang */
-  border-radius: 20px;    /* sedikit oval */
+  padding: 8px 18px;          /* 🔥 lebih tipis */
+  min-width: 190px;           /* memanjang */
+  height: 55px;               /* 🔥 lebih pipih */
+  border-radius: 30px;        /* oval pipih */
+  
   display: flex;
-  flex-direction: column;
-  align-items: center;    /* 🔥 teks & ikon benar-benar ke tengah */
-  justify-content: center;
-  gap: 4px;
+  flex-direction: row;        /* ikon & teks samping */
+  align-items: center;        /* rata tengah vertikal */
+  gap: 10px;
+
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
-  font-family: var(--body-font);
   cursor: pointer;
   animation: badgePulse 1.8s ease-in-out infinite;
   border: 2px solid rgba(255, 255, 255, 0.7);
 }
 
+
 .gratis-ongkir-badge::before {
-  content: "🚚";
-  font-size: 1.4rem;
-  margin-right: 0;        /* hilangkan geser kanan */
-  margin-bottom: 4px;     /* beri jarak ke teks */
+  content: "🛻";      /* Pickup truck */
+  font-size: 1.3rem;  /* ukuran kecil pas */
+  margin: 0;
 }
 
 .gratis-ongkir-badge .go-main {
   font-weight: 800;
-  font-size: 0.9rem;
-  text-align: center;
+  font-size: 0.85rem;
+  line-height: 1;
 }
 
 .gratis-ongkir-badge .go-sub {
-  font-size: 0.75rem;
-  opacity: 0.95;
-  text-align: center;
+  font-size: 0.70rem;
+  opacity: 0.9;
+  line-height: 1;
 }
 
 @keyframes badgePulse {

@@ -1543,10 +1543,10 @@ nav.social-links {
 
 /* Badge Gratis Ongkir */
 .gratis-ongkir-badge {
-  position: fixed;
-  bottom: 70px;   /* 🔥 turun mengikuti WA */
-  left: 20px;
-  right: auto;
+  bottom: 60px !important;   /* 🔥 turun pasti */
+  left: 20px !important;
+  right: auto !important;
+}
 
   z-index: 998;
   background: linear-gradient(135deg, var(--accent-color), var(--secondary-color));

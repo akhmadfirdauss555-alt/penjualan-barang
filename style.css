@@ -546,7 +546,8 @@ nav a:hover::after {
 
 /* Satu slide = kartu ukuran tetap */
 #instagram-gallery .instagram-slide {
-  flex: 0 0 100%;        /* 1 slide = 1 lebar container */
+  flex: 0 0 420px;       /* ini yang bikin 2 slide muat ngangak */
+  max-width: 420px;
   scroll-snap-align: center;
   display: flex;
   justify-content: center;

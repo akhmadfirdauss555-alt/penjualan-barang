@@ -26,12 +26,6 @@ body {
   line-height: 1.6;
 }
 
-/* FIX RUANG KANAN DI HP */
-html, body {
-  max-width: 100%;
-  overflow-x: hidden;
-}
-
 /* Hero Section */
 .hero-section {
   background: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url('assets2/banner.jpg') center/cover fixed no-repeat;

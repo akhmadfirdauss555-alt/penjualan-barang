@@ -2138,7 +2138,8 @@ nav.social-links {
 #instagram-gallery .instagram-slide {
   flex: 0 0 auto;
 }
-/* ==== LAYOUT GALLERY INSTAGRAM ==== */
+
+/* ==== LAYOUT GALLERY INSTAGRAM – FINAL STABIL ==== */
 
 #instagram-gallery .instagram-carousel-wrapper {
   display: flex;
@@ -2146,26 +2147,39 @@ nav.social-links {
   justify-content: center;
 }
 
+/* Batasi lebar area IG */
 #instagram-gallery .carousel-container {
-  max-width: 340px;     /* atur besar kecil kartu IG di sini */
+  max-width: 280px;      /* ← kecil banget, bisa kamu ubah 280–320 */
   margin: 0 auto;
   overflow-x: auto;
 }
 
+/* Deretan slide */
 #instagram-gallery .instagram-carousel {
   display: flex;
-  gap: 16px;
+  gap: 12px;
   scroll-snap-type: x mandatory;
+  justify-content: center;
 }
 
+/* Tiap slide: tidak dipaksa full, dan konten di tengah */
 #instagram-gallery .instagram-slide {
   flex: 0 0 auto;
   scroll-snap-align: center;
+  display: flex;
+  justify-content: center;
+}
+
+/* KECILKAN embed IG dengan scale (supaya saat scroll tidak ikut melebar) */
+#instagram-gallery .instagram-slide > * {
+  transform: scale(0.85);           /* ubah 0.8 / 0.7 kalau mau lebih kecil */
+  transform-origin: top center;
 }
 
 /* Hilangkan margin bawaan embed */
 #instagram-gallery .instagram-media {
   margin: 0 !important;
+  max-width: 100% !important;
 }
 
 }

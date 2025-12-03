@@ -1930,8 +1930,12 @@ nav.social-links {
   }
 
     .carousel-nav {
-      /* display:none; */  /* <- baris ini dihapus atau dikomentari */
-  }
+  position: absolute;
+  top: 30%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.9);
+  /* ... dst ... */
+}
 
   .instagram-follow-btn {
     padding: 12px 24px;
@@ -1983,27 +1987,47 @@ nav.social-links {
 
 @media (max-width: 768px) {
   .instagram-slide {
-    flex: 0 0 100%;
+    flex: 0 0 85%;      /* satu kartu hampir full layar */
   }
+
+  /* Container bisa di-swipe kiri-kanan di HP */
+  .carousel-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Matikan translateX dari JS di HP supaya tidak “loncat keluar” */
+  .instagram-carousel {
+    display: flex;
+    width: max-content;
+    transform: none !important;
+  }
+
+  /* Sembunyikan panah & dot di HP (biar user pakai swipe saja) */
+  .carousel-nav,
+  .carousel-dots {
+    display: none;
+  }
+
+  /* Kalau kamu pakai iframe / embed IG di dalam, rapikan juga */
   .instagram-wrapper {
     display: flex;
     justify-content: center;
     gap: 20px;
-    flex-wrap: wrap;
-    padding-bottom: 0;
-    margin-bottom: 0;
-}
+    flex-wrap: nowrap;
+  }
 
-.instagram-wrapper iframe {
+  .instagram-wrapper iframe {
     max-height: 450px !important;
     height: 450px !important;
     overflow: hidden;
-}
+  }
 
-.instagram-wrapper blockquote.instagram-media {
+  .instagram-wrapper blockquote.instagram-media {
     margin: 0 !important;
     padding: 0 !important;
-}
+  }
+  
   .carousel-container {
     overflow-x: auto;        /* Boleh discroll ke samping */
   }

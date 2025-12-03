@@ -442,7 +442,22 @@ class ShoppingCart extends BaseModule {
   // Buat form POST ke order.php
   const form = document.createElement('form');
   form.method = 'POST';
-  form.action = 'http://localhost/meja_cafe/order.php'; // URL yang kamu sebut
+  fetch('https://catalogmejacafepalu.vercel.app/api/createOrder', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    name,
+    phone,
+    address,
+    cart: cartItems,
+    total: totalAmount
+  })
+})
+.then(res => res.json())
+.then(data => {
+  // buka WA admin
+  window.open(data.whatsapp_url, "_blank");
+});
 
   // Kirim data cart dalam bentuk JSON
   const cartInput = document.createElement('input');

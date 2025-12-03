@@ -1930,7 +1930,7 @@ nav.social-links {
   }
 
   .carousel-nav {
-    display: none; /* Hide arrows on mobile, use swipe */
+    /* display: none; */  /* <- baris ini dihapus atau dikomentari */
   }
 
   .instagram-follow-btn {

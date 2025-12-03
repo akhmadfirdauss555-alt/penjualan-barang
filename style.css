@@ -2128,36 +2128,32 @@ nav.social-links {
   margin-top: 0;
   padding-top: 0;
 }
-/* ====== FINAL LOCK SIZE INSTAGRAM ====== */
 
-/* Pusatkan slider */
 #instagram-gallery .instagram-carousel {
   display: flex;
   justify-content: center;
+  overflow-x: auto;
 }
 
-/* Slide tidak wajib 100% lebar */
 #instagram-gallery .instagram-slide {
   flex: 0 0 auto;
-  margin: 0 auto;
+}
+/* ==== BATASI UKURAN GALLERY INSTAGRAM ==== */
+
+/* Batasi lebar maksimum kontainer slide */
+#instagram-gallery .carousel-container {
+  max-width: 340px;      /* atur ukuran kartu IG di sini */
+  margin: 0 auto;        /* center */
 }
 
-/* Kunci ukuran maksimum kartu IG */
-#instagram-gallery .instagram-slide,
-#instagram-gallery .instagram-slide > .instagram-media,
-#instagram-gallery .instagram-slide iframe {
-  max-width: 320px !important;   /* atur di sini: 280–340px sesuai selera */
-  width: 100% !important;
-  margin: 0 auto !important;
+/* Biar slider tidak melebar aneh */
+#instagram-gallery .instagram-carousel {
+  overflow: hidden;
 }
 
-/* HP sangat kecil – boleh dikecilkan lagi */
-@media (max-width: 480px) {
-  #instagram-gallery .instagram-slide,
-  #instagram-gallery .instagram-slide > .instagram-media,
-  #instagram-gallery .instagram-slide iframe {
-    max-width: 300px !important;
-  }
+/* Hilangkan margin bawaan embed Instagram */
+#instagram-gallery .instagram-media {
+  margin: 0 !important;
 }
 
 }

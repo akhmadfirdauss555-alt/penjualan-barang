@@ -1973,4 +1973,41 @@ nav.social-links {
   color: #25D366;
 }
 
+/* ================================
+   INSTAGRAM SLIDER (HORIZONTAL)
+   ================================ */
+
+.instagram-slider {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  gap: 1.5rem;
+  padding-bottom: 1rem;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+}
+
+.instagram-slider::-webkit-scrollbar {
+  height: 6px;
+}
+
+.instagram-slider::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 10px;
+}
+
+.slide-item {
+  flex: 0 0 320px;
+  scroll-snap-align: start;
+}
+
+.slide-item blockquote {
+  max-width: 100%;
+  width: 100% !important;
+  margin: 0;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+}
+
 }

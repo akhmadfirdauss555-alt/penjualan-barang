@@ -2040,32 +2040,37 @@ nav.social-links {
   .instagram-slide {
     flex: 0 0 85%;           /* Satu slide hampir full lebar layar */
   }
-/* Atur jarak antar card Instagram */
+
+/* ===== INSTAGRAM SLIDER FIX ===== */
+
+/* Default (desktop & tablet) */
 .instagram-slider {
   display: flex;
-  gap: 20px;           /* JARAK ANTAR CARD */
-  padding: 10px;       /* JARAK SAMPING */
   overflow-x: auto;
   scroll-snap-type: x mandatory;
+  gap: 16px;          /* kalau mau benar-benar nempel, ganti 0 */
+  padding: 0 10px;    /* jarak kiri–kanan section */
 }
 
 .instagram-card {
-  min-width: 85%;      /* Biar tidak terlalu lebar di HP */
   scroll-snap-align: start;
   border-radius: 14px;
   background: #fff;
 }
 
-/* RESPONSIVE – HP kecil */
-@media (max-width: 480px) {
+/* HP – Biar tidak sejajar dan jarak tidak kebesaran */
+@media (max-width: 768px) {
   .instagram-slider {
-    gap: 16px;
-    padding: 0 14px;
+    flex-direction: column;  /* jadi SATU per baris, tidak sejajar kiri-kanan */
+    gap: 8px;                /* jarak antar card kecil */
+    padding: 0 12px;
   }
 
   .instagram-card {
-    min-width: 88%;
+    width: 100%;        /* full lebar container */
+    min-width: auto;    /* pakai lebar normal, bukan 85–88% lagi */
   }
 }
+
 
 }

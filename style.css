@@ -2223,4 +2223,24 @@ nav.social-links {
     height: 38px;
     box-shadow: 0 3px 10px rgba(0,0,0,0.18);
   }
+
+  /* --- ATUR ULANG LEBAR INSTAGRAM UNTUK DESKTOP --- */
+@media (min-width: 992px) {
+
+  #instagram-gallery .instagram-carousel-wrapper {
+    max-width: 900px;      /* boleh 800–1000, silakan diatur */
+    gap: 16px;
+  }
+
+  #instagram-gallery .carousel-container {
+    max-width: 650px;      /* lebar area embed */
+  }
+
+  #instagram-gallery .instagram-slide .instagram-media,
+  #instagram-gallery .instagram-slide iframe,
+  #instagram-gallery .instagram-slide > span {
+    max-width: 520px !important;   /* ukuran embed di desktop */
+  }
+}
+
 }

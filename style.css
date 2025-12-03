@@ -1664,11 +1664,12 @@ nav.social-links {
     padding: 14px 24px;
     font-size: 1rem;
   }
+
   .whatsapp-icon {
   font-size: 22px;
-  color: #25D366; 
-  margin-right: 8px;
-  }
+  margin-right: 12px;
+  color: #25D366; /* warna hijau WA */
+ }
 
 
   .whatsapp-btn-hero i {

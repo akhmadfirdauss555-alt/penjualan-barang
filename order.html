@@ -1,12 +1,356 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <title>TES ORDER</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <title>Form Pemesanan - MEJA CAFE PALU</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background: radial-gradient(circle at top, #ffe9c4 0, #f4f7fb 40%, #edf1f9 100%);
+      color: #111827;
+    }
+
+    /* NAVBAR */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 40px;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+    }
+
+    .navbar-brand {
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      font-size: 14px;
+    }
+
+    .navbar-links a {
+      font-size: 13px;
+      text-decoration: none;
+      margin-left: 8px;
+      color: #1d4ed8;
+    }
+
+    .navbar-links a:first-child {
+      margin-left: 0;
+    }
+
+    .navbar-links a:hover {
+      text-decoration: underline;
+    }
+
+    /* CONTAINER */
+    .page-wrapper {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 16px;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 26px;
+      padding: 28px 32px 30px;
+      box-shadow: 0 20px 45px rgba(15,23,42,0.08);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      top: 0;
+      height: 8px;
+      background: linear-gradient(90deg, #f97316, #fb923c, #facc15);
+    }
+
+    .card-inner {
+      margin-top: 12px;
+    }
+
+    h1 {
+      margin: 0 0 4px;
+      font-size: 26px;
+    }
+
+    .subtitle {
+      margin: 0 0 24px;
+      font-size: 14px;
+      color: #6b7280;
+    }
+
+    /* GRID FORM */
+    .form-row {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .form-group {
+      margin-bottom: 14px;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+
+    input[type="text"],
+    textarea,
+    select {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid #e5e7eb;
+      font-size: 14px;
+      outline: none;
+      background: #f9fafb;
+      transition: border-color 0.16s ease, box-shadow 0.16s ease, background 0.16s ease;
+    }
+
+    input[type="text"]:focus,
+    textarea:focus,
+    select:focus {
+      border-color: #fb923c;
+      background: #ffffff;
+      box-shadow: 0 0 0 1px rgba(249,115,22,0.25);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 90px;
+    }
+
+    .help-text {
+      font-size: 11px;
+      color: #9ca3af;
+      margin-top: 2px;
+    }
+
+    /* BUTTON */
+    .btn-submit {
+      width: 100%;
+      margin-top: 10px;
+      border: none;
+      border-radius: 999px;
+      padding: 14px 18px;
+      background: linear-gradient(90deg, #f97316, #fb923c);
+      color: #ffffff;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 15px 30px rgba(249,115,22,0.35);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: transform 0.12s ease, box-shadow 0.12s ease, opacity 0.12s ease;
+    }
+
+    .btn-submit:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 18px 36px rgba(249,115,22,0.4);
+    }
+
+    .btn-submit:active {
+      transform: translateY(1px) scale(0.99);
+      box-shadow: 0 8px 18px rgba(249,115,22,0.35);
+      opacity: 0.98;
+    }
+
+    .btn-submit span.icon {
+      font-size: 18px;
+    }
+
+    .note {
+      margin-top: 8px;
+      font-size: 11px;
+      color: #6b7280;
+    }
+
+    .footer {
+      text-align: center;
+      font-size: 12px;
+      color: #9ca3af;
+      margin-top: 22px;
+      padding-bottom: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .navbar {
+        padding: 12px 16px;
+      }
+
+      .page-wrapper {
+        margin-top: 24px;
+      }
+
+      .card {
+        padding: 22px 18px 24px;
+      }
+
+      h1 {
+        font-size: 22px;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
-<body style="background:#ffe9c4; font-family:sans-serif;">
-  <h1 style="text-align:center; margin-top:40px;">HALAMAN ORDER BERHASIL DIBUKA ✅</h1>
-  <p style="text-align:center;">Kalau tulisan ini muncul, berarti pindah halamannya SUKSES.</p>
+<body>
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="navbar-brand">MEJA CAFE PALU</div>
+    <nav class="navbar-links">
+      <a href="index.html">Beranda</a>
+      <a href="#form-pesan">Pesan</a>
+    </nav>
+  </header>
+
+  <!-- CONTENT -->
+  <main class="page-wrapper">
+    <section class="card" id="form-pesan">
+      <div class="card-inner">
+        <h1>Form Pemesanan</h1>
+        <p class="subtitle">
+          Isi data di bawah, pesanan akan dikirim otomatis ke WhatsApp admin.
+        </p>
+
+        <form id="order-form">
+          <!-- Nama + WhatsApp -->
+          <div class="form-row">
+            <div class="form-group">
+              <label for="nama">Nama</label>
+              <input
+                type="text"
+                id="nama"
+                name="nama"
+                placeholder="Nama lengkap"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="whatsapp">No. WhatsApp</label>
+              <input
+                type="text"
+                id="whatsapp"
+                name="whatsapp"
+                placeholder="0852xxxxxxx"
+                required
+              />
+              <div class="help-text">
+                Gunakan angka saja, boleh diawali 08 atau 62.
+              </div>
+            </div>
+          </div>
+
+          <!-- Alamat -->
+          <div class="form-group">
+            <label for="alamat">Alamat Lengkap</label>
+            <textarea
+              id="alamat"
+              name="alamat"
+              placeholder="Nama jalan, RT/RW, kelurahan, kecamatan, kota/kabupaten"
+              required
+            ></textarea>
+          </div>
+
+          <!-- Jumlah -->
+          <div class="form-group" style="max-width: 180px;">
+            <label for="qty">Jumlah (Qty)</label>
+            <select id="qty" name="qty">
+              <option value="1" selected>1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </div>
+
+          <!-- Catatan Opsional (kalau mau tambah) -->
+          <div class="form-group">
+            <label for="catatan">Catatan (Opsional)</label>
+            <textarea
+              id="catatan"
+              name="catatan"
+              placeholder="Contoh: warna rangka putih, kirim sore, dsb."
+            ></textarea>
+          </div>
+
+          <!-- Button -->
+          <button type="submit" class="btn-submit">
+            <span class="icon">🟢</span>
+            Kirim Pesanan ke Admin
+          </button>
+
+          <p class="note">
+            * Admin akan menghubungi kembali melalui WhatsApp.
+          </p>
+        </form>
+      </div>
+    </section>
+
+    <div class="footer">
+      © 2025 MEJA CAFE PALU
+    </div>
+  </main>
+
+  <script>
+    // GANTI ini dengan nomor WhatsApp admin toko kamu (format internasional tanpa +)
+    const WA_ADMIN = '6285220888840';
+
+    function encodeText(text) {
+      return encodeURIComponent(text);
+    }
+
+    document.getElementById('order-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const nama = document.getElementById('nama').value.trim();
+      const waUser = document.getElementById('whatsapp').value.trim();
+      const alamat = document.getElementById('alamat').value.trim();
+      const qty = document.getElementById('qty').value;
+      const catatan = document.getElementById('catatan').value.trim();
+
+      if (!nama || !waUser || !alamat) {
+        alert('Harap lengkapi Nama, No. WhatsApp, dan Alamat.');
+        return;
+      }
+
+      // (Opsional) kamu bisa isi nama produk manual di sini
+      const namaProduk = 'Set Meja Cafe';
+
+      let pesan = `Halo admin, saya ingin memesan produk dari MEJA CAFE PALU.%0A%0A`;
+      pesan += `Produk: ${namaProduk}%0A`;
+      pesan += `Jumlah (Qty): ${qty}%0A%0A`;
+      pesan += `Nama: ${nama}%0A`;
+      pesan += `No. WhatsApp: ${waUser}%0A`;
+      pesan += `Alamat: ${alamat}%0A`;
+      if (catatan) {
+        pesan += `%0ACatatan: ${catatan}%0A`;
+      }
+
+      const url = `https://wa.me/${WA_ADMIN}?text=${pesan}`;
+      window.open(url, '_blank');
+    });
+  </script>
 </body>
 </html>

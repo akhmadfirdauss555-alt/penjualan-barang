@@ -2067,5 +2067,31 @@ nav.social-links {
   margin: 0 !important;
 }
 
+/* ===== FIX JARAK INSTAGRAM & FAQ BERDASARKAN HTML ===== */
+
+/* Section Gallery Instagram */
+.instagram-gallery-section {
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+/* Hilangkan jarak berlebihan di dalam section Instagram */
+.instagram-gallery-section .section-header,
+.instagram-gallery-section .section-title,
+.instagram-gallery-section .section-subtitle,
+.instagram-gallery-section .instagram-carousel-wrapper {
+  margin-bottom: 8px;   /* bisa ganti 0 kalau mau super rapat */
+}
+
+/* Footer / FAQ */
+.site-footer {
+  padding-top: 0;       /* hilangkan jarak dari atas footer */
+}
+
+.site-footer .faq-section {
+  margin-top: 0;
+  padding-top: 8px;     /* kalau mau nempel, ganti 0 */
+}
+
 
 }

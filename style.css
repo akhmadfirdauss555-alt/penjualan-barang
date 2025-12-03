@@ -2041,56 +2041,47 @@ nav.social-links {
     flex: 0 0 85%;           /* Satu slide hampir full lebar layar */
   }
 
-/* ===== INSTAGRAM SLIDER SUPER RAPAT ===== */
+/* ===== RAPATKAN JARAK GALLERY INSTAGRAM & FAQ ===== */
 
-.instagram-slider {
-  display: flex;
-  flex-direction: column;  /* 1 kartu per baris */
-  gap: 0;                  /* tidak ada jarak antar kartu */
-  padding: 0;              /* tidak ada jarak kiri-kanan */
-  margin: 0;               /* tidak ada jarak atas-bawah */
-}
-
-.instagram-card {
-  width: 100%;
-  min-width: auto;
-  margin: 0 !important;    /* paksa hilangkan margin bawaan */
-  padding: 0 !important;
-  border-radius: 0;        /* kalau mau benar2 polos */
-  background: transparent; /* biar ikut warna background section */
-}
-
-/* Hilangkan margin bawaan dari embed Instagram di dalam card */
-.instagram-card iframe {
-  display: block;
-  width: 100%;
-  margin: 0 !important;
-}
-
-/* ===== FIX JARAK INSTAGRAM & FAQ BERDASARKAN HTML ===== */
-
-/* Section Gallery Instagram */
+/* Buang jarak bawah section Instagram */
 .instagram-gallery-section {
-  padding-bottom: 0;
   margin-bottom: 0;
+  padding-bottom: 0;
 }
 
-/* Hilangkan jarak berlebihan di dalam section Instagram */
-.instagram-gallery-section .section-header,
+/* Kecilkan jarak di dalam header section Instagram */
+.instagram-gallery-section .section-header {
+  margin-bottom: 8px;   /* kalau mau lebih rapat lagi, ganti 0 */
+}
+
+/* Buang margin bawaan di judul & text kecilnya */
 .instagram-gallery-section .section-title,
-.instagram-gallery-section .section-subtitle,
-.instagram-gallery-section .instagram-carousel-wrapper {
-  margin-bottom: 8px;   /* bisa ganti 0 kalau mau super rapat */
+.instagram-gallery-section .section-subtitle {
+  margin-top: 0;
+  margin-bottom: 4px;   /* atau 0 */
 }
 
-/* Footer / FAQ */
+/* Buang jarak ekstra di wrapper carousel */
+.instagram-gallery-section .instagram-carousel-wrapper {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+/* Hilangkan jarak atas dari footer & FAQ */
 .site-footer {
-  padding-top: 0;       /* hilangkan jarak dari atas footer */
+  margin-top: 0;
+  padding-top: 0;
 }
 
 .site-footer .faq-section {
   margin-top: 0;
-  padding-top: 8px;     /* kalau mau nempel, ganti 0 */
+  padding-top: 8px;     /* mau nempel banget? ganti 0 */
+}
+
+/* Hilangkan margin atas judul FAQ */
+.site-footer .faq-section h3 {
+  margin-top: 0;
+  padding-top: 0;
 }
 
 

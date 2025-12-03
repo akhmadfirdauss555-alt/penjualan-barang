@@ -519,42 +519,44 @@ nav a:hover::after {
 
 /* Grid: [panah kiri] [slider putih] [panah kanan] */
 #instagram-gallery .instagram-carousel-wrapper {
-  max-width: 900px;
+  max-width: 720px;
   margin: 0 auto;
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
 }
 
+/* kotak putih */
 #instagram-gallery .carousel-container {
   overflow: hidden;
   border-radius: 16px;
   box-shadow: 0 8px 24px rgba(0,0,0,0.12);
   background: #ffffff;
+  max-width: 340px;   /* <<< ukuran kotak putih */
+  width: 100%;
+  margin: 0 auto;
 }
 
 #instagram-gallery .instagram-carousel {
   display: flex;
   will-change: transform;
-  justify-content: center;   /* kartu selalu di tengah */
 }
 
-/* Satu slide = kartu ukuran tetap */
+/* 1 slide = selebar container (340px) */
 #instagram-gallery .instagram-slide {
-  flex: 0 0 420px;       /* ini yang bikin 2 slide muat ngangak */
-  max-width: 420px;
+  flex: 0 0 100%;
   scroll-snap-align: center;
   display: flex;
   justify-content: center;
-  padding: 12px 0;
+  padding: 10px 0;
 }
 
 #instagram-gallery .instagram-slide .instagram-media,
 #instagram-gallery .instagram-slide iframe,
 #instagram-gallery .instagram-slide > span {
   width: 100% !important;
-  max-width: 100% !important;   /* ikut lebar kartu, tidak berubah-ubah */
+  max-width: 320px !important;   /* <<< ukuran kartu */
   margin: 0 auto !important;
 }
 
@@ -621,7 +623,8 @@ nav a:hover::after {
     gap: 8px;
   }
 
-  #instagram-gallery .carousel-container {
+ #instagram-gallery .carousel-container {
+    max-width: 300px;
     border-radius: 12px;
   }
 
@@ -634,19 +637,6 @@ nav a:hover::after {
     width: 38px;
     height: 38px;
     box-shadow: 0 3px 10px rgba(0,0,0,0.18);
-  }
-}
-
-/* Desktop besar – sedikit dilebarkan */
-@media (min-width: 1200px) {
-  #instagram-gallery .instagram-carousel-wrapper {
-    max-width: 1000px;
-  }
-
-  #instagram-gallery .instagram-slide .instagram-media,
-  #instagram-gallery .instagram-slide iframe,
-  #instagram-gallery .instagram-slide > span {
-    max-width: 480px !important;
   }
 }
 
@@ -1840,255 +1830,6 @@ nav.social-links {
 
 }
 
-/* Rapatkan jarak atas & bawah section IG */
-.instagram-gallery-section {
-  margin-top: 16px;   /* boleh 0 kalau mau mepet banget ke katalog */
-  margin-bottom: 8px; /* supaya dekat ke FAQ */
-  padding-top: 8px;
-  padding-bottom: 8px;
-}
-
-/* ===== FIX LEBAR & JARAK POST INSTAGRAM DI HP ===== */
-
-.instagram-carousel-wrapper {
-  padding: 0;
-  margin: 0 auto;
-}
-
-.instagram-carousel {
-  display: flex;
-  align-items: stretch;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  gap: 0;              /* hilangkan jarak antar slide */
-}
-
-/* ======== FIX UKURAN EMBED INSTAGRAM – VERSI IDEAL ======== */
-
-/* Container utama carousel */
-.instagram-carousel {
-  display: flex;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  justify-content: center;
-  gap: 16px;
-}
-
-/* Slide IG */
-.instagram-slide {
-  flex: 0 0 auto;
-  width: 90%;             /* ukuran untuk HP */
-  max-width: 350px;       /* <== UKURAN BATAS, BISA DIKECILKAN */
-  margin: 0 auto;
-  scroll-snap-align: center;
-}
-
-/* Atur embed Instagram agar ikut mengecil */
-.instagram-slide .instagram-media {
-  width: 100% !important;
-  max-width: 100% !important;
-  margin: 0 auto !important;
-}
-
-/* Hilangkan margin bawaan Instagram */
-.instagram-media {
-  margin: 0 !important;
-}
-
-/* HP kecil */
-@media (max-width: 480px) {
-  .instagram-slide {
-    width: 95%;
-    max-width: 300px;     /* lebih kecil lagi di HP */
-  }
-}
-
- 
-/* ================= INSTAGRAM GALLERY (BERSIH & STABIL) ================= */
-
-.instagram-gallery-section {
-  background: linear-gradient(135deg, #f5f5dc 0%, #fdfaf6 100%);
-  padding: 2.5rem 5% 3rem;
-  border-top: 1px solid rgba(111, 78, 55, 0.1);
-  margin-top: 12px;
-  margin-bottom: 12px;
-}
-
-.instagram-gallery-section .section-header {
-  text-align: center;
-  margin-bottom: 1.5rem;
-}
-
-.instagram-gallery-section .section-title {
-  font: 600 2rem var(--header-font);
-  color: var(--secondary-color);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.75rem;
-}
-
-.instagram-gallery-section .section-title i {
-  font-size: 2rem;
-  background: linear-gradient(45deg,#405de6,#5851db,#833ab4,#c13584,#e1306c,#fd1d1d);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.instagram-gallery-section .section-subtitle {
-  font: 400 1rem var(--body-font);
-  color: var(--text-color);
-  opacity: 0.8;
-  max-width: 520px;
-  margin: 0.5rem auto 0;
-}
-
-/* Biar kalau klik menu ke #instagram-gallery tidak ketutup navbar */
-#instagram-gallery {
-  scroll-margin-top: 90px;
-}
-
-/* WRAPPER + PANAH */
-.instagram-carousel-wrapper {
-  max-width: 360px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-}
-
-/* AREA SLIDE */
-.carousel-container {
-  flex: 1;
-  overflow: hidden;
-  border-radius: 14px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
-  background: #fff;
-}
-
-/* DERET SLIDE */
-.instagram-carousel {
-  display: flex;
-  scroll-snap-type: x mandatory;
-  overflow-x: hidden;
-  will-change: transform;
-}
-
-/* TIAP SLIDE */
-.instagram-slide {
-  flex: 0 0 100%;           /* 1 slide per layar */
-  scroll-snap-align: center;
-  display: flex;
-  justify-content: center;
-  padding: 10px 0;
-}
-
-/* PAKSA EMBED IG TETAP KECIL */
-.instagram-slide .instagram-media,
-.instagram-slide iframe,
-.instagram-slide > span {
-  width: 100% !important;
-  max-width: 320px !important;   /* UKURAN DESKTOP */
-  margin: 0 auto !important;
-}
-
-/* Hilangkan margin bawaan Instagram */
-.instagram-media {
-  margin: 0 !important;
-}
-
-/* PANAH KIRI KANAN */
-.carousel-nav {
-  background: rgba(255, 255, 255, 0.95);
-  border: none;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-  transition: all 0.25s ease;
-}
-
-.carousel-nav i {
-  font-size: 16px;
-  color: var(--secondary-color);
-}
-
-.carousel-nav:hover:not(:disabled) {
-  transform: translateY(-2px) scale(1.05);
-  background: #fff;
-}
-
-.carousel-nav:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-}
-
-/* POSISI PANAH */
-.carousel-prev {
-  order: 0;
-}
-
-.carousel-next {
-  order: 2;
-}
-
-/* BAGIAN SLIDE DI TENGAH */
-.instagram-carousel-wrapper .carousel-container {
-  order: 1;
-}
-
-/* ================== RESPONSIVE HP ================== */
-@media (max-width: 600px) {
-
-  .instagram-gallery-section {
-    padding: 2rem 4% 2.5rem;
-    margin-top: 8px;
-    margin-bottom: 8px;
-  }
-
-  .instagram-gallery-section .section-title {
-    font-size: 1.6rem;
-    flex-direction: column;
-    gap: 0.4rem;
-  }
-
-  .instagram-carousel-wrapper {
-    max-width: 320px;
-    gap: 6px;
-  }
-
-  .instagram-slide .instagram-media,
-  .instagram-slide iframe,
-  .instagram-slide > span {
-    max-width: 280px !important;   /* UKURAN HP */
-  }
-
-  /* Kalau di HP mau swipe, boleh aktifkan overflow-x */
-  .carousel-container {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  /* Biar bisa swipe tanpa aneh2 */
-  .instagram-carousel {
-    display: flex;
-  }
-
-  .carousel-nav {
-    width: 38px;
-    height: 38px;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.18);
-  }
-
-  /* --- ATUR ULANG LEBAR INSTAGRAM UNTUK DESKTOP --- */
-@media (min-width: 992px) {
-
   #instagram-gallery .instagram-carousel-wrapper {
     max-width: 900px;      /* boleh 800–1000, silakan diatur */
     gap: 16px;
@@ -2103,6 +1844,3 @@ nav.social-links {
   #instagram-gallery .instagram-slide > span {
     max-width: 520px !important;   /* ukuran embed di desktop */
   }
-}
-
-}

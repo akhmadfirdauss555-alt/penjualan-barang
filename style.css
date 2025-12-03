@@ -324,7 +324,6 @@ nav a:hover::after {
   transition: transform .25s ease, box-shadow .25s ease;
   display: flex; 
   flex-direction: column; 
-  overflow: hidden;
 }
 
 .menu-item:hover { 
@@ -1849,6 +1848,15 @@ nav.social-links {
     gap: 0.5rem;
   }
 
+.menu-item {
+    overflow: visible;      /* jangan dipotong di HP */
+    padding-bottom: 3.2rem; /* kasih ruang ekstra di bawah untuk tombol */
+  }
+
+  .menu-item-footer {
+    align-items: flex-end;  /* biar harga & tombol duduk rapi di bawah */
+  }
+}
   /* FAQ responsive mobile */
   .faq-grid {
     grid-template-columns: 1fr;
@@ -1967,6 +1975,4 @@ nav.social-links {
 .wa-icon-wrapper i {
   font-size: 20px;
   color: #25D366;
-}
-
 }

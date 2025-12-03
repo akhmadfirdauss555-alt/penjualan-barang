@@ -1978,55 +1978,137 @@ nav.social-links {
 
 }
 
-/* ==== INSTAGRAM SLIDE ITEM ==== */
-.instagram-slide {
-  flex: 0 0 33.333%;
-  padding: 0 10px;
-  box-sizing: border-box;
+/* Rapatkan jarak atas & bawah section IG */
+.instagram-gallery-section {
+  margin-top: 16px;   /* boleh 0 kalau mau mepet banget ke katalog */
+  margin-bottom: 8px; /* supaya dekat ke FAQ */
+  padding-top: 8px;
+  padding-bottom: 8px;
 }
 
-/* ==== INSTAGRAM SLIDE ITEM ==== */
-.instagram-slide {
-  flex: 0 0 33.333%;
-  padding: 0 10px;
-  box-sizing: border-box;
+/* ===== FIX LEBAR & JARAK POST INSTAGRAM DI HP ===== */
+
+.instagram-carousel-wrapper {
+  padding: 0;
+  margin: 0 auto;
 }
 
-/* Tablet & HP */
-@media (max-width: 768px) {
-  .instagram-slide {
-    flex: 0 0 90%;
-    max-width: 340px;
-    margin: 0 auto;
-  }
+.instagram-carousel {
+  display: flex;
+  align-items: stretch;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  gap: 0;              /* hilangkan jarak antar slide */
+}
 
-  .carousel-container {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
+/* ======== FIX UKURAN EMBED INSTAGRAM – VERSI IDEAL ======== */
 
-  .instagram-carousel {
-    display: flex;
-    width: max-content;
-  }
+/* Container utama carousel */
+.instagram-carousel {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  justify-content: center;
+  gap: 16px;
+}
 
-  .instagram-slide .instagram-media,
-  .instagram-slide iframe,
-  .instagram-slide > span {
-    width: 100% !important;
-    max-width: 320px !important;
-    margin: 0 auto !important;
-  }
+/* Slide IG */
+.instagram-slide {
+  flex: 0 0 auto;
+  width: 90%;             /* ukuran untuk HP */
+  max-width: 350px;       /* <== UKURAN BATAS, BISA DIKECILKAN */
+  margin: 0 auto;
+  scroll-snap-align: center;
+}
 
-  .instagram-media {
-    margin: 0 !important;
-  }
+/* Atur embed Instagram agar ikut mengecil */
+.instagram-slide .instagram-media {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 auto !important;
+}
+
+/* Hilangkan margin bawaan Instagram */
+.instagram-media {
+  margin: 0 !important;
 }
 
 /* HP kecil */
 @media (max-width: 480px) {
   .instagram-slide {
-    flex: 0 0 95%;
-    max-width: 300px;
+    width: 95%;
+    max-width: 300px;     /* lebih kecil lagi di HP */
   }
 }
+
+ 
+/* ===== RAPATKAN FAQ DENGAN INSTAGRAM ===== */
+
+.site-footer {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.site-footer .faq-section {
+  margin-top: 0;
+  padding-top: 8px;   /* kalau mau nempel banget ke IG, ganti 0 */
+}
+
+.site-footer .faq-section h3 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+#instagram-gallery .instagram-carousel {
+  display: flex;
+  justify-content: center;
+  overflow-x: auto;
+}
+
+#instagram-gallery .instagram-slide {
+  flex: 0 0 auto;
+}
+
+/* ==== LAYOUT GALLERY INSTAGRAM – FINAL STABIL ==== */
+
+#instagram-gallery .instagram-carousel-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Batasi lebar area IG */
+#instagram-gallery .carousel-container {
+  max-width: 280px;      /* ← kecil banget, bisa kamu ubah 280–320 */
+  margin: 0 auto;
+  overflow-x: auto;
+}
+
+/* Deretan slide */
+#instagram-gallery .instagram-carousel {
+  display: flex;
+  gap: 12px;
+  scroll-snap-type: x mandatory;
+  justify-content: center;
+}
+
+/* Tiap slide: tidak dipaksa full, dan konten di tengah */
+#instagram-gallery .instagram-slide {
+  flex: 0 0 auto;
+  scroll-snap-align: center;
+  display: flex;
+  justify-content: center;
+}
+
+/* KECILKAN embed IG dengan scale (supaya saat scroll tidak ikut melebar) */
+#instagram-gallery .instagram-slide > * {
+  transform: scale(0.85);           /* ubah 0.8 / 0.7 kalau mau lebih kecil */
+  transform-origin: top center;
+}
+
+/* Hilangkan margin bawaan embed */
+#instagram-gallery .instagram-media {
+  margin: 0 !important;
+  max-width: 100% !important;
+}
+

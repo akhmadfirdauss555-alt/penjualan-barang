@@ -468,258 +468,115 @@ nav a:hover::after {
   margin: 0;
 }
 
-/* Instagram Gallery Section */
+
+/* ================= INSTAGRAM GALLERY – CLEAN ================= */
+
+/* Biar kalau klik menu ke #instagram-gallery tidak ketutup navbar */
+#instagram-gallery {
+  scroll-margin-top: 90px;
+}
+
+/* Section Instagram */
 .instagram-gallery-section {
   background: linear-gradient(135deg, #f5f5dc 0%, #fdfaf6 100%);
-  padding: 4rem 5% 5rem;
+  padding: 3rem 5% 3.5rem;
   border-top: 1px solid rgba(111, 78, 55, 0.1);
+  margin-top: 16px;
+  margin-bottom: 16px;
 }
 
 .instagram-gallery-section .section-header {
   text-align: center;
-  margin-bottom: 3rem;
+  margin-bottom: 1.8rem;
 }
 
 .instagram-gallery-section .section-title {
-  font: 600 2.5rem var(--header-font);
+  font: 600 2rem var(--header-font);
   color: var(--secondary-color);
-  margin-bottom: 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
+  gap: 0.75rem;
 }
 
 .instagram-gallery-section .section-title i {
-  font-size: 2.2rem;
-  background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
+  font-size: 2rem;
+  background: linear-gradient(45deg,#405de6,#5851db,#833ab4,#c13584,#e1306c,#fd1d1d);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-.refresh-indicator {
-  font-size: 0.8em;
-  color: #6f4e37;
-  margin-left: 0.5rem;
-  opacity: 0.7;
-}
-
-.refresh-indicator i {
-  background: none !important;
-  -webkit-background-clip: unset !important;
-  -webkit-text-fill-color: unset !important;
-  background-clip: unset !important;
-}
-
 .instagram-gallery-section .section-subtitle {
-  font: 400 1.1rem var(--body-font);
+  font: 400 1rem var(--body-font);
   color: var(--text-color);
   opacity: 0.8;
-  max-width: 600px;
-  margin: 0 auto;
+  max-width: 520px;
+  margin: 0.5rem auto 0;
 }
 
-/* Carousel Wrapper */
+/* ================= STRUKTUR CAROUSEL ================= */
+
 .instagram-carousel-wrapper {
-  position: relative;
-  max-width: 1200px;
+  max-width: 900px;
   margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
 }
 
 .carousel-container {
-  position: relative;
+  flex: 1;
   overflow: hidden;
-  border-radius: 16px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  background: #fff;
 }
 
+/* Deretan slide, digerakkan oleh JS dengan translateX */
 .instagram-carousel {
   display: flex;
-  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   will-change: transform;
 }
 
-/* Instagram Post Cards */
-.instagram-post-card {
-  min-width: 300px;
-  background: white;
-  border-radius: 12px;
-  overflow: hidden;
-  margin: 0 10px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  transition: all 0.3s ease;
-}
-
-.instagram-post-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-}
-
-.instagram-post-header {
+/* Satu slide = satu layar */
+.instagram-slide {
+  flex: 0 0 100%;
+  scroll-snap-align: center;
   display: flex;
-  align-items: center;
-  padding: 12px 16px;
-  gap: 12px;
-  border-bottom: 1px solid #efefef;
-}
-
-.instagram-avatar {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
-  padding: 2px;
-}
-
-.instagram-avatar img {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  object-fit: cover;
-  background: white;
-}
-
-.instagram-user-info {
-  flex: 1;
-}
-
-.instagram-username {
-  font-weight: 600;
-  font-size: 14px;
-  color: #262626;
-}
-
-.instagram-location {
-  font-size: 12px;
-  color: #8e8e8e;
-}
-
-.instagram-post-image {
-  width: 100%;
-  aspect-ratio: 1;
-  object-fit: cover;
-  transition: transform 0.3s ease;
-}
-
-.instagram-post-card:hover .instagram-post-image {
-  transform: scale(1.05);
-}
-
-.instagram-post-content {
-  padding: 16px;
-}
-
-.instagram-actions {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 12px;
-}
-
-.instagram-action-left {
-  display: flex;
-  gap: 16px;
-}
-
-.instagram-actions i {
-  font-size: 24px;
-  color: #262626;
-  cursor: pointer;
-  transition: color 0.2s ease;
-}
-
-.instagram-actions i:hover {
-  color: #8e8e8e;
-}
-
-.instagram-likes {
-  font-weight: 600;
-  font-size: 14px;
-  color: #262626;
-  margin-bottom: 8px;
-}
-
-.instagram-caption {
-  font-size: 14px;
-  line-height: 1.4;
-  color: #262626;
-}
-
-.instagram-caption .username {
-  font-weight: 600;
-  margin-right: 8px;
-}
-
-.instagram-hashtags {
-  color: #00376b;
-  margin-top: 8px;
-  font-size: 14px;
-}
-
-.instagram-date {
-  font-size: 12px;
-  color: #8e8e8e;
-  margin-top: 12px;
-  text-transform: uppercase;
-  letter-spacing: 0.2px;
-}
-
-/* Loading State */
-.carousel-loading {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  min-height: 400px;
-  color: var(--secondary-color);
+  padding: 10px 0;
 }
 
-.loading-spinner {
-  width: 40px;
-  height: 40px;
-  border: 4px solid rgba(111, 78, 55, 0.1);
-  border-left: 4px solid var(--secondary-color);
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-  margin-bottom: 1rem;
+/* Paksa embed Instagram tetap rapi & tidak melebar */
+.instagram-slide .instagram-media,
+.instagram-slide iframe,
+.instagram-slide > span {
+  width: 100% !important;
+  max-width: 480px !important;
+  margin: 0 auto !important;
 }
 
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+/* Hilangkan margin bawaan Instagram */
+.instagram-media {
+  margin: 0 !important;
 }
 
-/* Navigation Arrows */
+/* ================= TOMBOL PANAH ================= */
+
 .carousel-nav {
-  position: absolute;
-  top: 30%;
-  transform: translateY(-50%);
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.95);
   border: none;
-  width: 50px;
-  height: 50px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  z-index: 10;
-}
-
-.carousel-nav:hover {
-  background: white;
-  transform: translateY(-50%) scale(1.1);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-}
-
-.carousel-prev {
-  left: -25px;
-}
-
-.carousel-next {
-  right: -25px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+  transition: all 0.25s ease;
 }
 
 .carousel-nav i {
@@ -727,65 +584,71 @@ nav a:hover::after {
   color: var(--secondary-color);
 }
 
+.carousel-nav:hover:not(:disabled) {
+  transform: translateY(-2px) scale(1.05);
+  background: #fff;
+}
+
 .carousel-nav:disabled {
-  opacity: 0.5;
+  opacity: 0.4;
   cursor: not-allowed;
 }
 
-.carousel-nav:disabled:hover {
-  transform: translateY(-50%) scale(1);
+/* Posisi kiri–tengah–kanan */
+.carousel-prev { order: 0; }
+.instagram-carousel-wrapper .carousel-container { order: 1; }
+.carousel-next { order: 2; }
+
+/* ================= RESPONSIVE ================= */
+
+/* Tablet & HP */
+@media (max-width: 768px) {
+  .instagram-gallery-section {
+    padding: 2.5rem 4% 3rem;
+  }
+
+  .instagram-gallery-section .section-title {
+    font-size: 1.7rem;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .instagram-carousel-wrapper {
+    max-width: 100%;
+    gap: 8px;
+  }
+
+  .instagram-slide {
+    flex: 0 0 90%;             /* hampir full layar */
+  }
+
+  .instagram-slide .instagram-media,
+  .instagram-slide iframe,
+  .instagram-slide > span {
+    max-width: 320px !important;
+  }
 }
 
-/* Carousel Dots */
-.carousel-dots {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  margin-top: 2rem;
+/* HP kecil */
+@media (max-width: 480px) {
+  .instagram-slide {
+    flex: 0 0 95%;
+  }
+
+  .instagram-slide .instagram-media,
+  .instagram-slide iframe,
+  .instagram-slide > span {
+    max-width: 300px !important;
+  }
 }
 
-.carousel-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: rgba(111, 78, 55, 0.3);
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.carousel-dot.active {
-  background: var(--secondary-color);
-  transform: scale(1.3);
-}
-
-/* Instagram CTA */
-.instagram-cta {
-  text-align: center;
-  margin-top: 3rem;
-}
-
-.instagram-follow-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  padding: 16px 32px;
-  background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
-  color: white;
-  text-decoration: none;
-  border-radius: 50px;
-  font: 600 1.1rem var(--body-font);
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 20px rgba(225, 48, 108, 0.3);
-}
-
-.instagram-follow-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 30px rgba(225, 48, 108, 0.4);
-  color: white;
-}
-
-.instagram-follow-btn i {
-  font-size: 1.3rem;
+/* Desktop besar */
+@media (min-width: 1200px) {
+  .instagram-slide .instagram-media,
+  .instagram-slide iframe,
+  .instagram-slide > span {
+    max-width: 520px !important;
+  }
 }
 
 /* Footer */

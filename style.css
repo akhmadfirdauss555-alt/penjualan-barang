@@ -2071,39 +2071,46 @@ nav.social-links {
   gap: 0;              /* hilangkan jarak antar slide */
 }
 
-/* Ukuran kartu IG lebih kecil & di tengah */
+/* ======== FIX UKURAN EMBED INSTAGRAM – VERSI IDEAL ======== */
+
+/* Container utama carousel */
 .instagram-carousel {
   display: flex;
-  align-items: stretch;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   justify-content: center;
+  gap: 16px;
 }
 
+/* Slide IG */
 .instagram-slide {
-  flex: 0 0 auto;          /* lebar mengikuti max-width di bawah */
-  max-width: 420px;        /* batas lebar kartu IG */
-  width: 90%;              /* di HP hampir full, tapi tidak 100% */
+  flex: 0 0 auto;
+  width: 90%;             /* ukuran untuk HP */
+  max-width: 350px;       /* <== UKURAN BATAS, BISA DIKECILKAN */
+  margin: 0 auto;
   scroll-snap-align: center;
-  padding: 0;
-  margin: 0 auto;          /* center */
 }
 
+/* Atur embed Instagram agar ikut mengecil */
 .instagram-slide .instagram-media {
-  max-width: 100% !important;
   width: 100% !important;
+  max-width: 100% !important;
   margin: 0 auto !important;
-  padding: 0 !important;
 }
 
+/* Hilangkan margin bawaan Instagram */
+.instagram-media {
+  margin: 0 !important;
+}
 
-/* HP: rapikan container supaya tidak terlalu banyak ruang krem */
-@media (max-width: 768px) {
-  .instagram-gallery-section .container {
-    padding-left: 8px;
-    padding-right: 8px;
+/* HP kecil */
+@media (max-width: 480px) {
+  .instagram-slide {
+    width: 95%;
+    max-width: 300px;     /* lebih kecil lagi di HP */
   }
 }
+
  
 /* ===== RAPATKAN FAQ DENGAN INSTAGRAM ===== */
 

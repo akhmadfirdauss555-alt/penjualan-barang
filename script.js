@@ -719,6 +719,12 @@ document.addEventListener('DOMContentLoaded', () => {
   app.register(new ImageZoom());
   app.register(new FAQAccordion());
   app.register(new SmoothScrollController());
+  
+  app.init();
+
+    // === Tambahkan DI SINI ===
+    initInstagramCarousel();
+});
 
   // Initialize application
   app.init();
@@ -732,5 +738,50 @@ window.addEventListener("load", () => {
   }
 
 });
+function initInstagramCarousel() {
+  const carousel = document.getElementById('igCarousel');
+  const slides = carousel ? Array.from(carousel.querySelectorAll('.instagram-slide')) : [];
+  const prevBtn = document.getElementById('igPrev');
+  const nextBtn = document.getElementById('igNext');
 
-});
+  if (!carousel || slides.length === 0 || !prevBtn || !nextBtn) return;
+
+  let currentIndex = 0;
+
+  function slidesPerView() {
+    if (window.innerWidth <= 600) return 1;
+    if (window.innerWidth <= 1024) return 2;
+    return 3;
+  }
+
+  function updateCarousel() {
+    const perView = slidesPerView();
+    const slideWidth = carousel.clientWidth / perView;
+
+    slides.forEach(slide => {
+      slide.style.minWidth = slideWidth + 'px';
+    });
+
+    const maxIndex = Math.max(0, slides.length - perView);
+    currentIndex = Math.min(currentIndex, maxIndex);
+
+    carousel.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+
+    prevBtn.disabled = currentIndex === 0;
+    nextBtn.disabled = currentIndex === maxIndex;
+  }
+
+  nextBtn.addEventListener('click', () => {
+    currentIndex++;
+    updateCarousel();
+  });
+
+  prevBtn.addEventListener('click', () => {
+    currentIndex--;
+    updateCarousel();
+  });
+
+  window.addEventListener('resize', updateCarousel);
+
+  updateCarousel();
+}

@@ -2004,6 +2004,18 @@ nav.social-links {
     margin: 0 !important;
     padding: 0 !important;
 }
+  .carousel-container {
+    overflow-x: auto;        /* Boleh discroll ke samping */
+  }
+
+  .instagram-carousel {
+    display: flex;
+    width: max-content;      /* Biar isinya memanjang ke samping */
+  }
+
+  .instagram-slide {
+    flex: 0 0 85%;           /* Satu slide hampir full lebar layar */
+  }
 
 }
 

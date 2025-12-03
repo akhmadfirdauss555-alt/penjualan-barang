@@ -2041,33 +2041,62 @@ nav.social-links {
     flex: 0 0 85%;           /* Satu slide hampir full lebar layar */
   }
 
-/* ===== RAPATKAN JARAK GALLERY INSTAGRAM & FAQ ===== */
+/* ===== FIX POSISI SECTION INSTAGRAM ===== */
 
-/* Buang jarak bawah section Instagram */
+/* Saat lompat ke #instagram-gallery, jangan ketutup navbar */
+#instagram-gallery {
+  scroll-margin-top: 90px; /* kira-kira setinggi navbar + sedikit ruang */
+}
+
+/* Rapatkan jarak atas & bawah section IG */
 .instagram-gallery-section {
-  margin-bottom: 0;
-  padding-bottom: 0;
+  margin-top: 16px;   /* boleh 0 kalau mau mepet banget ke katalog */
+  margin-bottom: 8px; /* supaya dekat ke FAQ */
+  padding-top: 8px;
+  padding-bottom: 8px;
 }
 
-/* Kecilkan jarak di dalam header section Instagram */
-.instagram-gallery-section .section-header {
-  margin-bottom: 8px;   /* kalau mau lebih rapat lagi, ganti 0 */
+/* ===== FIX LEBAR & JARAK POST INSTAGRAM DI HP ===== */
+
+.instagram-carousel-wrapper {
+  padding: 0;
+  margin: 0 auto;
 }
 
-/* Buang margin bawaan di judul & text kecilnya */
-.instagram-gallery-section .section-title,
-.instagram-gallery-section .section-subtitle {
-  margin-top: 0;
-  margin-bottom: 4px;   /* atau 0 */
+.instagram-carousel {
+  display: flex;
+  align-items: stretch;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  gap: 0;              /* hilangkan jarak antar slide */
 }
 
-/* Buang jarak ekstra di wrapper carousel */
-.instagram-gallery-section .instagram-carousel-wrapper {
-  margin-bottom: 0;
-  padding-bottom: 0;
+.instagram-slide {
+  flex: 0 0 100%;      /* 1 slide = 100% lebar layar */
+  scroll-snap-align: start;
+  padding: 0;
+  margin: 0;
 }
 
-/* Hilangkan jarak atas dari footer & FAQ */
+/* OVERRIDE bawaan Instagram agar full width & tidak ada jarak aneh */
+.instagram-slide .instagram-media {
+  max-width: 100% !important;
+  min-width: 0 !important;
+  width: 100% !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+}
+
+/* HP: rapikan container supaya tidak terlalu banyak ruang krem */
+@media (max-width: 768px) {
+  .instagram-gallery-section .container {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+}
+ 
+/* ===== RAPATKAN FAQ DENGAN INSTAGRAM ===== */
+
 .site-footer {
   margin-top: 0;
   padding-top: 0;
@@ -2075,14 +2104,12 @@ nav.social-links {
 
 .site-footer .faq-section {
   margin-top: 0;
-  padding-top: 8px;     /* mau nempel banget? ganti 0 */
+  padding-top: 8px;   /* kalau mau nempel banget ke IG, ganti 0 */
 }
 
-/* Hilangkan margin atas judul FAQ */
 .site-footer .faq-section h3 {
   margin-top: 0;
   padding-top: 0;
 }
-
 
 }

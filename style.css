@@ -535,27 +535,27 @@ nav a:hover::after {
   background: #ffffff;
 }
 
-/* Deret slide */
 #instagram-gallery .instagram-carousel {
   display: flex;
   will-change: transform;
+  justify-content: center;   /* kartu selalu di tengah */
 }
 
-/* Satu slide = satu layar */
+/* Satu slide = kartu ukuran tetap */
 #instagram-gallery .instagram-slide {
-  flex: 0 0 100%;
+  flex: 0 0 420px;       /* lebar kartu tetap */
+  max-width: 420px;
   scroll-snap-align: center;
   display: flex;
   justify-content: center;
   padding: 12px 0;
 }
 
-/* Paksa embed IG tetap di tengah dan tidak melebar */
 #instagram-gallery .instagram-slide .instagram-media,
 #instagram-gallery .instagram-slide iframe,
 #instagram-gallery .instagram-slide > span {
   width: 100% !important;
-  max-width: 420px !important;   /* lebar konten di tengah */
+  max-width: 100% !important;   /* ikut lebar kartu, tidak berubah-ubah */
   margin: 0 auto !important;
 }
 
@@ -626,10 +626,9 @@ nav a:hover::after {
     border-radius: 12px;
   }
 
-  #instagram-gallery .instagram-slide .instagram-media,
-  #instagram-gallery .instagram-slide iframe,
-  #instagram-gallery .instagram-slide > span {
-    max-width: 320px !important;
+    #instagram-gallery .instagram-slide {
+    flex: 0 0 320px;
+    max-width: 320px;
   }
 
   #instagram-gallery .carousel-nav {

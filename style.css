@@ -2027,7 +2027,7 @@ nav.social-links {
     margin: 0 !important;
     padding: 0 !important;
   }
-  
+
   .carousel-container {
     overflow-x: auto;        /* Boleh discroll ke samping */
   }
@@ -2040,7 +2040,32 @@ nav.social-links {
   .instagram-slide {
     flex: 0 0 85%;           /* Satu slide hampir full lebar layar */
   }
-
+/* Atur jarak antar card Instagram */
+.instagram-slider {
+  display: flex;
+  gap: 20px;           /* JARAK ANTAR CARD */
+  padding: 10px;       /* JARAK SAMPING */
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
 }
 
+.instagram-card {
+  min-width: 85%;      /* Biar tidak terlalu lebar di HP */
+  scroll-snap-align: start;
+  border-radius: 14px;
+  background: #fff;
+}
 
+/* RESPONSIVE – HP kecil */
+@media (max-width: 480px) {
+  .instagram-slider {
+    gap: 16px;
+    padding: 0 14px;
+  }
+
+  .instagram-card {
+    min-width: 88%;
+  }
+}
+
+}

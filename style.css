@@ -692,7 +692,7 @@ nav a:hover::after {
 /* Navigation Arrows */
 .carousel-nav {
   position: absolute;
-  top: 50%;
+  top: 30%;
   transform: translateY(-50%);
   background: rgba(255, 255, 255, 0.9);
   border: none;

@@ -2138,20 +2138,32 @@ nav.social-links {
 #instagram-gallery .instagram-slide {
   flex: 0 0 auto;
 }
-/* ==== BATASI UKURAN GALLERY INSTAGRAM ==== */
+/* ==== LAYOUT GALLERY INSTAGRAM ==== */
 
-/* Batasi lebar maksimum kontainer slide */
+#instagram-gallery .instagram-carousel-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 #instagram-gallery .carousel-container {
-  max-width: 340px;      /* atur ukuran kartu IG di sini */
-  margin: 0 auto;        /* center */
+  max-width: 340px;     /* atur besar kecil kartu IG di sini */
+  margin: 0 auto;
+  overflow-x: auto;
 }
 
-/* Biar slider tidak melebar aneh */
 #instagram-gallery .instagram-carousel {
-  overflow: hidden;
+  display: flex;
+  gap: 16px;
+  scroll-snap-type: x mandatory;
 }
 
-/* Hilangkan margin bawaan embed Instagram */
+#instagram-gallery .instagram-slide {
+  flex: 0 0 auto;
+  scroll-snap-align: center;
+}
+
+/* Hilangkan margin bawaan embed */
 #instagram-gallery .instagram-media {
   margin: 0 !important;
 }

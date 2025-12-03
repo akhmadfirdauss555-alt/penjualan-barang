@@ -1930,7 +1930,7 @@ nav.social-links {
   }
 
     .carousel-nav {
-      /* display: none; */  /* <- baris ini dihapus atau dikomentari */
+      /* display:none; */  /* <- baris ini dihapus atau dikomentari */
   }
 
   .instagram-follow-btn {
@@ -2016,34 +2016,6 @@ nav.social-links {
   .instagram-slide {
     flex: 0 0 85%;           /* Satu slide hampir full lebar layar */
   }
-/* === FIX SLIDER INSTAGRAM DI HP === */
-@media (max-width: 600px) {
-
-  /* Boleh digeser pakai jari */
-  .carousel-container {
-    overflow-x: auto !important;
-    overflow-y: hidden;
-    scroll-behavior: smooth;
-  }
-
-  /* Biar slide jadi memanjang ke samping */
-  .instagram-carousel {
-    display: flex;
-    width: max-content;
-    transform: none !important;    /* MATIKAN ANIMASI SLIDE DESKTOP DI HP */
-  }
-
-  /* Ukuran 1 slide untuk layar HP */
-  .instagram-slide {
-    flex: 0 0 85%;
-    margin-right: 16px;
-  }
-
-  /* Panah disembunyikan saja di HP (agar tidak error putih) */
-  .carousel-nav {
-    display: none !important;
-  }
-}
 
 }
 

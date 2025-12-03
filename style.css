@@ -1929,10 +1929,6 @@ nav.social-links {
     margin: 0 6px;
   }
 
-  .carousel-nav {
-    display: none; /* Hide arrows on mobile, use swipe */
-  }
-
   .instagram-follow-btn {
     padding: 12px 24px;
     font-size: 0.9rem;

@@ -2071,21 +2071,31 @@ nav.social-links {
   gap: 0;              /* hilangkan jarak antar slide */
 }
 
-.instagram-slide {
-  flex: 0 0 100%;      /* 1 slide = 100% lebar layar */
-  scroll-snap-align: start;
-  padding: 0;
-  margin: 0;
+/* Ukuran kartu IG lebih kecil & di tengah */
+.instagram-carousel {
+  display: flex;
+  align-items: stretch;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  justify-content: center;
 }
 
-/* OVERRIDE bawaan Instagram agar full width & tidak ada jarak aneh */
+.instagram-slide {
+  flex: 0 0 auto;          /* lebar mengikuti max-width di bawah */
+  max-width: 420px;        /* batas lebar kartu IG */
+  width: 90%;              /* di HP hampir full, tapi tidak 100% */
+  scroll-snap-align: center;
+  padding: 0;
+  margin: 0 auto;          /* center */
+}
+
 .instagram-slide .instagram-media {
   max-width: 100% !important;
-  min-width: 0 !important;
   width: 100% !important;
   margin: 0 auto !important;
   padding: 0 !important;
 }
+
 
 /* HP: rapikan container supaya tidak terlalu banyak ruang krem */
 @media (max-width: 768px) {

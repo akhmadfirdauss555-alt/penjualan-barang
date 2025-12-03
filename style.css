@@ -527,12 +527,15 @@ nav a:hover::after {
   gap: 16px;
 }
 
-/* Area putih di tengah */
 #instagram-gallery .carousel-container {
   overflow: hidden;
   border-radius: 16px;
   box-shadow: 0 8px 24px rgba(0,0,0,0.12);
   background: #ffffff;
+
+  max-width: 420px;   /* lebar tetap kotak putih */
+  width: 100%;
+  margin: 0 auto;     /* kotak putih di tengah */
 }
 
 #instagram-gallery .instagram-carousel {
@@ -543,8 +546,7 @@ nav a:hover::after {
 
 /* Satu slide = kartu ukuran tetap */
 #instagram-gallery .instagram-slide {
-  flex: 0 0 420px;       /* lebar kartu tetap */
-  max-width: 420px;
+  flex: 0 0 100%;        /* 1 slide = 1 lebar container */
   scroll-snap-align: center;
   display: flex;
   justify-content: center;

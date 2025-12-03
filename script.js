@@ -720,17 +720,27 @@ document.addEventListener('DOMContentLoaded', () => {
   app.register(new FAQAccordion());
   app.register(new SmoothScrollController());
 
+  // Init semua modul
   app.init();
 
-    // === Tambahkan DI SINI ===
-    initInstagramCarousel();
+  // Biar bisa diakses dari console (opsional)
+  window.MejaCafePalu = app;
+
+  // Inisialisasi carousel Instagram
+  initInstagramCarousel();
 });
 
-  // Initialize application
-  app.init();
+// Jalankan embed Instagram & fix ukuran setelah halaman load
+window.addEventListener('load', () => {
+  if (window.instgrm) {
+    window.instgrm.Embeds.process();
+  }
+  setTimeout(fixInstagramEmbedSize, 3000);
+});
 
-  // Make app globally accessible for debugging
-  window.MejaCafePalu = app;
+// Kalau ukuran layar berubah, sesuaikan lagi ukuran IG
+window.addEventListener('resize', fixInstagramEmbedSize);
+
 
 window.addEventListener("load", () => {
   if (window.instgrm) {

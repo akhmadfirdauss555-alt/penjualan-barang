@@ -422,15 +422,45 @@ class ShoppingCart extends BaseModule {
   }
 
   checkout() {
-    if (this.isEmpty()) {
-      alert('Keranjang masih kosong!');
-      return;
-    }
-
-    const message = this.generateWhatsAppMessage();
-    const url = this.buildWhatsAppUrl(message);
-    window.open(url, '_blank');
+  if (this.isEmpty()) {
+    alert('Keranjang masih kosong!');
+    return;
   }
+
+  // Hitung total dan siapkan data keranjang
+  const cartItems = this.items.map(item => ({
+    name: item.name,
+    price: item.price,
+    quantity: item.quantity
+  }));
+
+  const totalAmount = this.items.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
+
+  // Buat form POST ke order.php
+  const form = document.createElement('form');
+  form.method = 'POST';
+  form.action = 'http://localhost/meja_cafe/order.php'; // URL yang kamu sebut
+
+  // Kirim data cart dalam bentuk JSON
+  const cartInput = document.createElement('input');
+  cartInput.type = 'hidden';
+  cartInput.name = 'cart_json';
+  cartInput.value = JSON.stringify(cartItems);
+  form.appendChild(cartInput);
+
+  // Kirim total
+  const totalInput = document.createElement('input');
+  totalInput.type = 'hidden';
+  totalInput.name = 'total';
+  totalInput.value = totalAmount;
+  form.appendChild(totalInput);
+
+  document.body.appendChild(form);
+  form.submit(); // pindah ke order.php + kirim data keranjang
+}
 
   isEmpty() {
     return this.items.length === 0;

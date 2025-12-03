@@ -1943,4 +1943,34 @@ nav.social-links {
   .instagram-follow-btn span {
     font-size: 0.85rem;
   }
+  .submit-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 18px 40px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(90deg, #ff8a00, #ff6a00);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.wa-icon-wrapper {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wa-icon-wrapper i {
+  font-size: 20px;
+  color: #25D366;
+}
+
 }

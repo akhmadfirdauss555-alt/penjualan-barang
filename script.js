@@ -371,15 +371,27 @@ class ShoppingCart extends BaseModule {
   }
 
   checkout() {
-    if (this.isEmpty()) {
-      alert('Keranjang masih kosong!');
-      return;
-    }
-
-    const message = this.generateWhatsAppMessage();
-    const url = this.buildWhatsAppUrl(message);
-    window.open(url, '_blank');
+  if (this.isEmpty()) {
+    alert('Keranjang masih kosong!');
+    return;
   }
+
+  const cartItems = this.items.map(item => ({
+    name: item.name,
+    price: item.price,
+    quantity: item.quantity
+  }));
+
+  const totalAmount = this.items.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
+
+  const payload = { cart: cartItems, total: totalAmount };
+  localStorage.setItem('MEJA_CAFE_CART', JSON.stringify(payload));
+
+  window.location.href = 'order.html';
+}
 
   isEmpty() {
     return this.items.length === 0;

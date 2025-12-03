@@ -306,52 +306,68 @@
             </p>
           </div>
 
-           !-- Instagram Grid (tanpa carousel & tanpa loading text) -->
-          <div class="instagram-grid" data-aos="fade-up" data-aos-delay="300" 
-               style="max-width:1100px;margin:0 auto 3rem auto;display:grid;gap:1.5rem;
-                      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));">
+           <!-- ================= INSTAGRAM GALLERY ================ -->
+<section class="instagram-gallery-section" id="instagram">
+  <div class="section-header">
+    <h2 class="section-title">
+      <i class="fa-brands fa-instagram"></i>
+      Galeri Instagram Meja Cafe Palu
+      <span class="refresh-indicator">
+        <i class="fa-solid fa-rotate-right"></i> Auto dari Instagram resmi
+      </span>
+    </h2>
+    <p class="section-subtitle">
+      Geser kiri-kanan untuk melihat update terbaru dari Instagram @meja_cafe.plw
+    </p>
+  </div>
 
-           </div> 
+  <div class="instagram-carousel-wrapper">
+    <!-- Tombol kiri -->
+    <button class="carousel-nav carousel-prev" id="igPrev">
+      <i class="fa-solid fa-chevron-left"></i>
+    </button>
 
-            <!-- POST 1 -->
-            <blockquote class="instagram-media"
-              data-instgrm-permalink="https://www.instagram.com/p/DRjJ5-QEYRB/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==/"
-              data-instgrm-version="14"
-              style="background:#fff;border-radius:20px;overflow:hidden;
-                     box-shadow:0 10px 30px rgba(0,0,0,0.06);margin:0 auto;max-width:540px;width:100%;">
-              <a href="https://www.instagram.com/p/https://www.instagram.com/p/DRjJ5-QEYRB/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==/"></a>
-            </blockquote>
+    <div class="carousel-container">
+      <div class="instagram-carousel" id="igCarousel">
 
-            <!-- POST 2 -->
-            <blockquote class="instagram-media"
-              data-instgrm-permalink="https://www.instagram.com/p/DRdxY0JEQt-/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==/"
-              data-instgrm-version="14"
-              style="background:#fff;border-radius:20px;overflow:hidden;
-                     box-shadow:0 10px 30px rgba(0,0,0,0.06);margin:0 auto;max-width:540px;width:100%;">
-              <a href="https://www.instagram.com/p/https://www.instagram.com/p/DRdxY0JEQt-/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==/"></a>
-            </blockquote>
-
-            <!-- POST 3 -->
-            <blockquote class="instagram-media"
-              data-instgrm-permalink="https://www.instagram.com/p/DQn7a_yEUJe/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==/"
-              data-instgrm-version="14"
-              style="background:#fff;border-radius:20px;overflow:hidden;
-                     box-shadow:0 10px 30px rgba(0,0,0,0.06);margin:0 auto;max-width:540px;width:100%;">
-              <a href="https://www.instagram.com/p/https://www.instagram.com/p/DQn7a_yEUJe/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==/"></a>
-            </blockquote>
-
-          </div>
-
-          <!-- Instagram CTA -->
-          <div class="instagram-cta">
-            <a href="https://www.instagram.com/meja_cafe.plw" target="_blank" class="instagram-follow-btn" rel="noopener noreferrer">
-              <i class="fab fa-instagram"></i>
-              <span>Follow @meja_cafe.plw untuk update terbaru</span>
-            </a>
-          </div>
+        <!-- SLIDE 1 -->
+        <div class="instagram-slide">
+          <blockquote class="instagram-media" 
+            data-instgrm-permalink="https://www.instagram.com/p/DRJBklwkZsr/"
+            data-instgrm-version="14">
+          </blockquote>
         </div>
-      </section>
 
+        <!-- SLIDE 2 -->
+        <div class="instagram-slide">
+          <blockquote class="instagram-media" 
+            data-instgrm-permalink="https://www.instagram.com/p/<ID_POST_2>/"
+            data-instgrm-version="14">
+          </blockquote>
+        </div>
+
+        <!-- SLIDE 3 -->
+        <div class="instagram-slide">
+          <blockquote class="instagram-media" 
+            data-instgrm-permalink="https://www.instagram.com/p/<ID_POST_3>/"
+            data-instgrm-version="14">
+          </blockquote>
+        </div>
+
+        <!-- Tambah slide lain kalau mau -->
+      </div>
+    </div>
+
+    <!-- Tombol kanan -->
+    <button class="carousel-nav carousel-next" id="igNext">
+      <i class="fa-solid fa-chevron-right"></i>
+    </button>
+  </div>
+
+  <!-- SCRIPT EMBED INSTAGRAM (cukup 1x saja) -->
+  <script async src="https://www.instagram.com/embed.js"></script>
+</section>
+           
       <!-- Footer -->
     <footer id="contact" class="site-footer">
         <!-- FAQ Section -->

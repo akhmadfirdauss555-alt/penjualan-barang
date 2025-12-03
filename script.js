@@ -719,7 +719,7 @@ document.addEventListener('DOMContentLoaded', () => {
   app.register(new ImageZoom());
   app.register(new FAQAccordion());
   app.register(new SmoothScrollController());
-  
+
   app.init();
 
     // === Tambahkan DI SINI ===
@@ -785,3 +785,40 @@ function initInstagramCarousel() {
 
   updateCarousel();
 }
+
+// ====== FIX UKURAN EMBED INSTAGRAM (PAKSA KECIL) ======
+function fixInstagramEmbedSize() {
+  const MAX_WIDTH = 320; // ubah angka ini kalau mau lebih besar / kecil
+
+  const slides = document.querySelectorAll('#instagram-gallery .instagram-slide');
+
+  slides.forEach(slide => {
+    // Biar kontainer slide rata tengah
+    slide.style.display = 'flex';
+    slide.style.justifyContent = 'center';
+
+    // Cari elemen embed yang dibikin Instagram
+    const blockquote = slide.querySelector('.instagram-media');
+    const iframe = slide.querySelector('iframe');
+
+    // Parent dari iframe (dibuat oleh script IG)
+    const iframeParent = iframe ? iframe.parentElement : null;
+
+    // Atur ukuran maksimum di beberapa level sekaligus
+    [slide, blockquote, iframeParent, iframe].forEach(el => {
+      if (!el) return;
+      el.style.maxWidth = MAX_WIDTH + 'px';
+      el.style.width = '100%';
+      el.style.margin = '0 auto';
+    });
+  });
+}
+
+// Jalankan beberapa detik setelah halaman selesai,
+// supaya script Instagram sudah selesai memodifikasi DOM
+window.addEventListener('load', () => {
+  setTimeout(fixInstagramEmbedSize, 3000);
+});
+
+// Kalau orientasi / ukuran layar berubah, sesuaikan lagi
+window.addEventListener('resize', fixInstagramEmbedSize);

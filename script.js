@@ -725,4 +725,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Make app globally accessible for debugging
   window.MejaCafePalu = app;
+
+window.addEventListener("load", () => {
+  if (window.instgrm) {
+    window.instgrm.Embeds.process();
+  }
+});
+
 });

@@ -2128,5 +2128,36 @@ nav.social-links {
   margin-top: 0;
   padding-top: 0;
 }
+/* ====== FINAL LOCK SIZE INSTAGRAM ====== */
+
+/* Pusatkan slider */
+#instagram-gallery .instagram-carousel {
+  display: flex;
+  justify-content: center;
+}
+
+/* Slide tidak wajib 100% lebar */
+#instagram-gallery .instagram-slide {
+  flex: 0 0 auto;
+  margin: 0 auto;
+}
+
+/* Kunci ukuran maksimum kartu IG */
+#instagram-gallery .instagram-slide,
+#instagram-gallery .instagram-slide > .instagram-media,
+#instagram-gallery .instagram-slide iframe {
+  max-width: 320px !important;   /* atur di sini: 280–340px sesuai selera */
+  width: 100% !important;
+  margin: 0 auto !important;
+}
+
+/* HP sangat kecil – boleh dikecilkan lagi */
+@media (max-width: 480px) {
+  #instagram-gallery .instagram-slide,
+  #instagram-gallery .instagram-slide > .instagram-media,
+  #instagram-gallery .instagram-slide iframe {
+    max-width: 300px !important;
+  }
+}
 
 }

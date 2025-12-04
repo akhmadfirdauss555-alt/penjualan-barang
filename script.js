@@ -730,24 +730,14 @@ document.addEventListener('DOMContentLoaded', () => {
   initInstagramCarousel();
 });
 
-// Jalankan embed Instagram & fix ukuran setelah halaman load
+// Jalankan embed Instagram setelah halaman load
 window.addEventListener('load', () => {
   if (window.instgrm) {
     window.instgrm.Embeds.process();
   }
-  setTimeout(fixInstagramEmbedSize, 3000);
 });
 
-// Kalau ukuran layar berubah, sesuaikan lagi ukuran IG
-window.addEventListener('resize', fixInstagramEmbedSize);
-
-
-window.addEventListener("load", () => {
-  if (window.instgrm) {
-    window.instgrm.Embeds.process();
-  }
-
-});
+// ================= INSTAGRAM CAROUSEL (SIMPLE) =================
 function initInstagramCarousel() {
   const carousel = document.getElementById('igCarousel');
   const slides = carousel ? Array.from(carousel.querySelectorAll('.instagram-slide')) : [];
@@ -758,77 +748,58 @@ function initInstagramCarousel() {
 
   let currentIndex = 0;
 
-  function slidesPerView() {
-    if (window.innerWidth <= 600) return 1;
-    if (window.innerWidth <= 1024) return 2;
-    return 3;
-  }
+  function initInstagramCarousel() {
+  const carousel = document.getElementById('igCarousel');
+  const slides = carousel ? Array.from(carousel.querySelectorAll('.instagram-slide')) : [];
+  const prevBtn = document.getElementById('igPrev');
+  const nextBtn = document.getElementById('igNext');
 
-  function updateCarousel() {
-    const perView = slidesPerView();
-    const slideWidth = carousel.clientWidth / perView;
+  if (!carousel || slides.length === 0 || !prevBtn || !nextBtn) return;
 
-    slides.forEach(slide => {
-      slide.style.minWidth = slideWidth + 'px';
+  let currentIndex = 0;
+
+  // 🔁 sekarang index muter, bukan mentok
+  function goToSlide(index) {
+    if (index < 0) {
+      index = slides.length - 1;          // kalau mundur dari slide pertama → ke slide terakhir
+    } else if (index >= slides.length) {
+      index = 0;                           // kalau maju dari slide terakhir → ke slide pertama
+    }
+
+    currentIndex = index;
+
+    slides[currentIndex].scrollIntoView({
+      behavior: 'smooth',
+      block: 'nearest',
+      inline: 'center'
     });
 
-    const maxIndex = Math.max(0, slides.length - perView);
-    currentIndex = Math.min(currentIndex, maxIndex);
-
-    carousel.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
-
-    prevBtn.disabled = currentIndex === 0;
-    nextBtn.disabled = currentIndex === maxIndex;
+    // tombol selalu aktif (tidak pernah disabled)
+    prevBtn.disabled = false;
+    nextBtn.disabled = false;
   }
-
-  nextBtn.addEventListener('click', () => {
-    currentIndex++;
-    updateCarousel();
-  });
 
   prevBtn.addEventListener('click', () => {
-    currentIndex--;
-    updateCarousel();
+    goToSlide(currentIndex - 1);
   });
 
-  window.addEventListener('resize', updateCarousel);
-
-  updateCarousel();
-}
-
-// ====== FIX UKURAN EMBED INSTAGRAM (PAKSA KECIL) ======
-function fixInstagramEmbedSize() {
-  const MAX_WIDTH = 320; // ubah angka ini kalau mau lebih besar / kecil
-
-  const slides = document.querySelectorAll('#instagram-gallery .instagram-slide');
-
-  slides.forEach(slide => {
-    // Biar kontainer slide rata tengah
-    slide.style.display = 'flex';
-    slide.style.justifyContent = 'center';
-
-    // Cari elemen embed yang dibikin Instagram
-    const blockquote = slide.querySelector('.instagram-media');
-    const iframe = slide.querySelector('iframe');
-
-    // Parent dari iframe (dibuat oleh script IG)
-    const iframeParent = iframe ? iframe.parentElement : null;
-
-    // Atur ukuran maksimum di beberapa level sekaligus
-    [slide, blockquote, iframeParent, iframe].forEach(el => {
-      if (!el) return;
-      el.style.maxWidth = MAX_WIDTH + 'px';
-      el.style.width = '100%';
-      el.style.margin = '0 auto';
-    });
+  nextBtn.addEventListener('click', () => {
+    goToSlide(currentIndex + 1);
   });
+
+  // posisi awal
+  goToSlide(0);
 }
 
-// Jalankan beberapa detik setelah halaman selesai,
-// supaya script Instagram sudah selesai memodifikasi DOM
-window.addEventListener('load', () => {
-  setTimeout(fixInstagramEmbedSize, 3000);
-});
+  prevBtn.addEventListener('click', () => {
+    goToSlide(currentIndex - 1);
+  });
 
-// Kalau orientasi / ukuran layar berubah, sesuaikan lagi
-window.addEventListener('resize', fixInstagramEmbedSize);
+  nextBtn.addEventListener('click', () => {
+    goToSlide(currentIndex + 1);
+  });
+
+  // posisi awal
+  goToSlide(0);
+}
+

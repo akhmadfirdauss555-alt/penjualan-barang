@@ -567,9 +567,8 @@ nav a:hover::after {
   background: white;
   border-radius: 12px;
   overflow: hidden;
-  margin: 0;              /* gap antar card sudah diatur pakai gap di flex */
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  transition: all 0.3s ease;
+  margin: 0;                 /* gap antar card pakai gap flex saja */
+
 }
 
 .instagram-post-card:hover {

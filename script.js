@@ -737,37 +737,64 @@ window.addEventListener('load', () => {
   }
 });
 
-// ================= INSTAGRAM CAROUSEL (LOOP TAPI TETAP SIMPLE) =================
+// ================= INSTAGRAM CAROUSEL (LOOP + DOTS + AUTOPLAY) =================
 function initInstagramCarousel() {
   const carousel = document.getElementById('igCarousel');
   const slides = carousel ? Array.from(carousel.querySelectorAll('.instagram-slide')) : [];
   const prevBtn = document.getElementById('igPrev');
   const nextBtn = document.getElementById('igNext');
+  const dotsContainer = document.getElementById('igDots'); // container dots (HTML)
 
-  // Kalau elemen tidak lengkap, jangan jalanin apa2
+  // Kalau elemen tidak lengkap, jangan jalanin apa-apa
   if (!carousel || slides.length === 0 || !prevBtn || !nextBtn) return;
 
   let currentIndex = 0;
   const lastIndex = slides.length - 1;
 
+  // ============ GENERATE DOTS ============
+  if (dotsContainer) {
+    dotsContainer.innerHTML = '';
+
+    slides.forEach((_, i) => {
+      const dot = document.createElement('div');
+      dot.className = 'carousel-dot';
+      dot.addEventListener('click', () => {
+        goToSlide(i);
+      });
+      dotsContainer.appendChild(dot);
+    });
+  }
+
+  function updateDots() {
+    if (!dotsContainer) return;
+    const dots = dotsContainer.querySelectorAll('.carousel-dot');
+    dots.forEach((dot, i) => {
+      dot.classList.toggle('active', i === currentIndex);
+    });
+  }
+
+  // ============ LOGIC PINDAH SLIDE ============
   function goToSlide(index) {
-    // 🔁 BIKIN INDEX MUTER
+    // BIAR MUTER (LOOP)
     if (index < 0) {
-      index = lastIndex;       // dari pertama mundur → ke terakhir
+      index = lastIndex;
     } else if (index > lastIndex) {
-      index = 0;               // dari terakhir maju → ke pertama
+      index = 0;
     }
 
     currentIndex = index;
 
-    // Geser ke kartu yang aktif
+    // scroll ke slide aktif
     slides[currentIndex].scrollIntoView({
       behavior: 'smooth',
       block: 'nearest',
       inline: 'center'
     });
 
-    // Tombol jangan pernah dimatikan
+    // update indikator dots
+    updateDots();
+
+    // tombol jangan dimatiin
     prevBtn.disabled = false;
     nextBtn.disabled = false;
   }
@@ -782,10 +809,13 @@ function initInstagramCarousel() {
     goToSlide(currentIndex + 1);
   });
 
-  // Pastikan tombol aktif & posisi awal di slide pertama
+  // Posisi awal di slide pertama
   prevBtn.disabled = false;
   nextBtn.disabled = false;
   goToSlide(0);
+
+  // ============ AUTO-PLAY ============
+  setInterval(() => {
+    goToSlide(currentIndex + 1);
+  }, 4500); // 4500ms = 4.5 detik
 }
-
-

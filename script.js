@@ -759,7 +759,7 @@ function initInstagramCarousel() {
       const dot = document.createElement('div');
       dot.className = 'carousel-dot';
       dot.addEventListener('click', () => {
-        goToSlide(i);
+        goToSlide(i); // klik dot tetap scroll
       });
       dotsContainer.appendChild(dot);
     });
@@ -773,8 +773,18 @@ function initInstagramCarousel() {
     });
   }
 
+  // Cek apakah carousel kelihatan di layar
+  function isCarouselInView() {
+    const rect = carousel.getBoundingClientRect();
+    return rect.top < window.innerHeight && rect.bottom > 0;
+  }
+
   // ============ LOGIC PINDAH SLIDE ============
-  function goToSlide(index) {
+  /**
+   * @param {number} index - index slide
+   * @param {boolean} isAuto - apakah dipanggil dari auto-play
+   */
+  function goToSlide(index, isAuto = false) {
     // BIAR MUTER (LOOP)
     if (index < 0) {
       index = lastIndex;
@@ -783,6 +793,16 @@ function initInstagramCarousel() {
     }
 
     currentIndex = index;
+
+    // Kalau dipanggil dari auto-play & carouselnya TIDAK kelihatan,
+    // jangan scroll halaman (biar nggak loncat ke atas).
+    if (!isAuto || isCarouselInView()) {
+      slides[currentIndex].scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+        inline: 'center'
+      });
+    }
 
     // update indikator dots
     updateDots();
@@ -794,29 +814,22 @@ function initInstagramCarousel() {
 
   // Klik panah kiri
   prevBtn.addEventListener('click', () => {
-    goToSlide(currentIndex - 1);
+    goToSlide(currentIndex - 1, false); // manual
   });
 
   // Klik panah kanan
   nextBtn.addEventListener('click', () => {
-    goToSlide(currentIndex + 1);
+    goToSlide(currentIndex + 1, false); // manual
   });
 
-    // Posisi awal
+  // Posisi awal di slide pertama
   prevBtn.disabled = false;
   nextBtn.disabled = false;
-  goToSlide(0);
-
-  // ============ CEK CAROUSEL TERLIHAT ============
-  function isCarouselInView() {
-    const rect = carousel.getBoundingClientRect();
-    return rect.top < window.innerHeight && rect.bottom > 0;
-  }
+  goToSlide(0, false);
 
   // ============ AUTO-PLAY ============
   setInterval(() => {
-    if (!isCarouselInView()) return;
-    goToSlide(currentIndex + 1);
-  }, 4500);
+    // Auto = true → hanya scroll jika carousel sedang kelihatan
+    goToSlide(currentIndex + 1, true);
+  }, 4500); // 4500ms = 4.5 detik
 }
-

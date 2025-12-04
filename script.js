@@ -802,13 +802,21 @@ function initInstagramCarousel() {
     goToSlide(currentIndex + 1);
   });
 
-  // Posisi awal di slide pertama
+    // Posisi awal
   prevBtn.disabled = false;
   nextBtn.disabled = false;
   goToSlide(0);
 
+  // ============ CEK CAROUSEL TERLIHAT ============
+  function isCarouselInView() {
+    const rect = carousel.getBoundingClientRect();
+    return rect.top < window.innerHeight && rect.bottom > 0;
+  }
+
   // ============ AUTO-PLAY ============
   setInterval(() => {
+    if (!isCarouselInView()) return;
     goToSlide(currentIndex + 1);
-  }, 4500); // 4500ms = 4.5 detik
+  }, 4500);
 }
+

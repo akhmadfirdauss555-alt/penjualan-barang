@@ -743,7 +743,7 @@ function initInstagramCarousel() {
   const slides = carousel ? Array.from(carousel.querySelectorAll('.instagram-slide')) : [];
   const prevBtn = document.getElementById('igPrev');
   const nextBtn = document.getElementById('igNext');
-  const dotsContainer = document.getElementById('igDots'); // optional
+  const dotsContainer = document.getElementById('igDots'); // container dots (HTML)
 
   // Kalau elemen tidak lengkap, jangan jalanin apa-apa
   if (!carousel || slides.length === 0 || !prevBtn || !nextBtn) return;
@@ -751,17 +751,7 @@ function initInstagramCarousel() {
   let currentIndex = 0;
   const lastIndex = slides.length - 1;
 
-  // Rapikan layout carousel via JS (kalau belum di CSS)
-  carousel.style.display = 'flex';
-  carousel.style.overflowX = 'hidden';
-  carousel.style.scrollBehavior = 'smooth';
-
-  // Setiap slide lebar penuh 100% viewport carousel
-  slides.forEach(slide => {
-    slide.style.flex = '0 0 100%';
-  });
-
-  // ============ GENERATE DOTS (kalau container ada) ============
+  // ============ GENERATE DOTS ============
   if (dotsContainer) {
     dotsContainer.innerHTML = '';
 
@@ -769,7 +759,7 @@ function initInstagramCarousel() {
       const dot = document.createElement('div');
       dot.className = 'carousel-dot';
       dot.addEventListener('click', () => {
-        goToSlide(i, false);
+        goToSlide(i); // klik dot tetap scroll
       });
       dotsContainer.appendChild(dot);
     });
@@ -783,21 +773,19 @@ function initInstagramCarousel() {
     });
   }
 
-  // Cek apakah carousel kelihatan di layar (buat auto-play)
+  // Cek apakah carousel kelihatan di layar
   function isCarouselInView() {
     const rect = carousel.getBoundingClientRect();
     return rect.top < window.innerHeight && rect.bottom > 0;
   }
 
   // ============ LOGIC PINDAH SLIDE ============
-
   /**
-   * Pindah ke slide index, dengan loop dan TANPA area kosong.
-   * @param {number} index
-   * @param {boolean} isAuto - dipanggil dari auto-play atau bukan
+   * @param {number} index - index slide
+   * @param {boolean} isAuto - apakah dipanggil dari auto-play
    */
   function goToSlide(index, isAuto = false) {
-    // Biar muter (loop)
+    // BIAR MUTER (LOOP)
     if (index < 0) {
       index = lastIndex;
     } else if (index > lastIndex) {
@@ -806,20 +794,20 @@ function initInstagramCarousel() {
 
     currentIndex = index;
 
-    // Hitung posisi kiri slide yang dituju
-    const targetLeft = slides[currentIndex].offsetLeft;
-
-    // Kalau auto dan carousel lagi nggak kelihatan, jangan ganggu scroll halaman
+    // Kalau dipanggil dari auto-play & carouselnya TIDAK kelihatan,
+    // jangan scroll halaman (biar nggak loncat ke atas).
     if (!isAuto || isCarouselInView()) {
-      carousel.scrollTo({
-        left: targetLeft,
-        behavior: 'smooth'
+      slides[currentIndex].scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+        inline: 'center'
       });
     }
 
+    // update indikator dots
     updateDots();
 
-    // Tombol selalu aktif (tidak pernah disabled)
+    // tombol jangan dimatiin
     prevBtn.disabled = false;
     nextBtn.disabled = false;
   }
@@ -840,10 +828,8 @@ function initInstagramCarousel() {
   goToSlide(0, false);
 
   // ============ AUTO-PLAY ============
-
   setInterval(() => {
-    // Auto = true → hanya scroll kalau carousel kelihatan
+    // Auto = true → hanya scroll jika carousel sedang kelihatan
     goToSlide(currentIndex + 1, true);
-  }, 4500); // 4.5 detik
+  }, 4500); // 4500ms = 4.5 detik
 }
-

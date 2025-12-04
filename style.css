@@ -539,6 +539,7 @@ nav a:hover::after {
   display: flex;
   transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   will-change: transform;
+  flex-wrap: nowrap;
 }
 /* === SPASI & LEBAR SLIDE INSTAGRAM (baru) === */
 
@@ -547,6 +548,7 @@ nav a:hover::after {
   display: flex;          /* pastikan flex */
   gap: 32px;              /* Jarak antar slide (atur: 24 / 32 / 40) */
   padding: 0 32px;        /* Jarak dari tepi kiri-kanan container */
+  overflow: hidden;
 }
 
 /* Tiap slide/embed Instagram */

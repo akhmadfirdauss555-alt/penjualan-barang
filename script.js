@@ -748,25 +748,29 @@ function initInstagramCarousel() {
 
   let currentIndex = 0;
 
-  function initInstagramCarousel() {
+  // ================= INSTAGRAM CAROUSEL (LOOP) =================
+function initInstagramCarousel() {
   const carousel = document.getElementById('igCarousel');
-  const slides = carousel ? Array.from(carousel.querySelectorAll('.instagram-slide')) : [];
+  if (!carousel) return;
+
+  const slides = Array.from(carousel.querySelectorAll('.instagram-slide'));
   const prevBtn = document.getElementById('igPrev');
   const nextBtn = document.getElementById('igNext');
 
-  if (!carousel || slides.length === 0 || !prevBtn || !nextBtn) return;
+  if (!slides.length || !prevBtn || !nextBtn) return;
 
   let currentIndex = 0;
+  const lastIndex = slides.length - 1;
 
-  // 🔁 sekarang index muter, bukan mentok
-  function goToSlide(index) {
-    if (index < 0) {
-      index = slides.length - 1;          // kalau mundur dari slide pertama → ke slide terakhir
-    } else if (index >= slides.length) {
-      index = 0;                           // kalau maju dari slide terakhir → ke slide pertama
+  function goToSlide(newIndex) {
+    // 🔁 bikin index muter
+    if (newIndex < 0) {
+      newIndex = lastIndex;        // dari pertama mundur → ke terakhir
+    } else if (newIndex > lastIndex) {
+      newIndex = 0;                // dari terakhir maju → ke pertama
     }
 
-    currentIndex = index;
+    currentIndex = newIndex;
 
     slides[currentIndex].scrollIntoView({
       behavior: 'smooth',
@@ -774,7 +778,7 @@ function initInstagramCarousel() {
       inline: 'center'
     });
 
-    // tombol selalu aktif (tidak pernah disabled)
+    // tombol selalu aktif
     prevBtn.disabled = false;
     nextBtn.disabled = false;
   }
@@ -786,6 +790,10 @@ function initInstagramCarousel() {
   nextBtn.addEventListener('click', () => {
     goToSlide(currentIndex + 1);
   });
+
+  // pastikan tidak ada yang disabled di awal
+  prevBtn.disabled = false;
+  nextBtn.disabled = false;
 
   // posisi awal
   goToSlide(0);

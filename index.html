@@ -380,7 +380,7 @@
           </div>
         </div>
 
-        
+
           </div>
         </div>
       </section>
@@ -517,37 +517,6 @@
         offset: 100
       });
     </script>
-
-    <script>
-  const carousel = document.getElementById("igCarousel");
-  const nextBtn = document.getElementById("igNext");
-  const prevBtn = document.getElementById("igPrev");
-
-  let index = 0;
-  const slides = document.querySelectorAll(".instagram-slide");
-  const slideWidth = 360 + 24;
-
-  function smoothSlide() {
-    carousel.style.transition = "transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1)";
-    carousel.style.transform = `translate3d(${-index * slideWidth}px, 0, 0)`;
-  }
-
-  nextBtn.addEventListener("click", () => {
-    index++;
-    if (index >= slides.length) {
-      index = 0; // balik ke awal
-    }
-    smoothSlide();
-  });
-
-  prevBtn.addEventListener("click", () => {
-    index--;
-    if (index < 0) {
-      index = slides.length - 1; // lompat ke slide terakhir
-    }
-    smoothSlide();
-  });
-</script>
-
+    
   </body>
   </html>

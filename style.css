@@ -1649,7 +1649,7 @@ nav.social-links {
     text-align: left;
     font-size: 0.8rem;
    animation: 
-  goMarquee 25s linear infinite,   /* jalan pelan kanan → kiri */
+  goMarquee 18s linear infinite,   /* jalan pelan kanan → kiri */
   badgePulse 1.8s ease-in-out infinite;  /* tetap ada efek napas */
   }
 

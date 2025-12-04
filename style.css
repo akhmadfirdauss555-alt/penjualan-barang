@@ -2010,4 +2010,21 @@ nav.social-links {
   transform: scale(1.02);
 }
 
+/* ================================
+   SMOOTH INSTAGRAM CAROUSEL
+   ================================ */
+.instagram-carousel {
+  display: flex;
+  gap: 24px;
+  will-change: transform;
+  transform: translate3d(0,0,0);
+  transition: transform 0.6s cubic-bezier(0.25, 0.1, 0.25, 1); /* SUPER SMOOTH */
+}
+
+.instagram-slide {
+  flex-shrink: 0;
+  width: 360px; /* lebih stabil */
+  transform: translateZ(0);
+}
+
 }

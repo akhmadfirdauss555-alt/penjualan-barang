@@ -784,13 +784,6 @@ function initInstagramCarousel() {
 
     currentIndex = index;
 
-    // scroll ke slide aktif
-    slides[currentIndex].scrollIntoView({
-      behavior: 'smooth',
-      block: 'nearest',
-      inline: 'center'
-    });
-
     // update indikator dots
     updateDots();
 

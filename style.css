@@ -1577,12 +1577,12 @@ nav.social-links {
   right: 30px; 
 }
 
-/* Badge Gratis Ongkir */
+/* Badge Gratis Ongkir – bergerak kanan → kiri */
 .gratis-ongkir-badge {
   position: fixed;
   bottom: 30px;
-  left: 20px;       /* Dipindah kiri */
-  right: auto;
+  right: -260px;           /* mulai di luar layar kanan */
+  left: auto;
 
   z-index: 998;
   background: linear-gradient(135deg, var(--accent-color), var(--secondary-color));
@@ -1599,15 +1599,18 @@ nav.social-links {
 
   box-shadow: 0 8px 24px rgba(0,0,0,0.35);
   cursor: pointer;
-  animation: badgePulse 1.8s ease-in-out infinite;
+  
+  /* 2 animasi: jalan + pulse */
+  animation: 
+    goMarquee 14s linear infinite,
+    badgePulse 1.8s ease-in-out infinite;
+
   border: 2px solid rgba(255,255,255,0.7);
 }
 
-
-
 .gratis-ongkir-badge::before {
-  content: "🛻";      /* Pickup truck */
-  font-size: 1.3rem;  /* ukuran kecil pas */
+  content: "🛻";
+  font-size: 1.3rem;
   margin: 0;
 }
 
@@ -1623,18 +1626,19 @@ nav.social-links {
   line-height: 1;
 }
 
-@keyframes badgePulse {
+/* ANIMASI JALAN KANAN → KIRI → MUNCUL LAGI */
+@keyframes goMarquee {
   0% {
-    transform: translateY(0) scale(1);
-    box-shadow: 0 0 0 0 rgba(200, 160, 100, 0.7);
+    right: -260px;                         /* di luar kanan */
   }
   50% {
-    transform: translateY(-2px) scale(1.05);
-    box-shadow: 0 0 0 10px rgba(200, 160, 100, 0);
+    right: calc(100% + 260px);             /* keluar lewat kiri */
+  }
+  51% {
+    right: -260px;                         /* reset ke kanan lagi */
   }
   100% {
-    transform: translateY(0) scale(1);
-    box-shadow: 0 0 0 0 rgba(200, 160, 100, 0);
+    right: calc(100% + 260px);             /* jalan lagi ke kiri */
   }
 }
 

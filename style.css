@@ -529,36 +529,32 @@ nav a:hover::after {
 
 .carousel-container {
   position: relative;
-  overflow: hidden;
+  overflow: hidden;       /* penting, biar slide lain nggak kelihatan */
   border-radius: 16px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
+/* TRACK UTAMA */
 .instagram-carousel {
   display: flex;
-  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   will-change: transform;
-}
-/* === SPASI & LEBAR SLIDE INSTAGRAM (baru) === */
-
-/* Container yang punya id="igCarousel" */
-#igCarousel {
-  display: flex;          /* pastikan flex */
-  gap: 32px;              /* Jarak antar slide (atur: 24 / 32 / 40) */
-  padding: 0 32px;        /* Jarak dari tepi kiri-kanan container */
+  transform: translate3d(0, 0, 0);
+  transition: transform 0.6s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
-/* Tiap slide/embed Instagram */
+/* SETIAP SLIDE = 100% LEBAR CONTAINER */
 .instagram-slide {
-  flex: 0 0 340px;        /* Lebar tiap slide (320–360px enak) */
+  flex: 0 0 100%;
+  max-width: 100%;
 }
 
-/* Biar embed IG ikut nurut sama lebar slide */
-.instagram-slide iframe,
-.instagram-slide blockquote {
+/* EMBED IG NGIKUT LEBAR SLIDE */
+.instagram-slide blockquote,
+.instagram-slide iframe {
   width: 100% !important;
   max-width: 100% !important;
 }
+
 
 /* Instagram Post Cards */
 .instagram-post-card {
@@ -1821,11 +1817,6 @@ nav.social-links {
   100% { transform: scale(1); }
 }
 
-@media (max-width: 600px) {
-  .hero-section { 
-    min-height: 110vh; 
-  }
-  
   .hero-title-container {
     flex-direction: column;
     gap: 0.8rem;
@@ -2025,6 +2016,4 @@ nav.social-links {
   flex-shrink: 0;
   width: 360px; /* lebih stabil */
   transform: translateZ(0);
-}
-
 }

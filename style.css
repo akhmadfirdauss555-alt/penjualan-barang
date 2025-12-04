@@ -543,10 +543,9 @@ nav a:hover::after {
 
 /* Container yang punya id="igCarousel" */
 #igCarousel {
-  display: flex;
-  gap: 32px;
-  padding-left: 32px;   /* masih ada ruang kiri */
-  padding-right: 0;     /* ❌ buang ruang kosong kanan */
+  display: flex;          /* pastikan flex */
+  gap: 32px;              /* Jarak antar slide (atur: 24 / 32 / 40) */
+  padding: 0 32px;        /* Jarak dari tepi kiri-kanan container */
 }
 
 /* Tiap slide/embed Instagram */
@@ -567,8 +566,9 @@ nav a:hover::after {
   background: white;
   border-radius: 12px;
   overflow: hidden;
-  margin: 0;                 /* gap antar card pakai gap flex saja */
-
+  margin: 0 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
 }
 
 .instagram-post-card:hover {
@@ -732,6 +732,28 @@ nav a:hover::after {
   background: white;
   transform: translateY(-50%) scale(1.1);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.carousel-prev {
+  left: -25px;
+}
+
+.carousel-next {
+  right: -25px;
+}
+
+.carousel-nav i {
+  font-size: 16px;
+  color: var(--secondary-color);
+}
+
+.carousel-nav:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.carousel-nav:disabled:hover {
+  transform: translateY(-50%) scale(1);
 }
 
 /* Carousel Dots */

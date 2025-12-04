@@ -737,169 +737,99 @@ window.addEventListener('load', () => {
   }
 });
 
-// ================= INSTAGRAM CAROUSEL (INFINITE LOOP + DOTS + AUTOPLAY) =================
+// ================= INSTAGRAM CAROUSEL (LOOP + DOTS + AUTOPLAY) =================
 function initInstagramCarousel() {
-  const track = document.getElementById('igCarousel'); // container yang berisi .instagram-slide
+  const carousel = document.getElementById('igCarousel');
+  const slides = carousel ? Array.from(carousel.querySelectorAll('.instagram-slide')) : [];
   const prevBtn = document.getElementById('igPrev');
   const nextBtn = document.getElementById('igNext');
-  const dotsContainer = document.getElementById('igDots');
+  const dotsContainer = document.getElementById('igDots'); // container dots (HTML)
 
-  if (!track || !prevBtn || !nextBtn) return;
+  // Kalau elemen tidak lengkap, jangan jalanin apa-apa
+  if (!carousel || slides.length === 0 || !prevBtn || !nextBtn) return;
 
-  // Ambil slide asli (sebelum di-clone)
-  let originalSlides = Array.from(track.querySelectorAll('.instagram-slide'));
-  if (originalSlides.length === 0) return;
+  let currentIndex = 0;
+  const lastIndex = slides.length - 1;
 
-  const realCount = originalSlides.length; // jumlah slide asli
-
-  // Bersihkan dots dan buat ulang sesuai jumlah slide asli
+  // ============ GENERATE DOTS ============
   if (dotsContainer) {
     dotsContainer.innerHTML = '';
-    for (let i = 0; i < realCount; i++) {
+
+    slides.forEach((_, i) => {
       const dot = document.createElement('div');
       dot.className = 'carousel-dot';
       dot.addEventListener('click', () => {
-        goToRealIndex(i);
+        goToSlide(i); // klik dot tetap scroll
       });
       dotsContainer.appendChild(dot);
-    }
-  }
-
-  // Clone slide pertama & terakhir untuk efek infinite
-  const firstClone = originalSlides[0].cloneNode(true);
-  const lastClone = originalSlides[realCount - 1].cloneNode(true);
-
-  track.appendChild(firstClone);
-  track.insertBefore(lastClone, originalSlides[0]);
-
-  // Re-collect semua slide setelah clone
-  let slides = Array.from(track.querySelectorAll('.instagram-slide'));
-
-  // Styling dasar supaya jadi slider transform
-  track.style.display = 'flex';
-  track.style.transition = 'transform 0.4s ease';
-  if (track.parentElement) {
-    track.parentElement.style.overflow = 'hidden'; // parent jadi viewport
-  }
-
-  // Hitung lebar slide (ambil dari yang pertama)
-  const slideWidth = slides[1].getBoundingClientRect().width; // index 1 = slide asli pertama
-
-  // Mulai dari index 1 (karena index 0 = clone terakhir)
-  let index = 1;
-  let autoPlayTimer = null;
-
-  // Set posisi awal
-  setTranslateX();
-
-  // ===== Helper: apply transform =====
-  function setTranslateX(animate = true) {
-    if (!animate) {
-      track.style.transition = 'none';
-    } else {
-      track.style.transition = 'transform 0.4s ease';
-    }
-    track.style.transform = `translateX(${-slideWidth * index}px)`;
-  }
-
-  // ===== Map ke index real (tanpa clone) untuk dots =====
-  function getRealIndex() {
-    // index 1..realCount → 0..realCount-1
-    let realIndex = index - 1;
-    if (realIndex < 0) realIndex = realCount - 1;
-    if (realIndex >= realCount) realIndex = 0;
-    return realIndex;
-  }
-
-  // ===== Update dots =====
-  function updateDots() {
-    if (!dotsContainer) return;
-    const dots = Array.from(dotsContainer.querySelectorAll('.carousel-dot'));
-    const realIndex = getRealIndex();
-    dots.forEach((dot, i) => {
-      dot.classList.toggle('active', i === realIndex);
     });
   }
 
-  // ===== Pindah ke index real tertentu (dipakai saat klik dot) =====
-  function goToRealIndex(realIdx) {
-    index = realIdx + 1; // +1 karena offset clone
-    setTranslateX(true);
-    updateDots();
-    restartAutoPlay();
+  function updateDots() {
+    if (!dotsContainer) return;
+    const dots = dotsContainer.querySelectorAll('.carousel-dot');
+    dots.forEach((dot, i) => {
+      dot.classList.toggle('active', i === currentIndex);
+    });
   }
 
-  // ===== Next / Prev =====
-  function nextSlide() {
-    index++;
-    setTranslateX(true);
-    updateDots();
-  }
-
-  function prevSlideClick() {
-    index--;
-    setTranslateX(true);
-    updateDots();
-  }
-
-  // ===== Transition end: handle clone (loop beneran) =====
-  track.addEventListener('transitionend', () => {
-    if (slides[index] === firstClone) {
-      // Kalau sampai ke clone pertama (paling kanan),
-      // lompat diam2 ke slide asli pertama
-      index = 1;
-      setTranslateX(false);
-      updateDots();
-    } else if (slides[index] === lastClone) {
-      // Kalau sampai ke clone terakhir (paling kiri),
-      // lompat diam2 ke slide asli terakhir
-      index = realCount;
-      setTranslateX(false);
-      updateDots();
-    }
-  });
-
-  // ===== Tombol panah =====
-  prevBtn.addEventListener('click', () => {
-    prevSlideClick();
-    restartAutoPlay();
-  });
-
-  nextBtn.addEventListener('click', () => {
-    nextSlide();
-    restartAutoPlay();
-  });
-
-  // ===== Auto-play (tidak scroll halaman, hanya geser track) =====
-  function startAutoPlay() {
-    stopAutoPlay();
-    autoPlayTimer = setInterval(() => {
-      // opsional: hanya jalan kalau section-nya kelihatan
-      if (isCarouselInView()) {
-        nextSlide();
-      }
-    }, 4500);
-  }
-
-  function stopAutoPlay() {
-    if (autoPlayTimer) {
-      clearInterval(autoPlayTimer);
-      autoPlayTimer = null;
-    }
-  }
-
-  function restartAutoPlay() {
-    startAutoPlay();
-  }
-
-  // Cek apakah carousel kelihatan di layar (opsional)
+  // Cek apakah carousel kelihatan di layar
   function isCarouselInView() {
-    const rect = track.getBoundingClientRect();
+    const rect = carousel.getBoundingClientRect();
     return rect.top < window.innerHeight && rect.bottom > 0;
   }
 
-  // Posisi awal & dot awal
-  setTranslateX(false);
-  updateDots();
-  startAutoPlay();
+  // ============ LOGIC PINDAH SLIDE ============
+  /**
+   * @param {number} index - index slide
+   * @param {boolean} isAuto - apakah dipanggil dari auto-play
+   */
+  function goToSlide(index, isAuto = false) {
+    // BIAR MUTER (LOOP)
+    if (index < 0) {
+      index = lastIndex;
+    } else if (index > lastIndex) {
+      index = 0;
+    }
+
+    currentIndex = index;
+
+    // Kalau dipanggil dari auto-play & carouselnya TIDAK kelihatan,
+    // jangan scroll halaman (biar nggak loncat ke atas).
+    if (!isAuto || isCarouselInView()) {
+      slides[currentIndex].scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+        inline: 'center'
+      });
+    }
+
+    // update indikator dots
+    updateDots();
+
+    // tombol jangan dimatiin
+    prevBtn.disabled = false;
+    nextBtn.disabled = false;
+  }
+
+  // Klik panah kiri
+  prevBtn.addEventListener('click', () => {
+    goToSlide(currentIndex - 1, false); // manual
+  });
+
+  // Klik panah kanan
+  nextBtn.addEventListener('click', () => {
+    goToSlide(currentIndex + 1, false); // manual
+  });
+
+  // Posisi awal di slide pertama
+  prevBtn.disabled = false;
+  nextBtn.disabled = false;
+  goToSlide(0, false);
+
+  // ============ AUTO-PLAY ============
+  setInterval(() => {
+    // Auto = true → hanya scroll jika carousel sedang kelihatan
+    goToSlide(currentIndex + 1, true);
+  }, 4500); // 4500ms = 4.5 detik
 }

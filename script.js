@@ -737,77 +737,55 @@ window.addEventListener('load', () => {
   }
 });
 
-// ================= INSTAGRAM CAROUSEL (SIMPLE) =================
+// ================= INSTAGRAM CAROUSEL (LOOP TAPI TETAP SIMPLE) =================
 function initInstagramCarousel() {
   const carousel = document.getElementById('igCarousel');
   const slides = carousel ? Array.from(carousel.querySelectorAll('.instagram-slide')) : [];
   const prevBtn = document.getElementById('igPrev');
   const nextBtn = document.getElementById('igNext');
 
+  // Kalau elemen tidak lengkap, jangan jalanin apa2
   if (!carousel || slides.length === 0 || !prevBtn || !nextBtn) return;
-
-  let currentIndex = 0;
-
-  // ================= INSTAGRAM CAROUSEL (LOOP) =================
-function initInstagramCarousel() {
-  const carousel = document.getElementById('igCarousel');
-  if (!carousel) return;
-
-  const slides = Array.from(carousel.querySelectorAll('.instagram-slide'));
-  const prevBtn = document.getElementById('igPrev');
-  const nextBtn = document.getElementById('igNext');
-
-  if (!slides.length || !prevBtn || !nextBtn) return;
 
   let currentIndex = 0;
   const lastIndex = slides.length - 1;
 
-  function goToSlide(newIndex) {
-    // 🔁 bikin index muter
-    if (newIndex < 0) {
-      newIndex = lastIndex;        // dari pertama mundur → ke terakhir
-    } else if (newIndex > lastIndex) {
-      newIndex = 0;                // dari terakhir maju → ke pertama
+  function goToSlide(index) {
+    // 🔁 BIKIN INDEX MUTER
+    if (index < 0) {
+      index = lastIndex;       // dari pertama mundur → ke terakhir
+    } else if (index > lastIndex) {
+      index = 0;               // dari terakhir maju → ke pertama
     }
 
-    currentIndex = newIndex;
+    currentIndex = index;
 
+    // Geser ke kartu yang aktif
     slides[currentIndex].scrollIntoView({
       behavior: 'smooth',
       block: 'nearest',
       inline: 'center'
     });
 
-    // tombol selalu aktif
+    // Tombol jangan pernah dimatikan
     prevBtn.disabled = false;
     nextBtn.disabled = false;
   }
 
+  // Klik panah kiri
   prevBtn.addEventListener('click', () => {
     goToSlide(currentIndex - 1);
   });
 
+  // Klik panah kanan
   nextBtn.addEventListener('click', () => {
     goToSlide(currentIndex + 1);
   });
 
-  // pastikan tidak ada yang disabled di awal
+  // Pastikan tombol aktif & posisi awal di slide pertama
   prevBtn.disabled = false;
   nextBtn.disabled = false;
-
-  // posisi awal
   goToSlide(0);
 }
 
-  prevBtn.addEventListener('click', () => {
-    goToSlide(currentIndex - 1);
-  });
-
-  nextBtn.addEventListener('click', () => {
-    goToSlide(currentIndex + 1);
-  });
-
-  // posisi awal
-  goToSlide(0);
-}
 

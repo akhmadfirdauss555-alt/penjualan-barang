@@ -1602,7 +1602,7 @@ nav.social-links {
   
   /* 2 animasi: jalan + pulse */
   animation: 
-    goMarquee 14s linear infinite,
+    goMarquee 18s linear infinite,
     badgePulse 1.8s ease-in-out infinite;
 
   border: 2px solid rgba(255,255,255,0.7);
@@ -1626,19 +1626,12 @@ nav.social-links {
   line-height: 1;
 }
 
-/* ANIMASI JALAN KANAN → KIRI → MUNCUL LAGI */
-@keyframes goMarquee {
+ @keyframes goMarquee {
   0% {
-    right: -260px;                         /* di luar kanan */
-  }
-  50% {
-    right: calc(100% + 260px);             /* keluar lewat kiri */
-  }
-  51% {
-    right: -260px;                         /* reset ke kanan lagi */
+    right: -260px;                       /* mulai di luar kanan */
   }
   100% {
-    right: calc(100% + 260px);             /* jalan lagi ke kiri */
+    right: calc(100% + 260px);           /* selesai di luar kiri */
   }
 }
 

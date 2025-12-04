@@ -1976,14 +1976,3 @@ nav.social-links {
   font-size: 20px;
   color: #25D366;
 }
-
-/* Perbaiki panah carousel di HP agar tidak bikin halaman melebar */
-@media (max-width: 600px) {
-  .carousel-prev {
-    left: 16px;    /* tadinya -20px, sekarang di dalam layar */
-  }
-
-  .carousel-next {
-    right: 16px;   /* tadinya -20px, sekarang di dalam layar */
-  }
-}

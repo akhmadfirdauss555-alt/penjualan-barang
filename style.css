@@ -1989,4 +1989,25 @@ nav.social-links {
   color: #25D366;
 }
 
+/* ==== SMOOTH CAROUSEL ==== */
+.instagram-carousel {
+  scroll-behavior: smooth;        /* geser halus */
+}
+
+.instagram-track {
+  display: flex;
+  gap: 20px;
+  transition: transform 0.45s ease-in-out; /* animasi lembut */
+}
+
+.instagram-card {
+  flex-shrink: 0;
+  width: 300px;
+  transition: transform .35s ease;
+}
+
+.instagram-card:hover {
+  transform: scale(1.02);
+}
+
 }

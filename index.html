@@ -498,5 +498,36 @@
         offset: 100
       });
     </script>
+
+    <!-- SMOOTH INSTAGRAM CAROUSEL -->
+<script>
+  const carousel = document.getElementById("igCarousel");
+  const nextBtn = document.getElementById("igNext");
+  const prevBtn = document.getElementById("igPrev");
+
+  let index = 0;
+  const slides = document.querySelectorAll(".instagram-slide");
+  const slideWidth = 360 + 24; // width + gap
+
+  function smoothSlide() {
+    carousel.style.transition = "transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1)";
+    carousel.style.transform = `translate3d(${-index * slideWidth}px, 0, 0)`;
+  }
+
+  nextBtn.addEventListener("click", () => {
+    if (index < slides.length - 1) {
+      index++;
+      smoothSlide();
+    }
+  });
+
+  prevBtn.addEventListener("click", () => {
+    if (index > 0) {
+      index--;
+      smoothSlide();
+    }
+  });
+</script>
+
   </body>
   </html>

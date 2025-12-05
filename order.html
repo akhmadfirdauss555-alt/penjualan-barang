@@ -5,9 +5,6 @@
   <title>Form Pemesanan - Meja Cafe Palu</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Supabase JS v2 -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
   <style>
     :root {
       --primary: #ff7a1a;
@@ -169,22 +166,6 @@
       color: var(--text-main);
     }
 
-    .alert{
-      margin-top: 10px;
-      font-size: 13px;
-      padding: 8px 10px;
-      border-radius: 8px;
-      display: none;
-    }
-    .alert.success{
-      background:#dcfce7;
-      color:#166534;
-    }
-    .alert.error{
-      background:#fee2e2;
-      color:#b91c1c;
-    }
-
     @media (max-width: 768px){
       .form-card{ padding: 22px 18px 26px; }
       .row{ grid-template-columns: 1fr; }
@@ -200,21 +181,23 @@
   <div class="form-card">
     <div class="form-title">Form Pemesanan</div>
     <div class="form-subtitle">
-      Isi data di bawah, pesanan akan masuk ke sistem Owner (Supabase), bukan lagi ke WhatsApp.
+      Isi data di bawah, pesanan akan masuk ke sistem Owner (database PHP/MySQL).
     </div>
 
-    <!-- Form TANPA action PHP -->
-    <form id="orderForm">
+    <!-- FORM SEKARANG KIRIM KE PHP -->
+    <form id="orderForm" action="save_order.php" method="POST">
       <!-- NAMA & WHATSAPP -->
       <div class="row">
         <div class="form-group">
           <label>Nama</label>
-          <input type="text" id="customer_name" placeholder="Nama lengkap" required>
+          <input type="text" id="customer_name" name="customer_name"
+                 placeholder="Nama lengkap" required>
         </div>
 
         <div class="form-group">
           <label>No. WhatsApp</label>
-          <input type="tel" id="customer_phone" placeholder="0852xxxxxxx" required>
+          <input type="tel" id="customer_phone" name="customer_phone"
+                 placeholder="0852xxxxxxx" required>
           <div class="hint">Gunakan angka saja, boleh diawali 08 atau 62.</div>
         </div>
       </div>
@@ -222,13 +205,16 @@
       <!-- ALAMAT -->
       <div class="form-group">
         <label>Alamat Lengkap</label>
-        <textarea id="customer_address" placeholder="Nama jalan, RT/RW, kelurahan, kecamatan, kota/kabupaten" required></textarea>
+        <textarea id="customer_address" name="customer_address"
+                  placeholder="Nama jalan, RT/RW, kelurahan, kecamatan, kota/kabupaten"
+                  required></textarea>
       </div>
 
       <!-- CATATAN -->
       <div class="form-group">
         <label>Catatan (Opsional)</label>
-        <textarea id="notes" placeholder="Contoh: warna rangka putih, kirim sore, dsb."></textarea>
+        <textarea id="notes" name="notes"
+                  placeholder="Contoh: warna rangka putih, kirim sore, dsb."></textarea>
       </div>
 
       <!-- RINGKASAN -->
@@ -239,6 +225,10 @@
         <div class="summary-price" id="summaryTotal">Total: Rp 0</div>
       </div>
 
+      <!-- HIDDEN UNTUK DIKIRIM KE PHP -->
+      <input type="hidden" id="items_summary" name="items_summary">
+      <input type="hidden" id="total_amount" name="total_amount">
+
       <button type="submit" class="btn-submit">
         Kirim Pesanan ke Admin
       </button>
@@ -246,119 +236,73 @@
       <div class="footer-note">
         * Admin akan menghubungi kembali melalui WhatsApp setelah pesanan masuk ke sistem.
       </div>
-
-      <div id="alertSuccess" class="alert success">
-        Pesanan berhasil dikirim. Terima kasih! 🙏
-      </div>
-      <div id="alertError" class="alert error">
-        Terjadi kesalahan saat menyimpan pesanan. Silakan coba lagi.
-      </div>
     </form>
   </div>
 </div>
 
 <script>
-  // ====== CONFIG SUPABASE (GANTI DENGAN PUNYAMU) ======
-  const SUPABASE_URL = "YOUR_SUPABASE_URL";          // contoh: https://abcd.supabase.co
-  const SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_KEY"; // dari Project Settings > API > anon public
-
-  const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-  // ========== BACA DATA KERANJANG DARI LOCALSTORAGE ==========
+  // ====== BACA DATA KERANJANG DARI LOCALSTORAGE ======
   const cartPayload = JSON.parse(localStorage.getItem('MEJA_CAFE_CART') || '{}');
-  const cartItems = cartPayload.cart || [];
-  let totalAmount = cartPayload.total || 0;
+  const cartItems   = cartPayload.cart  || [];
+  let   totalAmount = cartPayload.total || 0;
 
   function formatRupiah(num) {
     return "Rp " + (Number(num) || 0).toLocaleString("id-ID");
   }
 
-  // Tampilkan ringkasan di halaman form
   function renderSummary() {
     const summaryProduct = document.getElementById("summaryProduct");
-    const summaryQty = document.getElementById("summaryQty");
-    const summaryTotal = document.getElementById("summaryTotal");
+    const summaryQty     = document.getElementById("summaryQty");
+    const summaryTotal   = document.getElementById("summaryTotal");
 
     if (!cartItems.length) {
       summaryProduct.textContent = "Keranjang masih kosong.";
-      summaryQty.textContent = "";
-      summaryTotal.textContent = "Total: Rp 0";
+      summaryQty.textContent     = "";
+      summaryTotal.textContent   = "Total: Rp 0";
       totalAmount = 0;
       return;
     }
 
-    const names = cartItems.map(i => i.name);
+    const names    = cartItems.map(i => i.name);
     const totalQty = cartItems.reduce((sum, i) => sum + i.quantity, 0);
 
     summaryProduct.textContent = `${totalQty} item: ${names.join(", ")}`;
-    summaryQty.textContent = "";
-    summaryTotal.textContent = "Total: " + formatRupiah(totalAmount);
+    summaryQty.textContent     = "";
+    summaryTotal.textContent   = "Total: " + formatRupiah(totalAmount);
   }
 
-  renderSummary();
-
-  // ====== HANDLE SUBMIT FORM KE SUPABASE ======
-  const form = document.getElementById("orderForm");
-  const alertSuccess = document.getElementById("alertSuccess");
-  const alertError = document.getElementById("alertError");
-
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    alertSuccess.style.display = "none";
-    alertError.style.display = "none";
-
-    const customerName    = document.getElementById("customer_name").value.trim();
-    const customerPhone   = document.getElementById("customer_phone").value.trim();
-    const customerAddress = document.getElementById("customer_address").value.trim();
-    const notes           = document.getElementById("notes").value.trim();
-
-    if (!customerName || !customerPhone || !customerAddress) {
-      alert("Data belum lengkap.");
-      return;
-    }
-
-    if (!cartItems.length) {
-      alert("Keranjang masih kosong. Silakan kembali ke halaman utama dan pilih produk.");
-      return;
-    }
-
-    // buat teks ringkasan cart untuk disimpan di kolom cart_text
+  // bikin teks detail keranjang buat disimpan ke DB
+  function buildCartText() {
+    if (!cartItems.length) return "";
     let cartText = "";
     cartItems.forEach((item, idx) => {
       const subtotal = item.price * item.quantity;
       cartText += `${idx + 1}. ${item.name} | Qty: ${item.quantity} | Harga: ${formatRupiah(item.price)} | Subtotal: ${formatRupiah(subtotal)}\n`;
     });
     cartText += `\nTOTAL: ${formatRupiah(totalAmount)}\n`;
-    if (notes) {
-      cartText += `Catatan: ${notes}`;
-    }
+    const notes = document.getElementById("notes").value.trim();
+    if (notes) cartText += `Catatan: ${notes}`;
+    return cartText;
+  }
 
-    const { data, error } = await supabaseClient
-      .from("orders")
-      .insert([
-        {
-          customer_name: customerName,
-          customer_phone: customerPhone,
-          customer_address: customerAddress,
-          cart_text: cartText
-        }
-      ]);
+  renderSummary();
 
-    console.log("Supabase result:", { data, error });
+  // ====== SUBMIT KE save_order.php ======
+  const form = document.getElementById("orderForm");
 
-    if (error) {
-      alertError.textContent = "Terjadi kesalahan saat menyimpan pesanan: " + error.message;
-      alertError.style.display = "block";
+  form.addEventListener("submit", function(e) {
+    if (!cartItems.length) {
+      e.preventDefault();
+      alert("Keranjang masih kosong. Silakan kembali ke halaman utama dan pilih produk.");
       return;
     }
 
-    // sukses → hapus keranjang dan pindah ke dashboard owner
-    localStorage.removeItem("MEJA_CAFE_CART");
-    alertSuccess.style.display = "block";
-
-    // GANTI 'owner.html' dengan nama file dashboard owner-mu
-    window.location.href = "owner.html";
+    // isi hidden sebelum form dikirim
+    document.getElementById("items_summary").value = buildCartText();
+    document.getElementById("total_amount").value  = totalAmount || 0;
+    // setelah ini form lanjut submit normal ke PHP
   });
 </script>
 </body>
 </html>
+

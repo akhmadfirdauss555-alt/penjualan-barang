@@ -1,356 +1,357 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <title>Form Pemesanan - MEJA CAFE PALU</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <title>Form Pemesanan - Meja Cafe Palu</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Supabase JS v2 -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <style>
-    * {
+    :root {
+      --primary: #ff7a1a;
+      --primary-dark: #f26a00;
+      --bg-body: #f3f5fb;
+      --card-bg: #ffffff;
+      --border: #e5e7eb;
+      --text-main: #111827;
+      --text-muted: #6b7280;
+      --radius-lg: 20px;
+      --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.12);
+    }
+
+    *{
       box-sizing: border-box;
-      font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-    }
-
-    body {
       margin: 0;
-      background: radial-gradient(circle at top, #ffe9c4 0, #f4f7fb 40%, #edf1f9 100%);
-      color: #111827;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
-    /* NAVBAR */
-    .navbar {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 14px 40px;
-      background: rgba(255,255,255,0.96);
-      backdrop-filter: blur(12px);
-      box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+    body{
+      background: var(--bg-body);
+      min-height: 100vh;
     }
 
-    .navbar-brand {
+    .page-wrapper{
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 24px 16px 40px;
+    }
+
+    .brand{
       font-weight: 700;
-      letter-spacing: 0.12em;
-      font-size: 14px;
+      font-size: 18px;
+      letter-spacing: 0.1em;
+      margin-bottom: 18px;
     }
 
-    .navbar-links a {
-      font-size: 13px;
-      text-decoration: none;
-      margin-left: 8px;
-      color: #1d4ed8;
+    .form-card{
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-soft);
+      padding: 26px 28px 30px;
     }
 
-    .navbar-links a:first-child {
-      margin-left: 0;
-    }
-
-    .navbar-links a:hover {
-      text-decoration: underline;
-    }
-
-    /* CONTAINER */
-    .page-wrapper {
-      max-width: 900px;
-      margin: 40px auto;
-      padding: 0 16px;
-    }
-
-    .card {
-      background: #ffffff;
-      border-radius: 26px;
-      padding: 28px 32px 30px;
-      box-shadow: 0 20px 45px rgba(15,23,42,0.08);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      top: 0;
-      height: 8px;
-      background: linear-gradient(90deg, #f97316, #fb923c, #facc15);
-    }
-
-    .card-inner {
-      margin-top: 12px;
-    }
-
-    h1 {
-      margin: 0 0 4px;
+    .form-title{
       font-size: 26px;
+      font-weight: 700;
+      margin-bottom: 4px;
+      color: var(--text-main);
     }
 
-    .subtitle {
-      margin: 0 0 24px;
-      font-size: 14px;
-      color: #6b7280;
+    .form-subtitle{
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 20px;
     }
 
-    /* GRID FORM */
-    .form-row {
+    .row{
       display: grid;
       grid-template-columns: 1.2fr 1fr;
       gap: 14px;
       margin-bottom: 14px;
     }
 
-    .form-group {
+    .form-group{
       margin-bottom: 14px;
     }
 
-    label {
+    label{
       display: block;
       font-size: 13px;
-      font-weight: 500;
+      font-weight: 600;
       margin-bottom: 4px;
+      color: #374151;
     }
 
     input[type="text"],
-    textarea,
-    select {
+    input[type="tel"],
+    select,
+    textarea{
       width: 100%;
+      border-radius: 12px;
+      border: 1px solid var(--border);
       padding: 10px 12px;
-      border-radius: 10px;
-      border: 1px solid #e5e7eb;
-      font-size: 14px;
+      font-size: 13px;
       outline: none;
+      transition: 0.15s;
       background: #f9fafb;
-      transition: border-color 0.16s ease, box-shadow 0.16s ease, background 0.16s ease;
     }
 
-    input[type="text"]:focus,
-    textarea:focus,
-    select:focus {
-      border-color: #fb923c;
+    input:focus,
+    select:focus,
+    textarea:focus{
+      border-color: #4f46e5;
+      box-shadow: 0 0 0 1px rgba(79,70,229,0.14);
       background: #ffffff;
-      box-shadow: 0 0 0 1px rgba(249,115,22,0.25);
     }
 
-    textarea {
+    textarea{
       resize: vertical;
-      min-height: 90px;
+      min-height: 80px;
     }
 
-    .help-text {
+    .hint{
       font-size: 11px;
       color: #9ca3af;
-      margin-top: 2px;
+      margin-top: 4px;
     }
 
-    /* BUTTON */
-    .btn-submit {
+    .btn-submit{
       width: 100%;
-      margin-top: 10px;
-      border: none;
       border-radius: 999px;
-      padding: 14px 18px;
-      background: linear-gradient(90deg, #f97316, #fb923c);
-      color: #ffffff;
-      font-size: 16px;
+      border: none;
+      margin-top: 18px;
+      padding: 12px 18px;
+      font-size: 15px;
       font-weight: 600;
+      color: #ffffff;
+      background: linear-gradient(90deg,#ffa337,#ff7a1a);
+      box-shadow: 0 18px 35px rgba(249,115,22,0.45);
       cursor: pointer;
-      box-shadow: 0 15px 30px rgba(249,115,22,0.35);
-      display: inline-flex;
+      display: flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
-      transition: transform 0.12s ease, box-shadow 0.12s ease, opacity 0.12s ease;
+      gap: 8px;
     }
 
-    .btn-submit:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 18px 36px rgba(249,115,22,0.4);
+    .btn-submit:active{
+      transform: translateY(1px);
+      box-shadow: 0 10px 22px rgba(249,115,22,0.45);
     }
 
-    .btn-submit:active {
-      transform: translateY(1px) scale(0.99);
-      box-shadow: 0 8px 18px rgba(249,115,22,0.35);
-      opacity: 0.98;
-    }
-
-    .btn-submit span.icon {
-      font-size: 18px;
-    }
-
-    .note {
+    .footer-note{
       margin-top: 8px;
       font-size: 11px;
-      color: #6b7280;
-    }
-
-    .footer {
+      color: var(--text-muted);
       text-align: center;
-      font-size: 12px;
-      color: #9ca3af;
-      margin-top: 22px;
-      padding-bottom: 20px;
     }
 
-    @media (max-width: 768px) {
-      .navbar {
-        padding: 12px 16px;
-      }
+    .summary-box{
+      margin-top: 16px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: #f9fafb;
+      font-size: 13px;
+      border: 1px dashed #e5e7eb;
+    }
 
-      .page-wrapper {
-        margin-top: 24px;
-      }
+    .summary-title{
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
 
-      .card {
-        padding: 22px 18px 24px;
-      }
+    .summary-price{
+      margin-top: 6px;
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--text-main);
+    }
 
-      h1 {
-        font-size: 22px;
-      }
+    .alert{
+      margin-top: 10px;
+      font-size: 13px;
+      padding: 8px 10px;
+      border-radius: 8px;
+      display: none;
+    }
+    .alert.success{
+      background:#dcfce7;
+      color:#166534;
+    }
+    .alert.error{
+      background:#fee2e2;
+      color:#b91c1c;
+    }
 
-      .form-row {
-        grid-template-columns: 1fr;
-      }
+    @media (max-width: 768px){
+      .form-card{ padding: 22px 18px 26px; }
+      .row{ grid-template-columns: 1fr; }
+      .page-wrapper{ padding-inline: 10px; }
     }
   </style>
 </head>
 <body>
-  <!-- NAVBAR -->
-  <header class="navbar">
-    <div class="navbar-brand">MEJA CAFE PALU</div>
-    <nav class="navbar-links">
-      <a href="index.html">Beranda</a>
-      <a href="#form-pesan">Pesan</a>
-    </nav>
-  </header>
 
-  <!-- CONTENT -->
-  <main class="page-wrapper">
-    <section class="card" id="form-pesan">
-      <div class="card-inner">
-        <h1>Form Pemesanan</h1>
-        <p class="subtitle">
-          Isi data di bawah, pesanan akan dikirim otomatis ke WhatsApp admin.
-        </p>
+<div class="page-wrapper">
+  <div class="brand">MEJA CAFE PALU</div>
 
-        <form id="order-form">
-          <!-- Nama + WhatsApp -->
-          <div class="form-row">
-            <div class="form-group">
-              <label for="nama">Nama</label>
-              <input
-                type="text"
-                id="nama"
-                name="nama"
-                placeholder="Nama lengkap"
-                required
-              />
-            </div>
-            <div class="form-group">
-              <label for="whatsapp">No. WhatsApp</label>
-              <input
-                type="text"
-                id="whatsapp"
-                name="whatsapp"
-                placeholder="0852xxxxxxx"
-                required
-              />
-              <div class="help-text">
-                Gunakan angka saja, boleh diawali 08 atau 62.
-              </div>
-            </div>
-          </div>
-
-          <!-- Alamat -->
-          <div class="form-group">
-            <label for="alamat">Alamat Lengkap</label>
-            <textarea
-              id="alamat"
-              name="alamat"
-              placeholder="Nama jalan, RT/RW, kelurahan, kecamatan, kota/kabupaten"
-              required
-            ></textarea>
-          </div>
-
-          <!-- Jumlah -->
-          <div class="form-group" style="max-width: 180px;">
-            <label for="qty">Jumlah (Qty)</label>
-            <select id="qty" name="qty">
-              <option value="1" selected>1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-            </select>
-          </div>
-
-          <!-- Catatan Opsional (kalau mau tambah) -->
-          <div class="form-group">
-            <label for="catatan">Catatan (Opsional)</label>
-            <textarea
-              id="catatan"
-              name="catatan"
-              placeholder="Contoh: warna rangka putih, kirim sore, dsb."
-            ></textarea>
-          </div>
-
-          <!-- Button -->
-          <button type="submit" class="btn-submit">
-            <span class="icon">🟢</span>
-            Kirim Pesanan ke Admin
-          </button>
-
-          <p class="note">
-            * Admin akan menghubungi kembali melalui WhatsApp.
-          </p>
-        </form>
-      </div>
-    </section>
-
-    <div class="footer">
-      © 2025 MEJA CAFE PALU
+  <div class="form-card">
+    <div class="form-title">Form Pemesanan</div>
+    <div class="form-subtitle">
+      Isi data di bawah, pesanan akan masuk ke sistem Owner (database Supabase), bukan lagi ke WhatsApp.
     </div>
-  </main>
 
-  <script>
-    // GANTI ini dengan nomor WhatsApp admin toko kamu (format internasional tanpa +)
-    const WA_ADMIN = '6285220888840';
+    <!-- Form TANPA action PHP -->
+    <form id="orderForm">
+      <!-- Produk (bisa kamu sesuaikan per halaman) -->
+      <input type="hidden" id="product_name" value="Set Meja Cafe Diameter 60 cm">
+      <input type="hidden" id="price" value="750000">
+      <input type="hidden" id="total">
 
-    function encodeText(text) {
-      return encodeURIComponent(text);
+      <!-- NAMA & WHATSAPP -->
+      <div class="row">
+        <div class="form-group">
+          <label>Nama</label>
+          <input type="text" id="customer_name" placeholder="Nama lengkap" required>
+        </div>
+
+        <div class="form-group">
+          <label>No. WhatsApp</label>
+          <input type="tel" id="customer_phone" placeholder="0852xxxxxxx" required>
+          <div class="hint">Gunakan angka saja, boleh diawali 08 atau 62.</div>
+        </div>
+      </div>
+
+      <!-- ALAMAT -->
+      <div class="form-group">
+        <label>Alamat Lengkap</label>
+        <textarea id="customer_address" placeholder="Nama jalan, RT/RW, kelurahan, kecamatan, kota/kabupaten" required></textarea>
+      </div>
+
+      <!-- JUMLAH & CATATAN -->
+      <div class="row">
+        <div class="form-group">
+          <label>Jumlah (Qty)</label>
+          <select id="qtySelect" required>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Catatan (Opsional)</label>
+          <textarea id="notes" placeholder="Contoh: warna rangka putih, kirim sore, dsb."></textarea>
+        </div>
+      </div>
+
+      <!-- RINGKASAN -->
+      <div class="summary-box">
+        <div class="summary-title">Ringkasan Pesanan</div>
+        <div id="summaryProduct">Set Meja Cafe Diameter 60 cm</div>
+        <div id="summaryQty">Qty: 1</div>
+        <div class="summary-price" id="summaryTotal">Total: Rp 750.000</div>
+      </div>
+
+      <button type="submit" class="btn-submit">
+        Kirim Pesanan ke Admin
+      </button>
+
+      <div class="footer-note">
+        * Admin akan menghubungi kembali melalui WhatsApp setelah pesanan masuk ke sistem.
+      </div>
+
+      <div id="alertSuccess" class="alert success">
+        Pesanan berhasil dikirim. Terima kasih! 🙏
+      </div>
+      <div id="alertError" class="alert error">
+        Terjadi kesalahan saat menyimpan pesanan. Silakan coba lagi.
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+  // ====== CONFIG SUPABASE (ISI DENGAN PUNYAMU) ======
+  const SUPABASE_URL = "YOUR_SUPABASE_URL";          // contoh: https://abcd.supabase.co
+  const SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_KEY"; // dari Project Settings > API > anon public
+
+  const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  // Harga 1 set (ganti sesuai produk)
+  const basePrice = 750000;
+
+  function formatRupiah(num){
+    return "Rp " + num.toLocaleString('id-ID');
+  }
+
+  function updateSummary(){
+    const qtySelect = document.getElementById('qtySelect');
+    const qty = parseInt(qtySelect.value || "1", 10);
+    const total = basePrice * qty;
+
+    document.getElementById('summaryQty').textContent   = "Qty: " + qty;
+    document.getElementById('summaryTotal').textContent = "Total: " + formatRupiah(total);
+    document.getElementById('total').value = total;
+    return total;
+  }
+
+  document.getElementById('qtySelect').addEventListener('change', updateSummary);
+  updateSummary(); // Set awal
+
+  // ====== KIRIM DATA KE SUPABASE ======
+  const form = document.getElementById('orderForm');
+  const alertSuccess = document.getElementById('alertSuccess');
+  const alertError = document.getElementById('alertError');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    alertSuccess.style.display = 'none';
+    alertError.style.display = 'none';
+
+    const productName     = document.getElementById('product_name').value;
+    const qty             = parseInt(document.getElementById('qtySelect').value || "1", 10);
+    const total           = updateSummary();
+    const customerName    = document.getElementById('customer_name').value.trim();
+    const customerPhone   = document.getElementById('customer_phone').value.trim();
+    const customerAddress = document.getElementById('customer_address').value.trim();
+    const notes           = document.getElementById('notes').value.trim();
+
+    if (!customerName || !customerPhone || !customerAddress) {
+      alert("Data belum lengkap.");
+      return;
     }
 
-    document.getElementById('order-form').addEventListener('submit', function (e) {
-      e.preventDefault();
+    // cart_text: disimpan sebagai ringkasan pesanan 1 baris
+    const cartText = `Produk: ${productName} | Qty: ${qty} | Total: ${formatRupiah(total)} | Catatan: ${notes || '-'}`;
 
-      const nama = document.getElementById('nama').value.trim();
-      const waUser = document.getElementById('whatsapp').value.trim();
-      const alamat = document.getElementById('alamat').value.trim();
-      const qty = document.getElementById('qty').value;
-      const catatan = document.getElementById('catatan').value.trim();
+    // INSERT ke tabel orders (kolom: customer_name, customer_phone, customer_address, cart_text)
+    const { error } = await supabaseClient
+      .from('orders')
+      .insert([
+        {
+          customer_name: customerName,
+          customer_phone: customerPhone,
+          customer_address: customerAddress,
+          cart_text: cartText
+        }
+      ]);
 
-      if (!nama || !waUser || !alamat) {
-        alert('Harap lengkapi Nama, No. WhatsApp, dan Alamat.');
-        return;
-      }
+    if (error) {
+      console.error(error);
+      alertError.style.display = 'block';
+    } else {
+      alertSuccess.style.display = 'block';
+      form.reset();
+      document.getElementById('qtySelect').value = "1";
+      updateSummary();
+    }
+  });
+</script>
 
-      // (Opsional) kamu bisa isi nama produk manual di sini
-      const namaProduk = 'Set Meja Cafe';
-
-      let pesan = `Halo admin, saya ingin memesan produk dari MEJA CAFE PALU.%0A%0A`;
-      pesan += `Produk: ${namaProduk}%0A`;
-      pesan += `Jumlah (Qty): ${qty}%0A%0A`;
-      pesan += `Nama: ${nama}%0A`;
-      pesan += `No. WhatsApp: ${waUser}%0A`;
-      pesan += `Alamat: ${alamat}%0A`;
-      if (catatan) {
-        pesan += `%0ACatatan: ${catatan}%0A`;
-      }
-
-      const url = `https://wa.me/${WA_ADMIN}?text=${pesan}`;
-      window.open(url, '_blank');
-    });
-  </script>
 </body>
 </html>

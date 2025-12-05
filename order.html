@@ -276,62 +276,83 @@
 </div>
 
 <script>
-  // ====== CONFIG SUPABASE (ISI DENGAN PUNYAMU) ======
+  
+  // ====== CONFIG SUPABASE (GANTI DENGAN PUNYAMU) ======
   const SUPABASE_URL = "YOUR_SUPABASE_URL";          // contoh: https://abcd.supabase.co
   const SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_KEY"; // dari Project Settings > API > anon public
 
   const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-  // Harga 1 set (ganti sesuai produk)
-  const basePrice = 750000;
+  // ========== BACA DATA KERANJANG DARI LOCALSTORAGE ==========
+  const cartPayload = JSON.parse(localStorage.getItem('MEJA_CAFE_CART') || '{}');
+  const cartItems = cartPayload.cart || [];
+  let totalAmount = cartPayload.total || 0;
 
-  function formatRupiah(num){
-    return "Rp " + num.toLocaleString('id-ID');
+  function formatRupiah(num) {
+    return "Rp " + (Number(num) || 0).toLocaleString("id-ID");
   }
 
-  function updateSummary(){
-    const qtySelect = document.getElementById('qtySelect');
-    const qty = parseInt(qtySelect.value || "1", 10);
-    const total = basePrice * qty;
+  // Tampilkan ringkasan di halaman form
+  function renderSummary() {
+    const summaryProduct = document.getElementById("summaryProduct");
+    const summaryQty = document.getElementById("summaryQty");
+    const summaryTotal = document.getElementById("summaryTotal");
 
-    document.getElementById('summaryQty').textContent   = "Qty: " + qty;
-    document.getElementById('summaryTotal').textContent = "Total: " + formatRupiah(total);
-    document.getElementById('total').value = total;
-    return total;
+    if (cartItems.length === 0) {
+      summaryProduct.textContent = "Keranjang kosong";
+      summaryQty.textContent = "";
+      summaryTotal.textContent = "Total: Rp 0";
+      totalAmount = 0;
+      return;
+    }
+
+    // contoh ringkasan: "3 item (Meja X, Kursi Y, ...)"
+    const names = cartItems.map(i => i.name);
+    const totalQty = cartItems.reduce((sum, i) => sum + i.quantity, 0);
+
+    summaryProduct.textContent = `${totalQty} item: ${names.join(", ")}`;
+    summaryQty.textContent = "";
+    summaryTotal.textContent = "Total: " + formatRupiah(totalAmount);
   }
 
-  document.getElementById('qtySelect').addEventListener('change', updateSummary);
-  updateSummary(); // Set awal
+  renderSummary();
 
-  // ====== KIRIM DATA KE SUPABASE ======
-  const form = document.getElementById('orderForm');
-  const alertSuccess = document.getElementById('alertSuccess');
-  const alertError = document.getElementById('alertError');
+  // ====== HANDLE SUBMIT FORM KE SUPABASE ======
+  const form = document.getElementById("orderForm");
 
-  form.addEventListener('submit', async (e) => {
+  form.addEventListener("submit", async (e) => {
     e.preventDefault();
-    alertSuccess.style.display = 'none';
-    alertError.style.display = 'none';
 
-    const productName     = document.getElementById('product_name').value;
-    const qty             = parseInt(document.getElementById('qtySelect').value || "1", 10);
-    const total           = updateSummary();
-    const customerName    = document.getElementById('customer_name').value.trim();
-    const customerPhone   = document.getElementById('customer_phone').value.trim();
-    const customerAddress = document.getElementById('customer_address').value.trim();
-    const notes           = document.getElementById('notes').value.trim();
+    const customerName    = document.getElementById("customer_name").value.trim();
+    const customerPhone   = document.getElementById("customer_phone").value.trim();
+    const customerAddress = document.getElementById("customer_address").value.trim();
+    const notes           = document.getElementById("notes").value.trim();
 
     if (!customerName || !customerPhone || !customerAddress) {
       alert("Data belum lengkap.");
       return;
     }
 
-    // cart_text: disimpan sebagai ringkasan pesanan 1 baris
-    const cartText = `Produk: ${productName} | Qty: ${qty} | Total: ${formatRupiah(total)} | Catatan: ${notes || '-'}`;
+    // jika cart kosong, jangan lanjut
+    if (!cartItems.length) {
+      alert("Keranjang masih kosong. Silakan kembali ke halaman utama dan pilih produk.");
+      return;
+    }
+
+    // buat teks ringkasan cart untuk disimpan di kolom cart_text
+    let cartText = "";
+    cartItems.forEach((item, idx) => {
+      const subtotal = item.price * item.quantity;
+      cartText += `${idx + 1}. ${item.name} | Qty: ${item.quantity} | Harga: ${formatRupiah(item.price)} | Subtotal: ${formatRupiah(subtotal)}\n`;
+    });
+    cartText += `\nTOTAL: ${formatRupiah(totalAmount)}\n`;
+    if (notes) {
+      cartText += `Catatan: ${notes}`;
+    }
 
     // INSERT ke tabel orders (kolom: customer_name, customer_phone, customer_address, cart_text)
-    const { error } = await supabaseClient
-      .from('orders')
+    const { data, error } = await supabaseClient
+      .from("orders")
       .insert([
         {
           customer_name: customerName,
@@ -341,17 +362,21 @@
         }
       ]);
 
+    console.log("Supabase result:", { data, error });
+
     if (error) {
-      console.error(error);
-      alertError.style.display = 'block';
-    } else {
-      alertSuccess.style.display = 'block';
-      form.reset();
-      document.getElementById('qtySelect').value = "1";
-      updateSummary();
+      alert("Gagal menyimpan ke Supabase: " + error.message);
+      return;
     }
+
+    alert("Pesanan berhasil dikirim. Terima kasih!");
+
+    // optional: hapus keranjang & localStorage
+    localStorage.removeItem("MEJA_CAFE_CART");
+    form.reset();
+    renderSummary();
   });
 </script>
-
 </body>
 </html>
+

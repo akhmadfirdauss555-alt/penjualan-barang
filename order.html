@@ -276,7 +276,7 @@
 </div>
 
 <script>
-  
+
   // ====== CONFIG SUPABASE (GANTI DENGAN PUNYAMU) ======
   const SUPABASE_URL = "YOUR_SUPABASE_URL";          // contoh: https://abcd.supabase.co
   const SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_KEY"; // dari Project Settings > API > anon public
@@ -361,20 +361,16 @@
           cart_text: cartText
         }
       ]);
+console.log("result supabase:", { data, error });
 
-    console.log("Supabase result:", { data, error });
+if (error) {
+  alert("Gagal menyimpan ke Supabase: " + error.message);
+  return;
+}
 
-    if (error) {
-      alert("Gagal menyimpan ke Supabase: " + error.message);
-      return;
-    }
-
-    alert("Pesanan berhasil dikirim. Terima kasih!");
-
-    // optional: hapus keranjang & localStorage
-    localStorage.removeItem("MEJA_CAFE_CART");
-    form.reset();
-    renderSummary();
+// sukses → hapus keranjang dan redirect ke dashboard owner
+localStorage.removeItem('MEJA_CAFE_CART');
+window.location.href = 'owner.html';   // misal nama dashboard = owner.html
   });
 </script>
 </body>

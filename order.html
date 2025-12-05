@@ -200,16 +200,11 @@
   <div class="form-card">
     <div class="form-title">Form Pemesanan</div>
     <div class="form-subtitle">
-      Isi data di bawah, pesanan akan masuk ke sistem Owner (database Supabase), bukan lagi ke WhatsApp.
+      Isi data di bawah, pesanan akan masuk ke sistem Owner (Supabase), bukan lagi ke WhatsApp.
     </div>
 
     <!-- Form TANPA action PHP -->
     <form id="orderForm">
-      <!-- Produk (bisa kamu sesuaikan per halaman) -->
-      <input type="hidden" id="product_name" value="Set Meja Cafe Diameter 60 cm">
-      <input type="hidden" id="price" value="750000">
-      <input type="hidden" id="total">
-
       <!-- NAMA & WHATSAPP -->
       <div class="row">
         <div class="form-group">
@@ -230,31 +225,18 @@
         <textarea id="customer_address" placeholder="Nama jalan, RT/RW, kelurahan, kecamatan, kota/kabupaten" required></textarea>
       </div>
 
-      <!-- JUMLAH & CATATAN -->
-      <div class="row">
-        <div class="form-group">
-          <label>Jumlah (Qty)</label>
-          <select id="qtySelect" required>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label>Catatan (Opsional)</label>
-          <textarea id="notes" placeholder="Contoh: warna rangka putih, kirim sore, dsb."></textarea>
-        </div>
+      <!-- CATATAN -->
+      <div class="form-group">
+        <label>Catatan (Opsional)</label>
+        <textarea id="notes" placeholder="Contoh: warna rangka putih, kirim sore, dsb."></textarea>
       </div>
 
       <!-- RINGKASAN -->
       <div class="summary-box">
         <div class="summary-title">Ringkasan Pesanan</div>
-        <div id="summaryProduct">Set Meja Cafe Diameter 60 cm</div>
-        <div id="summaryQty">Qty: 1</div>
-        <div class="summary-price" id="summaryTotal">Total: Rp 750.000</div>
+        <div id="summaryProduct">Keranjang masih kosong.</div>
+        <div id="summaryQty"></div>
+        <div class="summary-price" id="summaryTotal">Total: Rp 0</div>
       </div>
 
       <button type="submit" class="btn-submit">
@@ -276,7 +258,6 @@
 </div>
 
 <script>
-
   // ====== CONFIG SUPABASE (GANTI DENGAN PUNYAMU) ======
   const SUPABASE_URL = "YOUR_SUPABASE_URL";          // contoh: https://abcd.supabase.co
   const SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_KEY"; // dari Project Settings > API > anon public
@@ -298,15 +279,14 @@
     const summaryQty = document.getElementById("summaryQty");
     const summaryTotal = document.getElementById("summaryTotal");
 
-    if (cartItems.length === 0) {
-      summaryProduct.textContent = "Keranjang kosong";
+    if (!cartItems.length) {
+      summaryProduct.textContent = "Keranjang masih kosong.";
       summaryQty.textContent = "";
       summaryTotal.textContent = "Total: Rp 0";
       totalAmount = 0;
       return;
     }
 
-    // contoh ringkasan: "3 item (Meja X, Kursi Y, ...)"
     const names = cartItems.map(i => i.name);
     const totalQty = cartItems.reduce((sum, i) => sum + i.quantity, 0);
 
@@ -319,9 +299,13 @@
 
   // ====== HANDLE SUBMIT FORM KE SUPABASE ======
   const form = document.getElementById("orderForm");
+  const alertSuccess = document.getElementById("alertSuccess");
+  const alertError = document.getElementById("alertError");
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
+    alertSuccess.style.display = "none";
+    alertError.style.display = "none";
 
     const customerName    = document.getElementById("customer_name").value.trim();
     const customerPhone   = document.getElementById("customer_phone").value.trim();
@@ -333,7 +317,6 @@
       return;
     }
 
-    // jika cart kosong, jangan lanjut
     if (!cartItems.length) {
       alert("Keranjang masih kosong. Silakan kembali ke halaman utama dan pilih produk.");
       return;
@@ -350,7 +333,6 @@
       cartText += `Catatan: ${notes}`;
     }
 
-    // INSERT ke tabel orders (kolom: customer_name, customer_phone, customer_address, cart_text)
     const { data, error } = await supabaseClient
       .from("orders")
       .insert([
@@ -361,18 +343,22 @@
           cart_text: cartText
         }
       ]);
-console.log("result supabase:", { data, error });
 
-if (error) {
-  alert("Gagal menyimpan ke Supabase: " + error.message);
-  return;
-}
+    console.log("Supabase result:", { data, error });
 
-// sukses → hapus keranjang dan redirect ke dashboard owner
-localStorage.removeItem('MEJA_CAFE_CART');
-window.location.href = 'owner.html';   // misal nama dashboard = owner.html
+    if (error) {
+      alertError.textContent = "Terjadi kesalahan saat menyimpan pesanan: " + error.message;
+      alertError.style.display = "block";
+      return;
+    }
+
+    // sukses → hapus keranjang dan pindah ke dashboard owner
+    localStorage.removeItem("MEJA_CAFE_CART");
+    alertSuccess.style.display = "block";
+
+    // GANTI 'owner.html' dengan nama file dashboard owner-mu
+    window.location.href = "owner.html";
   });
 </script>
 </body>
 </html>
-
